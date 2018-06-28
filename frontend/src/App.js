@@ -18,6 +18,7 @@ class App extends Component {
                 id: data.idInstructor,
             })))
             .then(data => this.setState({
+
                 info: data
             }))
             .catch(error => console.log(error))

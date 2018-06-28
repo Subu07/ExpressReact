@@ -30,6 +30,9 @@ db.query(supervisor,(err,result) => {
     }
 });
 /* GET home page. */
+router.get('/', (req,res,next) => {
+   res.render('index.html',{title:" Hello to the react World from the express world"})
+});
 router.get('/check', function(req, res, next) {
   res.send(data);
 });
