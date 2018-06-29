@@ -10,6 +10,13 @@
             <array />
           </option>
         </State>
+        <State>
+          <option name="id" value="77fef2a7-7004-4574-ae5e-f1ede3d4e5d1" />
+          <option name="name" value="DDL data source" />
+          <option name="urls">
+            <array />
+          </option>
+        </State>
       </list>
     </option>
   </component>
