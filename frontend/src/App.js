@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import './App.css';
+import Navbar from "./Header/Navbar/Navbar";
 
 class App extends Component {
-    state = {
+  /*  state = {
         info: []
     };
 
+*/
     componentDidMount() {
-            this.fetchData();
+          //  this.fetchData();
 
     }
-    fetchData = () => {
+   /* fetchData = () => {
         fetch("/check")
             .then(response => response.json())
             .then(response => response.map(data => ({
@@ -24,11 +26,8 @@ class App extends Component {
             .catch(error => console.log(error))
 
     };
-
-
-  render() {
-    return (
-      <div className="App">
+    */
+        /*
           {console.log(this.state.info)}
         <p>
             <h1>This is the React World</h1>
@@ -38,6 +37,12 @@ class App extends Component {
                     {info.name}
                   </ul>
               ))}
+         */
+
+  render() {
+    return (
+      <div className="App">
+        <Navbar/>
       </div>
     );
   }
