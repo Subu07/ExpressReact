@@ -33,6 +33,13 @@ db.query(supervisor,(err,result) => {
 router.get('/', (req,res,next) => {
    res.render('index.html',{title:" Hello to the react World from the express world"})
 });
+
+router.post('/send', (req, res) => {
+    console.log(req.body);
+});
+
+
+
 router.get('/check', function(req, res, next) {
   res.send(data);
 });
