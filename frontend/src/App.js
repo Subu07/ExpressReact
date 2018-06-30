@@ -20,7 +20,8 @@ class App extends Component {
             headers: {'content-type' : 'application/json',},
             method: 'POST'
         })
-            .then(res => console.log(res.json()))
+            .then(res => res.json())
+            .then(data => console.log(data));
     };
 
     handleChange = (event) => {
