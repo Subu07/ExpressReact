@@ -1,42 +1,20 @@
 import React, { Component } from 'react';
 import './App.css';
 import Navbar from "./Header/Navbar/Navbar";
+import Form from "./component/Section/Form";
+import FormTry from "./component/Section/FormTry";
 
 class App extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            formData: []
-        };
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+  render() {
+      return (
+        <div>
+           <Navbar/>
+            <Form/>
+            <FormTry/>
+        </div>
+      );
     }
-    componentDidMount() {
-          //  this.fetchData();
-    }
-    sendData = (data) => {
-        fetch("/send",{
-            body: JSON.stringify(data),
-            headers: {'content-type' : 'application/json',},
-            method: 'POST'
-        })
-            .then(res => console.log(res.json()))
-    };
 
-    handleChange = (event) => {
-        this.setState({
-            formData: event.target.value
-        });
-        event.preventDefault();
-    };
-    handleSubmit = (event) => {
-        console.log(this.state.formData);
-        this.sendData(this.state.formData);
-        this.setState({
-            formData: []
-        });
-        event.preventDefault();
-    };
    /* fetchData = () => {
         fetch("/check")
             .then(response => response.json())
@@ -63,18 +41,6 @@ class App extends Component {
                   </ul>
               ))}
          */
-
-  render() {
-    return (
-      <div className="App">
-        <Navbar/>
-          <form onSubmit={this.handleSubmit}>
-              <input type={"text"} onChange={this.handleChange}/>
-              <button type={"submit"}>Submit</button>
-          </form>
-      </div>
-    );
-  }
 }
 
 export default App;

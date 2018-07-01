@@ -21,6 +21,7 @@ db.connect((err) => {
 );
 
 supervisor = "SELECT * FROM supervisor";
+inputsupervisor = "INSERT INTO supervisor (idInstructor,name) VALUES ('5','Sujan')";
 
 db.query(supervisor,(err,result) => {
     if(err) console.log(err);
@@ -29,15 +30,15 @@ db.query(supervisor,(err,result) => {
         data =result;
     }
 });
+
 /* GET home page. */
 router.get('/', (req,res,next) => {
    res.render('index.html',{title:" Hello to the react World from the express world"})
 });
 
 router.post('/send', (req, res) => {
-    console.log(req.body);
+    console.log(req.body.name);
 });
-
 
 
 router.get('/check', function(req, res, next) {

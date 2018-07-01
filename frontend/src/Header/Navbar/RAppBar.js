@@ -36,7 +36,6 @@ class RAppBar extends Component <props> {
                            <RButton color={this.props.AppButtonColor} buttonText={this.props.AppButtonText}/>
                        </Toolbar>
                    </AppBar>
-                    {this.props.title}
                 </MuiThemeProvider>
             </Fragment>
         );
