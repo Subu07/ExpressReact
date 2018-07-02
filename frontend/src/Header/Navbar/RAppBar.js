@@ -10,8 +10,6 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Typography from "@material-ui/core/es/Typography/Typography";
 import theme from "../../theme/theme";
 import MuiThemeProvider from "@material-ui/core/es/styles/MuiThemeProvider";
-import pink from "@material-ui/core/es/colors/pink";
-import red from "@material-ui/core/es/colors/red";
 
 type props = {
     title : string,

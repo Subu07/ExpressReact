@@ -7,11 +7,11 @@ import FormTry from "./component/Section/FormTry";
 class App extends Component {
   render() {
       return (
-        <div>
-           <Navbar/>
-            <Form/>
-            <FormTry/>
-        </div>
+          <div>
+              <Navbar/>
+              <Form/>
+              <FormTry/>
+          </div>
       );
     }
 
