@@ -31,7 +31,7 @@ class RAppBar extends Component <props> {
                            <Typography variant={"display1"} color={"secondary"}>
                                {this.props.title}
                            </Typography>
-                           <RButton color={this.props.AppButtonColor} buttonText={this.props.AppButtonText}/>
+                           <RButton color={this.props.AppButtonColor} buttonText={this.props.AppButtonText} />
                        </Toolbar>
                    </AppBar>
                 </MuiThemeProvider>
