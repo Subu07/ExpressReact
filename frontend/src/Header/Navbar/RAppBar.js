@@ -28,6 +28,7 @@ class RAppBar extends Component <props> {
                            <IconButton color={"inherit"} aria-label = "Menu">
                                <MenuIcon/>
                            </IconButton>
+
                            <Typography variant={"display1"} color={"secondary"}>
                                {this.props.title}
                            </Typography>

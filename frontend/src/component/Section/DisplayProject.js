@@ -1,5 +1,8 @@
 import React, {Component, Fragment} from 'react';
 import PropTypes from 'prop-types';
+import DataTable from "./DataTable";
+import RButton from "../../Header/Navbar/RButton";
+import red from "@material-ui/core/es/colors/red";
 
 class DisplayProject extends Component {
 
@@ -7,6 +10,8 @@ class DisplayProject extends Component {
         return (
             <Fragment>
                 <h2>This is where the project list will be displayed.</h2>
+                <RButton color={red} buttonText={"Add Project"}/>
+                <DataTable/>
             </Fragment>
         );
     }
