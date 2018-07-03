@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import Navbar from "./Header/Navbar/Navbar";
-import Form from "./component/Section/Form";
-import FormTry from "./component/Section/FormTry";
-import DisplayProject from "./component/Section/DisplayProject";
 import Layout from "./component/Layout/Layout";
 
 class App extends Component {

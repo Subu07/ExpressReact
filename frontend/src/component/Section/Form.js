@@ -1,9 +1,5 @@
 import React, {Component, Fragment} from 'react';
 import PropTypes from 'prop-types';
-import Input from "@material-ui/core/es/Input/Input";
-import RButton from "../../Header/Navbar/RButton";
-import green from "@material-ui/core/es/colors/green";
-import TextField from '@material-ui/core/TextField';
 
 class Form extends Component {
     constructor(props) {
