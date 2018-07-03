@@ -18,18 +18,18 @@ class AddProject extends Component {
             open: false,
             projectName: "",
             supervisorName: "",
-            studentName: "",
+            studentName: [],
         };
         this.handleClick = this.handleClick.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange = (event) => {
         this.setState({
             [event.target.name] : event.target.value
         });
-        console.log(this.state)
     };
 
     handleClick = () => {
@@ -43,13 +43,24 @@ class AddProject extends Component {
             open: false
         })
     };
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        this.setState({
+            projectName: "",
+            supervisorName: "",
+            studentName: [],
+            open: false,
+        });
+        console.log(this.state)
+    };
   render() {
     return (
       <div>
           <RButton color={red} buttonText={"Add Project"} onClick={this.handleClick}/>
           <Modal open={this.state.open} onClose={this.handleClose}
-                 style={{paddingTop: 100, paddingLeft: 100, paddingRight: 100, paddingBottom: 100}}>
-              <form>
+                 style={{paddingTop: 100, paddingLeft: 400, paddingRight: 400, paddingBottom: 100}}>
+              <form onSubmit={this.handleSubmit}>
                 <Paper elevation={2}>
                     <Typography variant={"title"} style={{textAlign: 'center', paddingTop: 50}}>
                         Enter Details For New Project:
@@ -73,9 +84,11 @@ class AddProject extends Component {
                     <br/>
                     <InputLabel style={{paddingLeft:20}}>Supervisor Name: </InputLabel>
                     <br/>
-                    <TextField value={this.state.supervisorName} style={{paddingBottom: 50, paddingLeft: 20}}
+                    <TextField value={this.state.supervisorName} style={{paddingLeft: 20, paddingBottom: 20}}
                                onChange={this.handleChange}
                                name={"supervisorName"}/>
+                    <br/>
+                    <RButton color={red} buttonText={"Submit"} type={"submit"} style={{marginLeft:20, marginBottom: 20}}/>
                 </Paper>
               </form>
           </Modal>
