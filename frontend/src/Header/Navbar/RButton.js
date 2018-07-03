@@ -16,7 +16,7 @@ class RButton extends Component <props> {
         return (
             <Fragment>
                  <MuiThemeProvider theme={theme(this.props.color)}>
-                    <Button color={"primary"} variant={"contained"} size={"small"}>
+                    <Button color={"primary"} variant={"contained"} size={"small"} onClick={this.props.onClick}>
                         {this.props.buttonText}
                     </Button>
                  </MuiThemeProvider>

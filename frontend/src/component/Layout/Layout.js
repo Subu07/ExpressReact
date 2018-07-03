@@ -5,6 +5,9 @@ import Paper from "@material-ui/core/es/Paper/Paper";
 import Navbar from "../../Header/Navbar/Navbar";
 import DisplayProject from "../Section/DisplayProject";
 import Search from "../Section/Search";
+import red from "@material-ui/core/es/colors/red";
+import RButton from "../../Header/Navbar/RButton";
+import AddProject from "../Section/AddProject";
 
 class Layout extends Component {
     static defaultProps = {};
@@ -25,6 +28,11 @@ class Layout extends Component {
                     </Grid>
                     <Grid item xs = {9}>
                         <DisplayProject/>
+                    </Grid>
+                    <Grid item xs={3}>
+                    </Grid>
+                    <Grid item xs={9}>
+                        <AddProject/>
                     </Grid>
                 </Grid>
             </Fragment>

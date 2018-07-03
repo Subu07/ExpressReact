@@ -9,8 +9,6 @@ class DisplayProject extends Component {
     render() {
         return (
             <Fragment>
-                <h2>This is where the project list will be displayed.</h2>
-                <RButton color={red} buttonText={"Add Project"}/>
                 <DataTable/>
             </Fragment>
         );
