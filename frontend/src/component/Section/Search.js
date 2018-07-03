@@ -10,15 +10,22 @@ class Search extends Component {
             supervisor: "",
             category: "",
             year: "",
-        }
+        };
+        this.handleChange = this.handleChange.bind(this);
     }
     data = [{id: 1, name:"Ravi"},{id: 2, name:"Sujan"}];
+    handleChange = (event) => {
+        this.setState({
+            [event.target.name] : event.target.value,
+        })
+    };
     render() {
         return (
             <Fragment>
                 <InputLabel>Category:</InputLabel>
                 <br/>
-                <Select value={this.state.category} onChange={this.handleChange} fullWidth={true}>
+                <br/>
+                <Select value={this.state.category} name={"category"} onChange={this.handleChange} fullWidth={true}>
                     {this.data.map(item => (
                         <MenuItem value={item.name} key={item.id}>{item.name}</MenuItem>
                     ))}
@@ -28,7 +35,8 @@ class Search extends Component {
                 <br/>
                 <InputLabel>Supervisors:</InputLabel>
                 <br/>
-                <Select value={this.state.supervisor} onChange={this.handleChange} fullWidth={true}>
+                <br/>
+                <Select value={this.state.supervisor} name={"supervisor"} onChange={this.handleChange} fullWidth={true}>
                     {this.data.map(item => (
                         <MenuItem value={item.name} key={item.id}>{item.name}</MenuItem>
                     ))}
@@ -38,7 +46,8 @@ class Search extends Component {
                 <br/>
                 <InputLabel>Year:</InputLabel>
                 <br/>
-                <Select value={this.state.year} onChange={this.handleChange} fullWidth={true}>
+                <br/>
+                <Select value={this.state.year} name={"year"} onChange={this.handleChange} fullWidth={true}>
                     {this.data.map(item => (
                         <MenuItem value={item.name} key={item.id}>{item.name}</MenuItem>
                     ))}
