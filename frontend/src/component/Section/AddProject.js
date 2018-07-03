@@ -75,7 +75,9 @@ class AddProject extends Component {
                     <br/>
                     <InputLabel style={{paddingLeft:20}}>Student Name: </InputLabel>
                     <br/>
-                    <Select style={{marginLeft: 20, width: 180}} value={this.state.studentName} onChange={this.handleChange} name={"studentName"}>
+                    <Select style={{marginLeft: 20, width: 180}} multiple={true}
+                            value={this.state.studentName}
+                            onChange={this.handleChange} name={"studentName"}>
                         {/*{this.data.map(item => (
                         <MenuItem value={item.name} key={item.id}>{item.name}</MenuItem>
                     ))}*/}
