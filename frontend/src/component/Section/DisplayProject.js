@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import PropTypes from 'prop-types';
+import "./../../index.css";
 import DataTable from "./DataTable";
 import RButton from "../../Header/Navbar/RButton";
 import red from "@material-ui/core/es/colors/red";
