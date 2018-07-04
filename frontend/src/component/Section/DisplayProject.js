@@ -5,25 +5,22 @@ import RButton from "../../Header/Navbar/RButton";
 import red from "@material-ui/core/es/colors/red";
 
 class DisplayProject extends Component {
-    state = {
-        message : 'Hello from state'
-    };
-    handleChange = (event) => {
-        event.preventDefault();
-        console.log('The Button was clicked');
-        this.setState(this.state = {
-            message :'i am clicked'
-        });
-};
+
    render() {
+       let heading = ['Year','Project Title','Category','Name','SuperVisor'];
+       let data = [{
+           "Year" : "2071",
+           "Project_Title" : "Decentralized electronic health record system",
+           "Category" : "Database",
+           "Member" : "Ajaya Mandal",
+           "SuperVisor" : "Prof.Dr. Subarna Thapa"
+       }];
         return (
             <Fragment>
                 <h2>This is where the project list will be displayed.</h2>
-                <RButton color={red} buttonText={"Add Project"} onClick ={this.handleChange}/>
-                <DataTable/>
-                <button onClick={this.handleChange}>
-                <h1>{ this.state.message}</h1>
-                </button>
+                <RButton color={red} buttonText={"Add Project"}/>
+                <DataTable heading={heading} data={data}/>
+
             </Fragment>
         );
     }

@@ -5,6 +5,7 @@ import Paper from "@material-ui/core/es/Paper/Paper";
 import Navbar from "../../Header/Navbar/Navbar";
 import DisplayProject from "../Section/DisplayProject";
 import Search from "../Section/Search";
+import Sidebar from "../Section/Sidebar";
 
 class Layout extends Component {
     static defaultProps = {};

@@ -9,16 +9,20 @@ class Sidebar extends Component {
     render() {
         return (
             <Fragment>
-                <Drawer variant={"permanent"}  >
-                    <List>Department</List>
-                    <Divider/>
-                    <List>Year</List>
-                    <Divider/>
-                    <List>Category</List>
-                    <Divider/>
-                    <List>Supervisor</List>
-                    <Divider/>
-                </Drawer>
+                <span style={{marginTop : 50}}>
+                    <Drawer variant={"permanent"}>
+                        <List>Department</List>
+                        <Divider/>
+                        <List>Year</List>
+                        <Divider/>
+                        <List>Category</List>
+                        <Divider/>
+                        <List>Supervisor</List>
+                        <Divider/>
+                        <List>Department</List>
+
+                    </Drawer>
+                </span>
             </Fragment>
         );
     }
