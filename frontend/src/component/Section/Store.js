@@ -1,6 +1,4 @@
-import { observable } from 'mobx';
+const getData = () => fetch("/check")
+    .then(res => res.json());
 
-class Store {
-    @observable data = [];
-    
-}
+export default getData;
