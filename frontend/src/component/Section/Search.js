@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -50,7 +50,7 @@ class Search extends Component {
 
     render() {
         return (
-            <Fragment>
+            <div style={{marginLeft:10}}>
                 <InputLabel>Category:</InputLabel>
                 <br/>
                 <br/>
@@ -85,7 +85,7 @@ class Search extends Component {
                 <br/>
                     <RButton color={red} buttonText={"Clear"} style={{marginTop: 20, marginLeft: 10}}
                              onClick={this.handleClearClick}/>
-            </Fragment>
+            </div>
         );
     }
 }

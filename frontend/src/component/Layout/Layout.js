@@ -8,11 +8,11 @@ import AddProject from "../Section/AddProject";
 class Layout extends Component {
     constructor(props){
         super(props);
-    }
-    state = {
+        this.state = {
         info:"",
         buttonPressed : false,
-        searchField: []
+        searchField: ["","",""]
+    }
     };
 
     getData = (category, supervisor, year) => {

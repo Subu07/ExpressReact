@@ -1,7 +1,6 @@
 //@flow
 
 import React, {Component, Fragment} from 'react';
-import RButton from "./RButton";
 import AppBar from "@material-ui/core/es/AppBar/AppBar";
 import Toolbar from "@material-ui/core/es/Toolbar/Toolbar";
 import logo from '../../assets/img/logo.png';
@@ -22,7 +21,7 @@ class RAppBar extends Component <props> {
                 <MuiThemeProvider theme={theme(this.props.color)}>
                    <AppBar position={"static"}>
                        <Toolbar>
-                           <img src={logo} height={80}/>
+                           <img src={logo} height={80} alt={"TU-Logo"}/>
                            <Typography variant={"display1"} color={"inherit"}>
                                {this.props.title}
                            </Typography>

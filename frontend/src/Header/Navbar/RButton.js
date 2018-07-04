@@ -1,7 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import PropTypes from 'prop-types';
 import Button from "@material-ui/core/es/Button/Button";
-import Typography from "@material-ui/core/es/Typography/Typography";
 import theme from "../../theme/theme";
 import MuiThemeProvider from "@material-ui/core/es/styles/MuiThemeProvider";
 

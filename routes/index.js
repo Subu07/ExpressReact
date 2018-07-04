@@ -11,6 +11,8 @@ const db = mysql.createConnection({
     multipleStatements: true
 });
 
+
+
 //Connect
 db.connect((err) => {
     if(err) {
@@ -20,8 +22,8 @@ db.connect((err) => {
     }
 );
 
-query = "SELECT * FROM supervisor; SELECT * FROM Category; SELECT * FROM Batch ";
-inputsupervisor = "INSERT INTO supervisor (idInstructor,name) VALUES ('5','Sujan')";
+query = "SELECT * FROM supervisor; SELECT * FROM Category; SELECT * FROM Batch; SELECT * FROM Student ";
+inputsupervisor = "INSERT INTO supervisor (idInstructor, name) VALUES ('5', 'Sujan')";
 
 db.query(query, (err,result) => {
     if(err) console.log(err);
@@ -32,13 +34,21 @@ db.query(query, (err,result) => {
 });
 
 /* GET home page. */
-router.get('/', (req,res,next) => {
-   res.render('index.html',{title:" Hello to the react World from the express world"})
-});
 
 router.post('/send', (req, res) => {
-    console.log(req.body.name);
+    console.log(req.body);
 });
+
+router.post('/reqData', (req, res) => {
+        console.log(req.body);
+        res.send([{
+            "Year" : "2071",
+            "Project_Title" : "Decentralized electronic health record system",
+            "Category" : "Database",
+            "Name" : "Ajaya Mandal",
+            "Roll" : "521",
+            "SuperVisor" : "Dr. Subarna Thapa"
+}])});
 
 
 router.get('/check', function(req, res, next) {
