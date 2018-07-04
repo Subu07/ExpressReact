@@ -8,7 +8,7 @@ import TableBody from "@material-ui/core/es/TableBody/TableBody";
 import Typography from "@material-ui/core/es/Typography/Typography";
 
 
-class DataTable extends Component <props> {
+class DataTable extends Component {
    render() {
         let headings= this.props.heading.map((heading)=> {
             return(
@@ -20,11 +20,12 @@ class DataTable extends Component <props> {
             )
         });
         let rows = this.props.data.map((row)=> {
-           return <TableRow>
+           return <TableRow key ={ row.Roll}>
                <TableCell>{row.Year}</TableCell>
                <TableCell>{row.Project_Title}</TableCell>
                <TableCell>{row.Category}</TableCell>
-               <TableCell>{row.Member}</TableCell>
+               <TableCell>{row.Name}</TableCell>
+               <TableCell>{row.Roll}</TableCell>
                <TableCell>{row.SuperVisor}</TableCell>
            </TableRow>
         });

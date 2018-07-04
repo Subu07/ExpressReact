@@ -7,20 +7,19 @@ import red from "@material-ui/core/es/colors/red";
 class DisplayProject extends Component {
 
    render() {
-       let heading = ['Year','Project Title','Category','Name','SuperVisor'];
+       let heading = ['Year','Project Title','Category','Name','Roll','SuperVisor'];
        let data = [{
            "Year" : "2071",
            "Project_Title" : "Decentralized electronic health record system",
            "Category" : "Database",
-           "Member" : "Ajaya Mandal",
+           "Name" : "Ajaya Mandal",
+           "Roll" : "521",
            "SuperVisor" : "Prof.Dr. Subarna Thapa"
        }];
         return (
             <Fragment>
                 <h2>This is where the project list will be displayed.</h2>
-                <RButton color={red} buttonText={"Add Project"}/>
-                <DataTable heading={heading} data={data}/>
-
+                <DataTable heading={heading} data={data} searchField={this.props.searchField}/>
             </Fragment>
         );
     }

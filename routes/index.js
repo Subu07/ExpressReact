@@ -8,7 +8,8 @@ const db = mysql.createConnection({
     host : 'localhost',
     user : 'sujan',
     password : 'salina@@@',
-    database : 'beproject'
+    database : 'beproject',
+    multipleStatements: true
 });
 
 //Connect
@@ -20,7 +21,7 @@ db.connect((err) => {
     }
 );
 
-supervisor = "SELECT * FROM supervisor";
+query = "SELECT * FROM supervisor; SELECT * FROM Category; SELECT * FROM Batch; SELECT * FROM Student ";
 inputsupervisor = "INSERT INTO supervisor (idInstructor,name) VALUES ('5','Sujan')";
 
 db.query(supervisor,(err,result) => {
