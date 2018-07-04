@@ -24,7 +24,7 @@ db.connect((err) => {
 query = "SELECT * FROM supervisor; SELECT * FROM Category; SELECT * FROM Batch; SELECT * FROM Student ";
 inputsupervisor = "INSERT INTO supervisor (idInstructor,name) VALUES ('5','Sujan')";
 
-db.query(supervisor,(err,result) => {
+db.query(query,(err,result) => {
     if(err) console.log(err);
     else {
         console.log("Connected",result);
@@ -46,5 +46,16 @@ router.get('/check', function(req, res, next) {
   res.send(data);
 });
 
+ router.post('/reqData', (req,res) => {
+     console.log(req.body);
+     res.send([{
+         "Year" : "2071",
+            "Project_Title" : "Decentralized electronic health record system",
+            "Category" : "Database",
+            "Name" : "Ajaya Mandal",
+            "Roll" : "521",
+            "SuperVisor" : "Dr. Subarna Thapa"
+     }])
+ });
 
 module.exports = router;
