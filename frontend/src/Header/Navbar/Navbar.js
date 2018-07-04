@@ -7,7 +7,7 @@ class Navbar extends Component {
    render() {
         return (
             <Fragment>
-                <RAppBar title={"B.E. Major Project"} color={blue} AppButtonText={"Clear"} AppButtonColor={yellow}/>
+                <RAppBar title={"B.E. Major Project"} color={blue} />
             </Fragment>
         );
     }

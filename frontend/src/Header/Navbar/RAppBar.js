@@ -13,8 +13,6 @@ import "./../../index.css";
 type props = {
     title : string,
     color : any,
-   AppButtonText : string,
-    AppButtonColor : any,
 }
 class RAppBar extends Component <props> {
 
@@ -28,10 +26,6 @@ class RAppBar extends Component <props> {
                            <Typography variant={"display1"} color={"inherit"}>
                                {this.props.title}
                            </Typography>
-                           <span style={{marginLeft: 'auto'}}>
-                               <RButton color={this.props.AppButtonColor}
-                                        buttonText={this.props.AppButtonText}/>
-                           </span>
                        </Toolbar>
                    </AppBar>
                 </MuiThemeProvider>

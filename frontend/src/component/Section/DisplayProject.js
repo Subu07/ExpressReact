@@ -1,15 +1,15 @@
 import React, {Component, Fragment} from 'react';
 import "./../../index.css";
 import DataTable from "./DataTable";
-import RButton from "../../Header/Navbar/RButton";
-import red from "@material-ui/core/es/colors/red";
 
 class DisplayProject extends Component {
-
+    state = {
+        data:""
+    };
     render() {
         return (
             <Fragment>
-                <DataTable/>
+                <DataTable data={this.state.data} searchField={this.props.searchField}/>
             </Fragment>
         );
     }

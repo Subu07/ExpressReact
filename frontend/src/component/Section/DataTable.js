@@ -1,12 +1,23 @@
 import React, {Component, Fragment} from 'react';
-import PropTypes from 'prop-types';
 import Table from "@material-ui/core/es/Table/Table";
 import TableHead from "@material-ui/core/es/TableHead/TableHead";
 import TableRow from "@material-ui/core/es/TableRow/TableRow";
 import TableCell from "@material-ui/core/es/TableCell/TableCell";
+import getData from './Store';
 
 class DataTable extends Component {
+    state ={
+        data: [],
+    };
+
+    componentDidMount(){
+        this.setState({
+            data: getData()
+        })
+    }
+
    render() {
+        console.log(this.props.searchField);
         return (
             <Fragment>
                 <Table>

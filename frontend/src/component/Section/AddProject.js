@@ -9,7 +9,6 @@ import Paper from "@material-ui/core/es/Paper/Paper";
 import InputLabel from "@material-ui/core/es/InputLabel/InputLabel";
 import TextField from "@material-ui/core/es/TextField/TextField";
 import Select from "@material-ui/core/es/Select/Select";
-import MenuItem from "@material-ui/core/es/MenuItem/MenuItem";
 
 class AddProject extends Component {
     constructor(props){
@@ -57,7 +56,7 @@ class AddProject extends Component {
   render() {
     return (
       <div>
-          <RButton color={red} buttonText={"Add Project"} onClick={this.handleClick}/>
+          <RButton color={red} buttonText={"Add Project"} onClick={this.handleClick} style={{marginLeft: 10}}/>
           <Modal open={this.state.open} onClose={this.handleClose}
                  style={{paddingTop: 100, paddingLeft: 400, paddingRight: 400, paddingBottom: 100}}>
               <form onSubmit={this.handleSubmit}>
@@ -70,6 +69,7 @@ class AddProject extends Component {
                     <br/>
                     <TextField value={this.state.projectName} style={{paddingLeft:20}}
                                name={"projectName"}
+                               required={true}
                                onChange={this.handleChange}/>
                     <br/>
                     <br/>
@@ -77,7 +77,7 @@ class AddProject extends Component {
                     <br/>
                     <Select style={{marginLeft: 20, width: 180}} multiple={true}
                             value={this.state.studentName}
-                            onChange={this.handleChange} name={"studentName"}>
+                            onChange={this.handleChange} name={"studentName"} required={true}>
                         {/*{this.data.map(item => (
                         <MenuItem value={item.name} key={item.id}>{item.name}</MenuItem>
                     ))}*/}
@@ -88,7 +88,7 @@ class AddProject extends Component {
                     <br/>
                     <TextField value={this.state.supervisorName} style={{paddingLeft: 20, paddingBottom: 20}}
                                onChange={this.handleChange}
-                               name={"supervisorName"}/>
+                               name={"supervisorName"} required={true}/>
                     <br/>
                     <RButton color={red} buttonText={"Submit"} type={"submit"} style={{marginLeft:20, marginBottom: 20}}/>
                 </Paper>
