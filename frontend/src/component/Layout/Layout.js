@@ -29,10 +29,10 @@ class Layout extends Component {
                    <Grid item xs ={12}>
                      <Navbar clearData={this.clearData}/>
                    </Grid>
-                    <Grid item xs = {3}>
+                    <Grid item xs = {2}>
                         <Search getData={this.getData} />
                     </Grid>
-                    <Grid item xs = {9}>
+                    <Grid item xs = {10}>
                         <DisplayProject searchField={this.state.searchField}/>
                     </Grid>
                 </Grid>
