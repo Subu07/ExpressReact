@@ -25,6 +25,18 @@ class AddProject extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    send = (projectName, supervisorName, studentName) => {
+        fetch('/send',{
+            body: JSON.stringify({project: projectName,supervisor: supervisorName, name: studentName}),
+            headers: {
+                'content-type': 'application/json'
+            },
+            method: 'POST'
+        })
+            .then(res => res.json())
+            .then(res => console.log(res))
+    };
+
     handleChange = (event) => {
         this.setState({
             [event.target.name] : event.target.value
@@ -45,6 +57,7 @@ class AddProject extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
+        this.send(this.state.projectName, this.state.supervisorName, this.state.studentName);
         this.setState({
             projectName: "",
             supervisorName: "",
@@ -56,7 +69,7 @@ class AddProject extends Component {
   render() {
     return (
       <div>
-          <RButton color={red} buttonText={"Add Project"} onClick={this.handleClick} style={{marginLeft: 20}}/>
+          <RButton color={red} buttonText={"Add Project"} onClick={this.handleClick} style={{marginLeft: 10}}/>
           <Modal open={this.state.open} onClose={this.handleClose}
                  style={{paddingTop: 100, paddingLeft: 400, paddingRight: 400, paddingBottom: 100}}>
               <form onSubmit={this.handleSubmit}>

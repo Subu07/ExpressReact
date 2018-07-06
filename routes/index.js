@@ -6,8 +6,8 @@ let data;
 // Create Connection
 const db = mysql.createConnection({
     host : 'localhost',
-    user : 'sujan',
-    password : 'salina@@@',
+    user : 'root',
+    password : '',
     database : 'beproject',
     multipleStatements: true
 });
@@ -21,7 +21,13 @@ db.connect((err) => {
     }
 );
 
-query = "SELECT * FROM supervisor; SELECT * FROM Category; SELECT * FROM Batch; SELECT * FROM Student ";
+query = "SELECT * FROM supervisor; SELECT * FROM Category; SELECT * FROM Batch; SELECT * FROM Student;SELECT DISTINCTROW S1.name AS studentName, S1.roll_no AS roll_no, P.name AS projectName, C.Category_name, S2.name AS supervisorName, B.year\n" +
+    "FROM Student AS S1\n" +
+    "INNER JOIN Project_has_Student S on S1.idStudent = S.Student_idStudent\n" +
+    "INNER JOIN Project P on S.Project_idProject = P.idProject\n" +
+    "INNER JOIN Project_has_Category C on P.idProject = C.Project_idProject\n" +
+    "INNER JOIN Supervisor S2 on P.Supervisor_idInstructor = S2.idInstructor\n" +
+    "INNER JOIN Batch B on S1.Batch_batch_no = B.year";
 inputsupervisor = "INSERT INTO supervisor (idInstructor,name) VALUES ('5','Sujan')";
 
 db.query(query,(err,result) => {
@@ -48,14 +54,7 @@ router.get('/check', function(req, res, next) {
 
  router.post('/reqData', (req,res) => {
      console.log(req.body);
-     res.send([{
-         "Year" : "2071",
-            "Project_Title" : "Decentralized electronic health record system",
-            "Category" : "Database",
-            "Name" : "Ajaya Mandal",
-            "Roll" : "521",
-            "SuperVisor" : "Dr. Subarna Thapa"
-     }])
+     res.send(data[4]);
  });
 
 module.exports = router;

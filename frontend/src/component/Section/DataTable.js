@@ -12,7 +12,7 @@ class DataTable extends Component {
    render() {
         let headings= this.props.heading.map((heading)=> {
             return(
-                <TableCell>
+                <TableCell key={heading}>
                     <Typography variant={"title"}>
                         {heading}
                      </Typography>
@@ -20,13 +20,13 @@ class DataTable extends Component {
             )
         });
         let rows = this.props.data.map((row)=> {
-           return <TableRow key ={ row.Roll}>
-               <TableCell>{row.Year}</TableCell>
-               <TableCell>{row.Project_Title}</TableCell>
-               <TableCell>{row.Category}</TableCell>
-               <TableCell>{row.Name}</TableCell>
-               <TableCell>{row.Roll}</TableCell>
-               <TableCell>{row.SuperVisor}</TableCell>
+           return <TableRow key ={row.roll_no+row.studentName}>
+               <TableCell>{row.year}</TableCell>
+               <TableCell>{row.projectName}</TableCell>
+               <TableCell>{row.Category_name}</TableCell>
+               <TableCell>{row.studentName}</TableCell>
+               <TableCell>{row.roll_no}</TableCell>
+               <TableCell>{row.supervisorName}</TableCell>
            </TableRow>
         });
        return(
