@@ -5,6 +5,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import red from "@material-ui/core/es/colors/red";
 import RButton from "../../Header/Navbar/RButton";
 import getData from "./Store";
+import AddProject from "./AddProject";
 
 class Search extends Component {
     constructor(props){
@@ -85,6 +86,10 @@ class Search extends Component {
                 <br/>
                     <RButton color={red} buttonText={"Clear"} style={{marginTop: 20, marginLeft: 10}}
                              onClick={this.handleClearClick}/>
+                <br/>
+                <br/>
+                <br/>
+                <AddProject/>
             </div>
         );
     }

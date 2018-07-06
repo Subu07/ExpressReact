@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import "./../../index.css";
 import DataTable from "./DataTable";
+import groupBy from 'lodash/groupBy';
 
 class DisplayProject extends Component {
     state = {
@@ -25,8 +26,7 @@ class DisplayProject extends Component {
     }
    render() {
        let heading = ['Year','Project Title','Category','Name','Roll','SuperVisor'];
-
-       console.log(this.props.searchField);
+       console.log(this.state.data);
         return (
             <Fragment>
                 <DataTable heading={heading} data={this.state.data}/>

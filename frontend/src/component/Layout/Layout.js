@@ -35,9 +35,6 @@ class Layout extends Component {
                     <Grid item xs = {9}>
                         <DisplayProject searchField={this.state.searchField}/>
                     </Grid>
-                    <Grid item xs={3}>
-                        <AddProject/>
-                    </Grid>
                 </Grid>
             </Fragment>
         );

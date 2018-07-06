@@ -29,8 +29,6 @@ class RAppBar extends Component <props> {
                                {this.props.title}
                            </Typography>
                            <span style={{marginLeft: 'auto'}}>
-                               <RButton color={this.props.AppButtonColor}
-                                        buttonText={this.props.AppButtonText}/>
                            </span>
                        </Toolbar>
                    </AppBar>
