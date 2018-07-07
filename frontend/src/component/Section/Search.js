@@ -9,9 +9,10 @@ import Divider from '@material-ui/core/Divider';
 import getData from "./Store";
 import AddProject from "./AddProject";
 import green from "@material-ui/core/es/colors/green";
-import Drawer from "@material-ui/core/es/Drawer/Drawer";
-import List from "@material-ui/core/es/List/List";
-import Toolbar from "@material-ui/core/es/Toolbar/Toolbar";
+
+import Clear from "@material-ui/icons/Clear";
+import Eye from "@material-ui/icons/Visibility";
+
 
 class Search extends Component {
     constructor(props){
@@ -89,10 +90,10 @@ class Search extends Component {
                 </Select>
                  <Divider/>
                 <br/>
-                <RButton color={green} buttonText={"View"} style = {{marginTop: 20, marginLeft: 10}}/>
+                <RButton color={green} buttonText={"View"} style = {{marginTop: 20, marginLeft: 10}}><Eye/></RButton>
                 <br/>
                 <RButton color={red} buttonText={"Clear"} style={{marginTop: 20, marginLeft: 10}}
-                             onClick={this.handleClearClick}/>
+                         onClick={this.handleClearClick}><Clear/></RButton>
                 <AddProject/>
             </div>
         );

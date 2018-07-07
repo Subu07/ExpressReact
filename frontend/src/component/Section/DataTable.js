@@ -6,10 +6,14 @@ import TableRow from "@material-ui/core/es/TableRow/TableRow";
 import TableCell from "@material-ui/core/es/TableCell/TableCell";
 import TableBody from "@material-ui/core/es/TableBody/TableBody";
 import Typography from "@material-ui/core/es/Typography/Typography";
+
+import DeleteIcon from '@material-ui/icons/Delete';
 import RButton from "../../Header/Navbar/RButton";
-import yellow from "@material-ui/core/es/colors/yellow";
 import pink from "@material-ui/core/es/colors/pink";
 import teal from "@material-ui/core/es/colors/teal";
+import Button from "@material-ui/core/es/Button/Button";
+import DeleteProject from "./DeleteProject";
+import EditProject from "./EditProject";
 
 
 class DataTable extends Component {
@@ -32,8 +36,8 @@ class DataTable extends Component {
                <TableCell>{row.roll_no}</TableCell>
                <TableCell>{row.supervisorName}</TableCell>
                <TableCell>
-                   <RButton color={teal} buttonText={"Edit"}/>
-                   <RButton color={pink} buttonText={"Delete"}/>
+                   <EditProject/>
+                   <DeleteProject/>
                </TableCell>
            </TableRow>
         });

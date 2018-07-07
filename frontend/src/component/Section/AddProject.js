@@ -2,7 +2,6 @@ import React, {
   Component,
 } from 'react';
 import RButton from "../../Header/Navbar/RButton";
-import red from "@material-ui/core/es/colors/red";
 import Modal from "@material-ui/core/es/Modal/Modal";
 import Typography from "@material-ui/core/es/Typography/Typography";
 import Paper from "@material-ui/core/es/Paper/Paper";
@@ -10,6 +9,8 @@ import InputLabel from "@material-ui/core/es/InputLabel/InputLabel";
 import TextField from "@material-ui/core/es/TextField/TextField";
 import Select from "@material-ui/core/es/Select/Select";
 import cyan from "@material-ui/core/es/colors/cyan";
+
+import Add from "@material-ui/icons/Add";
 
 class AddProject extends Component {
     constructor(props){
@@ -71,7 +72,7 @@ class AddProject extends Component {
     return (
       <div>
           <br/>
-          <RButton color={cyan} buttonText={"Add Project"} onClick={this.handleClick} style={{marginLeft: 10}}/>
+          <RButton color={cyan} buttonText={"Add Project"} onClick={this.handleClick} style={{marginLeft: 10}}><Add/></RButton>
           <Modal open={this.state.open} onClose={this.handleClose}
                  style={{paddingTop: 100, paddingLeft: 400, paddingRight: 400, paddingBottom: 100}}>
               <form onSubmit={this.handleSubmit}>

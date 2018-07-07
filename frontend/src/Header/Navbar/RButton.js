@@ -19,6 +19,7 @@ class RButton extends Component <props> {
                     <Button color={"primary"} variant={"contained"} size={"small"}
                             onClick={this.props.onClick}
                             style={this.props.style}>
+                        {this.props.children}
                         {this.props.buttonText}
                     </Button>
                  </MuiThemeProvider>
