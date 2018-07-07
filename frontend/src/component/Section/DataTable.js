@@ -7,6 +7,14 @@ import TableCell from "@material-ui/core/es/TableCell/TableCell";
 import TableBody from "@material-ui/core/es/TableBody/TableBody";
 import Typography from "@material-ui/core/es/Typography/Typography";
 
+import DeleteIcon from '@material-ui/icons/Delete';
+import RButton from "../../Header/Navbar/RButton";
+import pink from "@material-ui/core/es/colors/pink";
+import teal from "@material-ui/core/es/colors/teal";
+import Button from "@material-ui/core/es/Button/Button";
+import DeleteProject from "./DeleteProject";
+import EditProject from "./EditProject";
+
 
 class DataTable extends Component {
    render() {
@@ -27,6 +35,10 @@ class DataTable extends Component {
                <TableCell>{row.studentName}</TableCell>
                <TableCell>{row.roll_no}</TableCell>
                <TableCell>{row.supervisorName}</TableCell>
+               <TableCell>
+                   <EditProject/>
+                   <DeleteProject/>
+               </TableCell>
            </TableRow>
         });
        return(

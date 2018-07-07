@@ -14,7 +14,8 @@ class DisplayProject extends Component {
                 headers: {
                     'content-type': 'application/json'
                 },
-                body: JSON.stringify({category: this.props.searchField[0],
+                body: JSON.stringify({
+                    category: this.props.searchField[0],
                     supervisor: this.props.searchField[1],
                     batch: this.props.searchField[2],})
             }).then(res => res.json())
@@ -25,7 +26,7 @@ class DisplayProject extends Component {
         }
     }
    render() {
-       let heading = ['Year','Project Title','Category','Name','Roll','SuperVisor'];
+       let heading = ['Year','Project Title','Category','Name','Roll','SuperVisor','Action'];
        console.log(this.state.data);
         return (
             <Fragment>

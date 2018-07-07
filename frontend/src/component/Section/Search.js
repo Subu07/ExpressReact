@@ -3,9 +3,16 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import red from "@material-ui/core/es/colors/red";
+import Dividers from "@material-ui/core/"
 import RButton from "../../Header/Navbar/RButton";
+import Divider from '@material-ui/core/Divider';
 import getData from "./Store";
 import AddProject from "./AddProject";
+import green from "@material-ui/core/es/colors/green";
+
+import Clear from "@material-ui/icons/Clear";
+import Eye from "@material-ui/icons/Visibility";
+
 
 class Search extends Component {
     constructor(props){
@@ -54,13 +61,12 @@ class Search extends Component {
             <div style={{marginLeft:10}}>
                 <InputLabel>Category:</InputLabel>
                 <br/>
-                <br/>
                 <Select value={this.state.category} name={"category"} onChange={this.handleChange} fullWidth={true}>
                     {this.state.categoryData.map(item => (
                         <MenuItem value={item.name} key={item.name}>{item.name}</MenuItem>
                     ))}
                 </Select>
-                <br/>
+                <Divider/>
                 <br/>
                 <br/>
                 <InputLabel>Supervisors:</InputLabel>
@@ -71,7 +77,7 @@ class Search extends Component {
                         <MenuItem value={item.name} key={item.idInstructor}>{item.name}</MenuItem>
                     ))}
                 </Select>
-                <br/>
+                 <Divider/>
                 <br />
                 <br/>
                 <InputLabel>Year:</InputLabel>
@@ -82,13 +88,12 @@ class Search extends Component {
                         <MenuItem value={item.year} key={item.year}>{item.year}</MenuItem>
                     ))}
                 </Select>
+                 <Divider/>
                 <br/>
+                <RButton color={green} buttonText={"View"} style = {{marginTop: 20, marginLeft: 10}}><Eye/></RButton>
                 <br/>
-                    <RButton color={red} buttonText={"Clear"} style={{marginTop: 20, marginLeft: 10}}
-                             onClick={this.handleClearClick}/>
-                <br/>
-                <br/>
-                <br/>
+                <RButton color={red} buttonText={"Clear"} style={{marginTop: 20, marginLeft: 10}}
+                         onClick={this.handleClearClick}><Clear/></RButton>
                 <AddProject/>
             </div>
         );
