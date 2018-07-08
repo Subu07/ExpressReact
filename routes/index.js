@@ -7,8 +7,8 @@ let joinData;
 // Create Connection
 const db = mysql.createConnection({
   host: "localhost",
-  user: "root",
-  password: "",
+  user: "sujan",
+  password: "salina@@@",
   database: "beproject",
   multipleStatements: true
 });
@@ -23,7 +23,7 @@ db.connect(err => {
 query =
   "SELECT * FROM supervisor;SELECT * FROM Category; SELECT * FROM Batch; SELECT * FROM Student;";
 joinQuery =
-  "SELECT P.Project_idProject, GROUP_CONCAT(DISTINCT(S.name)) AS studentName,P2.name AS projectName, GROUP_CONCAT(DISTINCT(S.roll_no)) AS studentRoll, S2.name AS supervisorName, GROUP_CONCAT(DISTINCT(S.Batch_batch_no)) AS year, GROUP_CONCAT(DISTINCT(Category.Category_name)) AS category FROM Project_has_Student P INNER JOIN Student S on P.Student_idStudent = S.idStudent INNER JOIN Project P2 on P.Project_idProject = P2.idProject INNER JOIN Project_has_Category Category on P2.idProject = Category.Project_idProject INNER JOIN Supervisor S2 on P2.Supervisor_idInstructor = S2.idInstructor GROUP BY P.Project_idProject";
+  "SELECT P.Project_idProject, GROUP_CONCAT(DISTINCT(S.name) SEPARATOR '/') AS studentName,P2.name AS projectName, GROUP_CONCAT(DISTINCT(S.roll_no)) AS studentRoll, S2.name AS supervisorName, GROUP_CONCAT(DISTINCT(S.Batch_batch_no)) AS year, GROUP_CONCAT(DISTINCT(Category.Category_name)) AS category FROM Project_has_Student P INNER JOIN Student S on P.Student_idStudent = S.idStudent INNER JOIN Project P2 on P.Project_idProject = P2.idProject INNER JOIN Project_has_Category Category on P2.idProject = Category.Project_idProject INNER JOIN Supervisor S2 on P2.Supervisor_idInstructor = S2.idInstructor GROUP BY P.Project_idProject";
 
 db.query(query, (err, result) => {
   if (err) console.log(err);
