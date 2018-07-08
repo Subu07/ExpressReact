@@ -1,5 +1,4 @@
 import React, {Component, Fragment} from 'react';
-import PropTypes from 'prop-types';
 import pink from "@material-ui/core/es/colors/pink";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Done from "@material-ui/icons/Done";
@@ -7,15 +6,9 @@ import Clear from "@material-ui/icons/Clear";
 
 import RButton from "../../Header/Navbar/RButton";
 import Modal from "@material-ui/core/es/Modal/Modal";
-import Paper from "@material-ui/core/es/Paper/Paper";
-import Card from "@material-ui/core/es/Card/Card";
-import CardMedia from "@material-ui/core/es/CardMedia/CardMedia";
-import CardContent from "@material-ui/core/es/CardContent/CardContent";
 import green from "@material-ui/core/es/colors/green";
 import red from "@material-ui/core/es/colors/red";
-import CardActions from "@material-ui/core/es/CardActions/CardActions";
 import Typography from "@material-ui/core/es/Typography/Typography";
-import brown from "@material-ui/core/es/colors/brown";
 import Divider from "@material-ui/core/es/Divider/Divider";
 import DialogContent from "@material-ui/core/es/DialogContent/DialogContent";
 import Dialog from "@material-ui/core/es/Dialog/Dialog";
@@ -47,9 +40,8 @@ class DeleteProject extends Component {
     render() {
         return (
             <Fragment>
-                <RButton color={pink} buttonText={"Delete"} onClick = {this.handleClick}><DeleteIcon/></RButton>
-                <Modal open={this.state.isOpen} onClose={this.handleClose}
-               >
+                <RButton color={pink}  buttonText={"Delete"} onClick = {this.handleClick}><DeleteIcon/></RButton>
+                <Modal open={this.state.isOpen} onClose={this.handleClose}>
                     <Dialog open = {this.state.isOpen}
                     onClose = {this.handleClose}
                     aria-described = "alert-dialog-body">
@@ -62,8 +54,7 @@ class DeleteProject extends Component {
                         </DialogContent>
                         <Divider/>
                         <DialogActions style={{paddingTop : 100}}>
-
-                            <RButton color={red} buttonText={"Yes"} style = {{marginLeft:100}} onClick = {this.handleClose}><Done/></RButton>
+                            <RButton color={red} buttonText={"Yes"} style={{marginRight: 'auto'}} onClick = {this.handleClose}><Done/></RButton>
                             <RButton color={green} buttonText={"No"} style = {{ marginLeft: 175}} onClick = {this.handleClose}><Clear/></RButton>
                         </DialogActions>
                     </Dialog>

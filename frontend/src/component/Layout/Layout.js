@@ -4,7 +4,6 @@ import Navbar from "../../Header/Navbar/Navbar";
 import DisplayProject from "../Section/DisplayProject";
 import Search from "../Section/Search";
 import AddProject from "../Section/AddProject";
-import Form from "../Section/Form";
 
 class Layout extends Component {
     constructor(props){
@@ -25,7 +24,7 @@ class Layout extends Component {
     render() {
         return (
             <Fragment>
-                <Grid container spacing={24}>
+                <Grid container spacing={8}>
                    <Grid item xs ={12}>
                      <Navbar clearData={this.clearData}/>
                    </Grid>

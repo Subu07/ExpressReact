@@ -11,6 +11,8 @@ import Select from "@material-ui/core/es/Select/Select";
 import cyan from "@material-ui/core/es/colors/cyan";
 
 import Add from "@material-ui/icons/Add";
+import getData from "./Store";
+import MenuItem from "@material-ui/core/es/MenuItem/MenuItem";
 
 class AddProject extends Component {
     constructor(props){
@@ -20,6 +22,7 @@ class AddProject extends Component {
             projectName: "",
             supervisorName: "",
             studentName: [],
+            studentData: [],
         };
         this.handleClick = this.handleClick.bind(this);
         this.handleClose = this.handleClose.bind(this);
@@ -68,6 +71,14 @@ class AddProject extends Component {
         });
         console.log(this.state)
     };
+
+    componentDidMount(){
+        getData()
+            .then(data => this.setState({
+                studentData: data[3]
+            }))
+    }
+
   render() {
     return (
       <div>
@@ -93,10 +104,10 @@ class AddProject extends Component {
                     <br/>
                     <Select style={{marginLeft: 20, width: 180}} multiple={true}
                             value={this.state.studentName}
-                            onChange={this.handleChange} name={"studentName"} required={true}>
-                        {/*{this.studentData.map(item => (
-                        <MenuItem value={item.name} key={item.id}>{item.name}</MenuItem>
-                    ))}*/}
+                            onChange={this.handleChange} name={"studentName"} fullWidth={true}>
+                        {this.state.studentData.map(item => (
+                            <MenuItem key={item.idStudent} value={item.name}>{item.name}</MenuItem>
+                        ))}
                     </Select>
                     <br/>
                     <br/>
