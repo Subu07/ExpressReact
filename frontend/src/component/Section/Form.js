@@ -18,7 +18,7 @@ import Add from "@material-ui/icons/es/Add";
 class Form extends Component {
     state = {
         isOpen: false,
-        number : ''
+        number : 3
     };
     handleOpen = () => {
       this.setState({
@@ -29,7 +29,7 @@ class Form extends Component {
         this.setState(
             {
                 isOpen : false,
-                number : ''
+                number : 3
             }
         )
     };
@@ -238,7 +238,6 @@ class Form extends Component {
                                     value={this.state.number}
                                     onChange={this.handleChange('number')}
                                 >
-                                    <option value={''}/>
                                     <option value={3}>3</option>
                                     <option value={4}>4</option>
                                 </Select>
