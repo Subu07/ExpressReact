@@ -1,7 +1,6 @@
 //@flow
 
 import React, {Component, Fragment} from 'react';
-import RButton from "./RButton";
 import AppBar from "@material-ui/core/es/AppBar/AppBar";
 import Toolbar from "@material-ui/core/es/Toolbar/Toolbar";
 import logo from '../../assets/img/logo.png';

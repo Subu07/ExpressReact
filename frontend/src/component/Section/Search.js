@@ -1,9 +1,8 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import red from "@material-ui/core/es/colors/red";
-import Dividers from "@material-ui/core/"
 import RButton from "../../Header/Navbar/RButton";
 import Divider from '@material-ui/core/Divider';
 import getData from "./Store";
@@ -12,6 +11,7 @@ import green from "@material-ui/core/es/colors/green";
 
 import Clear from "@material-ui/icons/Clear";
 import Eye from "@material-ui/icons/Visibility";
+import Form from "./Form";
 
 
 class Search extends Component {
@@ -94,7 +94,7 @@ class Search extends Component {
                 <br/>
                 <RButton color={red} buttonText={"Clear"} style={{marginTop: 20, marginLeft: 10}}
                          onClick={this.handleClearClick}><Clear/></RButton>
-                <AddProject/>
+                <Form/>
             </div>
         );
     }

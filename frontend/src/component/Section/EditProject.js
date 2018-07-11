@@ -1,5 +1,4 @@
 import React, {Component, Fragment} from 'react';
-import PropTypes from 'prop-types';
 
 import Edit from  "@material-ui/icons/Edit";
 import teal from "@material-ui/core/es/colors/teal";

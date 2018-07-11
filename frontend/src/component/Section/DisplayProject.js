@@ -9,8 +9,8 @@ class DisplayProject extends Component {
         data: []
     };
     componentDidMount(){
-        fetch("/reqData",).
-        then(res => res.json())
+        fetch("/reqData",)
+            .then(res => res.json())
             .then(json => sortBy(json,'projectName'))
             .then(json => this.setState({
                 data: json

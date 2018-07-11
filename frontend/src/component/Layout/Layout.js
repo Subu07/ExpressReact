@@ -3,16 +3,16 @@ import Grid from "@material-ui/core/es/Grid/Grid";
 import Navbar from "../../Header/Navbar/Navbar";
 import DisplayProject from "../Section/DisplayProject";
 import Search from "../Section/Search";
-import AddProject from "../Section/AddProject";
 
 class Layout extends Component {
     constructor(props){
         super(props);
-    }
-    state = {
-        info:"",
-        buttonPressed : false,
+
+    this.state = {
+        info: "",
+        buttonPressed: false,
         searchField: []
+    }
     };
 
     getData = (category, supervisor, year) => {
