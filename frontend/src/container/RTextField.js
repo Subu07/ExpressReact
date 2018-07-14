@@ -3,15 +3,11 @@ import PropTypes from 'prop-types';
 import TextField from "@material-ui/core/es/TextField/TextField";
 
 type props = {
-    id: any,
     value:any,
     name : string,
     required: boolean,
     focus: boolean,
-    onChange: any,
-    autoFocus: boolean,
-    required: boolean,
-    margin: any
+    onChange: any
 }
 class RTextfield extends Component<props> {
 
@@ -19,15 +15,12 @@ class RTextfield extends Component<props> {
     render() {
         return (
             <Fragment>
-                <TextField
-                value={this.props.value}
-                name={this.props.name}
-                id={this.props.id}
-                onChange={this.props.onChange}
-                margin={this.props.margin}
-                autoFocus={true}
-                required={true}
-              />
+                <TextField value={this.props.value}
+                           required={this.props.required}
+                           autoFocus={this.props.focus}
+                           onChange={this.props.onChange}
+                           name={this.props.name}
+                           helperText={this.props.helperText}/>
             </Fragment>
         );
     }

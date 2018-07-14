@@ -13,6 +13,9 @@ import TableBody from "@material-ui/core/es/TableBody/TableBody";
 import Dialog from "@material-ui/core/es/Dialog/Dialog";
 import DialogContent from "@material-ui/core/es/DialogContent/DialogContent";
 import DialogTitle from "@material-ui/core/es/DialogTitle/DialogTitle";
+import AddStudent from "../../component/Section/AddStudent";
+import red from "@material-ui/core/es/colors/red";
+import green from "@material-ui/core/es/colors/green";
 
 class Student extends Component {
     state = {
@@ -57,17 +60,21 @@ class Student extends Component {
                     <TableCell>{student.Batch_batch_no}</TableCell>
                     <TableCell>{student.name}</TableCell>
                     <TableCell>{student.roll_no}</TableCell>
+                    <TableCell>
+                        <RButton color={green} buttonText={"EDIT"}/>
+                        <RButton color={red} buttonText={"DELETE"}/>
+                    </TableCell>
                 </TableRow>
             )
         });
         return (
             <Fragment>
-                <RButton color={lime} buttonText={"Student"} style = {{margin:20}} onClick = {this.handleOpen}/>
+                <RButton color={lime} buttonText={"Student"} onClick = {this.handleOpen}/>
                  <Dialog fullWidth={true}
                          open = {this.state.isOpen}
                          onClose={this.handleClose}>
                 <Paper elevation={2}>
-                    <h2>Student</h2>
+                    <AddStudent/>
                 <Table>
                     <TableHead>
                         <TableRow>{headings}</TableRow>
