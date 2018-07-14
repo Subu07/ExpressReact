@@ -72,9 +72,7 @@ class Student extends Component {
                     <TableHead>
                         <TableRow>{headings}</TableRow>
                     </TableHead>
-                    <DialogContent>
                     <TableBody>{rows}</TableBody>
-                    </DialogContent>
                 </Table>
                 </Paper>
                  </Dialog>

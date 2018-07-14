@@ -1,18 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const mysql = require("mysql");
-const bodyParser = require("body-parser");
 
 let data;
-
-
-
 
 // Create Connection
 const db = mysql.createConnection({
   host: "localhost",
-  user: "sujan",
-  password: "salina@@@",
+  user: "root",
+  password: "",
   database: "beproject",
   multipleStatements: true
 });
@@ -43,13 +39,13 @@ db.query(query, (err, result) => {
 });
 
 /* GET home page. */
- studentQuery = "SELECT * FROM student";
+ studentQuery = "SELECT name AS studentName, roll_no AS studentRoll FROM student;SELECT * FROM Supervisor;SELECT * FROM Project;SELECT * FROM BATCH";
 router.get('/studentDisplay',(req,res,next) => {
     db.query(studentQuery,(errors,results) => {
         if (errors) throw errors;
         console.log('data received from Student Table: ');
         console.log(results);
-        res.send(JSON.stringify(results));
+        res.send(results);
     })
 });
 

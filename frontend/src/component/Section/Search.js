@@ -53,7 +53,7 @@ class Search extends Component {
     ) {
       let newData = this.state.orgData.filter(item => {
         return (
-          item.category === this.state.category &&
+          item.category.split(",").includes(this.state.category) &&
           item.supervisorName === this.state.supervisor &&
           item.year === this.state.batch
         );
@@ -61,38 +61,27 @@ class Search extends Component {
       this.setState({
         data: newData
       });
-    }
-    else if (
-      this.state.category !== "" &&
-      this.state.supervisor !== ""
-    ) {
+    } else if (this.state.category !== "" && this.state.supervisor !== "") {
       let newData = this.state.orgData.filter(item => {
         return (
-          item.category === this.state.category &&
+          item.category.split(",").includes(this.state.category) &&
           item.supervisorName === this.state.supervisor
         );
       });
       this.setState({
         data: newData
       });
-    }
-    else if (
-      this.state.category !== "" &&
-       this.state.batch !== ""
-    ) {
+    } else if (this.state.category !== "" && this.state.batch !== "") {
       let newData = this.state.orgData.filter(item => {
         return (
-          item.category === this.state.category &&
+          item.category.split(",").includes(this.state.category) &&
           item.year === this.state.batch
         );
       });
       this.setState({
         data: newData
       });
-    }
-    else if (
-      this.state.supervisor !== "" && this.state.batch !== ""
-    ) {
+    } else if (this.state.supervisor !== "" && this.state.batch !== "") {
       let newData = this.state.orgData.filter(item => {
         return (
           item.supervisorName === this.state.supervisor &&
@@ -102,38 +91,23 @@ class Search extends Component {
       this.setState({
         data: newData
       });
-    }
-    else if (
-      this.state.supervisor !== ""
-    ) {
+    } else if (this.state.supervisor !== "") {
       let newData = this.state.orgData.filter(item => {
-        return (
-          item.supervisorName === this.state.supervisor
-        );
+        return item.supervisorName === this.state.supervisor;
       });
       this.setState({
         data: newData
       });
-    }
-    else if (
-      this.state.batch !== ""
-    ) {
+    } else if (this.state.batch !== "") {
       let newData = this.state.orgData.filter(item => {
-        return (
-          item.year === this.state.batch
-        );
+        return item.year === this.state.batch;
       });
       this.setState({
         data: newData
       });
-    }
-    else if (
-      this.state.category
-    ) {
+    } else if (this.state.category) {
       let newData = this.state.orgData.filter(item => {
-        return (
-          item.category === this.state.category
-        );
+        return item.category.split(",").includes(this.state.category);
       });
       this.setState({
         data: newData
@@ -229,7 +203,7 @@ class Search extends Component {
           >
             <Clear />
           </RButton>
-          <AddProject/>
+          <AddProject />
         </Grid>
         <Grid item xs={10}>
           <DisplayProject data={this.state.data} />
