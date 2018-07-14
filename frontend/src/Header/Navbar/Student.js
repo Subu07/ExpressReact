@@ -11,6 +11,8 @@ import Table from "@material-ui/core/es/Table/Table";
 import TableHead from "@material-ui/core/es/TableHead/TableHead";
 import TableBody from "@material-ui/core/es/TableBody/TableBody";
 import Dialog from "@material-ui/core/es/Dialog/Dialog";
+import DialogContent from "@material-ui/core/es/DialogContent/DialogContent";
+import DialogTitle from "@material-ui/core/es/DialogTitle/DialogTitle";
 
 class Student extends Component {
     state = {
@@ -61,24 +63,21 @@ class Student extends Component {
         return (
             <Fragment>
                 <RButton color={lime} buttonText={"Student"} style = {{margin:20}} onClick = {this.handleOpen}/>
-                 <Modal open = {this.state.isOpen} onClose={this.handleClose} style={{
-                    paddingTop: 50,
-                    paddingLeft: 200,
-                    paddingRight: 200,
-                    paddingBottom: 100
-                 }}>
+                 <Dialog fullWidth={true}
+                         open = {this.state.isOpen}
+                         onClose={this.handleClose}>
                 <Paper elevation={2}>
                     <h2>Student</h2>
                 <Table>
                     <TableHead>
                         <TableRow>{headings}</TableRow>
                     </TableHead>
-                    <Dialog>
+                    <DialogContent>
                     <TableBody>{rows}</TableBody>
-                    </Dialog>
+                    </DialogContent>
                 </Table>
                 </Paper>
-                 </Modal>
+                 </Dialog>
                 </Fragment>
         );
     }
