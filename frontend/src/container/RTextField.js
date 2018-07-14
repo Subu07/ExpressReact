@@ -20,7 +20,8 @@ class RTextfield extends Component<props> {
                            autoFocus={this.props.focus}
                            onChange={this.props.onChange}
                            name={this.props.name}
-                           helperText={this.props.helperText}/>
+                           helperText={this.props.helperText}
+                style={this.props.style}/>
             </Fragment>
         );
     }

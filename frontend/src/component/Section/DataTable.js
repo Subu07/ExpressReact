@@ -8,11 +8,11 @@ import TableBody from "@material-ui/core/es/TableBody/TableBody";
 import Typography from "@material-ui/core/es/Typography/Typography";
 import DeleteProject from "./DeleteProject";
 import EditProject from "./EditProject";
+import sortBy from "lodash";
 
 class DataTable extends Component {
 
   render() {
-      console.log(this.props.data);
     let headings = this.props.heading.map(heading => {
       return (
         <TableCell key={heading}>
@@ -25,7 +25,12 @@ class DataTable extends Component {
         <TableRow key={row.Project_idProject}>
           <TableCell>{row.year}</TableCell>
           <TableCell>{row.projectName}</TableCell>
-          <TableCell>{row.category}</TableCell>
+          <TableCell>{row.category.split(",").map(name => (
+              <div key={name}>
+                  <br/>
+                  {name}
+              </div>
+          ))}</TableCell>
           <TableCell>
             {row.studentName.split(",").map(name => (
               <div key={name}>
@@ -45,7 +50,7 @@ class DataTable extends Component {
           </TableCell>
           <TableCell>{row.supervisorName}</TableCell>
           <TableCell>
-            <EditProject data={row}/>
+            <EditProject data={row} allData={this.props.data} />
             <br />
             <br />
             <DeleteProject data={row.Project_idProject} />
