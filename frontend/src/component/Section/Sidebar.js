@@ -1,5 +1,4 @@
 import React, {Component, Fragment} from 'react';
-import PropTypes from 'prop-types';
 import Drawer from "@material-ui/core/es/Drawer/Drawer";
 import List from "@material-ui/core/es/List/List";
 import Divider from "@material-ui/core/es/Divider/Divider";

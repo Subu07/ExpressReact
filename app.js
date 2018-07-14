@@ -4,6 +4,8 @@ let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 const port = process.env.PORT || 5000;
+const bodyParser = require('body-parser');
+
 
 let indexRouter = require('./routes/index');
 let usersRouter = require('./routes/users');

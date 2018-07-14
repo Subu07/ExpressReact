@@ -8,6 +8,13 @@ import Typography from "@material-ui/core/es/Typography/Typography";
 import theme from "../../theme/theme";
 import MuiThemeProvider from "@material-ui/core/es/styles/MuiThemeProvider";
 import "./../../index.css";
+import RButton from "./RButton";
+import green from "@material-ui/core/es/colors/green";
+import teal from "@material-ui/core/es/colors/teal";
+import lime from "@material-ui/core/es/colors/lime";
+import Project from "./Project";
+import Student from "./Student";
+import Supervisor from "./Supervisor";
 
 type props = {
     title : string,
@@ -18,6 +25,12 @@ type props = {
 class RAppBar extends Component <props> {
 
     render() {
+        let heading = [
+      "Batch",
+      "Name",
+      "Roll No",
+      "Action"
+     ];
         return (
             <Fragment>
                 <MuiThemeProvider theme={theme(this.props.color)}>
@@ -29,6 +42,9 @@ class RAppBar extends Component <props> {
                            </Typography>
                            <span style={{marginLeft: 'auto'}}>
                            </span>
+                           <Project/>
+                           <Student title = {heading}/>
+                           <Supervisor/>
                        </Toolbar>
                    </AppBar>
                 </MuiThemeProvider>

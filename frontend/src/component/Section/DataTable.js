@@ -6,16 +6,13 @@ import TableRow from "@material-ui/core/es/TableRow/TableRow";
 import TableCell from "@material-ui/core/es/TableCell/TableCell";
 import TableBody from "@material-ui/core/es/TableBody/TableBody";
 import Typography from "@material-ui/core/es/Typography/Typography";
-
 import DeleteProject from "./DeleteProject";
 import EditProject from "./EditProject";
 
 class DataTable extends Component {
-  state = {
-    id: 0
-  };
 
   render() {
+      console.log(this.props.data);
     let headings = this.props.heading.map(heading => {
       return (
         <TableCell key={heading}>
@@ -26,19 +23,32 @@ class DataTable extends Component {
     let rows = this.props.data.map(row => {
       return (
         <TableRow key={row.Project_idProject}>
-          <Fragment>
-            <TableCell>{row.year}</TableCell>
-            <TableCell>{row.projectName}</TableCell>
-            <TableCell>{row.category}</TableCell>
-          </Fragment>
-          <TableCell>{row.studentName}</TableCell>
-          <TableCell>{row.studentRoll}</TableCell>
+          <TableCell>{row.year}</TableCell>
+          <TableCell>{row.projectName}</TableCell>
+          <TableCell>{row.category}</TableCell>
+          <TableCell>
+            {row.studentName.split(",").map(name => (
+              <div key={name}>
+                <br />
+                {name}
+              </div>
+            ))}
+          </TableCell>
+          <TableCell>
+            {row.studentRoll.split(",").map(roll => (
+              <div style={{ textAlign: "left" }} key={roll}>
+                <br />
+                <br />
+                {roll}
+              </div>
+            ))}
+          </TableCell>
           <TableCell>{row.supervisorName}</TableCell>
           <TableCell>
-            <EditProject />
+            <EditProject data={row}/>
             <br />
             <br />
-            <DeleteProject />
+            <DeleteProject data={row.Project_idProject} />
           </TableCell>
         </TableRow>
       );
@@ -57,3 +67,4 @@ class DataTable extends Component {
 }
 
 export default DataTable;
+//.then(json => sortBy(json,'projectName'))

@@ -1,5 +1,4 @@
 import React, {Component, Fragment} from 'react';
-import PropTypes from 'prop-types';
 import RButton from "../../Header/Navbar/RButton";
 import red from "@material-ui/core/es/colors/red";
 import Modal from "@material-ui/core/es/Modal/Modal";
@@ -10,7 +9,6 @@ import TextField from "@material-ui/core/es/TextField/TextField";
 import green from "@material-ui/core/es/colors/green";
 import Grid from "@material-ui/core/es/Grid/Grid";
 import Select from "@material-ui/core/es/Select/Select";
-import Input from "@material-ui/core/es/Input/Input";
 import Divider from "@material-ui/core/es/Divider/Divider";
 import cyan from "@material-ui/core/es/colors/cyan";
 import Add from "@material-ui/icons/es/Add";
@@ -18,8 +16,27 @@ import Add from "@material-ui/icons/es/Add";
 class Form extends Component {
     state = {
         isOpen: false,
-        number : 3
+        number : 3,
+        projectName: "",
+        supervisorName: "",
+        studentName: [],
+        studentRoll: [],
     };
+
+    formData = (projectName, supervisorName, studentName) => {
+        fetch('/formData',{
+            body: JSON.stringify({project: projectName,supervisor: supervisorName, name: studentName}),
+            headers: {
+                'content-type': 'application/json'
+            },
+            method: 'POST'
+        })
+            .then(res => res.json())
+            .then(res => console.log(res))
+    };
+
+
+
     handleOpen = () => {
       this.setState({
           isOpen : true
@@ -40,7 +57,18 @@ class Form extends Component {
         });
     };
 
+    handleSubmit = (event) => {
+        event.preventDefault();
+        this.formData(this.state.projectName, this.state.supervisorName, this.state.studentName);
+        this.setState({
+            projectName: "",
+            supervisorName: "",
+            studentName: [],
+            open: false,
+        });
+        console.log(this.state)
 
+    };
     render() {
         let stu_num = () => {
             let check = this.state.number;
@@ -283,8 +311,7 @@ class Form extends Component {
                                 <Divider/>
                                 <br/><br/><br/>
                                 <span>
-                                <RButton color={green} buttonText={"Submit"} style = {{paddingLeft: 30}}/>
-
+                                <RButton color={green} buttonText={"Submit"} style = {{paddingLeft: 30}} onClick = {this.handleSubmit}/>
                                 </span>
                                 <span>
                                 <RButton color={red} buttonText={"Cancel"} onClick={this.handleClose} style = {{paddingLeft: 30}} />
