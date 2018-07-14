@@ -41,7 +41,7 @@ class AProject extends Component {
         year: this.state.year
     };
     console.log(data);
-    fetch("/newSupervisor", {
+    fetch("/newProject", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
