@@ -23,7 +23,7 @@ class EditProject extends Component {
     allData: "",
     supData: "",
     proData: "",
-      batData:"",
+    batData: "",
     data: this.props.data,
     name1: this.props.data.studentName.split(",")[0],
     name2: this.props.data.studentName.split(",")[1],
@@ -60,6 +60,44 @@ class EditProject extends Component {
     });
   };
 
+  handleSubmit = event => {
+    fetch("/addProject", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name1: this.state.name1,
+        name2: this.state.name2,
+        name3: this.state.name3,
+        name4: this.state.name4,
+        roll1: this.state.roll1,
+        roll2: this.state.roll2,
+        roll3: this.state.roll3,
+        roll4: this.state.roll4,
+        project: this.state.project,
+        supervisor: this.state.supervisor,
+        batch: this.state.batch
+      })
+    })
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+    this.setState({
+      number: "",
+      name1: this.props.data.studentName.split(",")[0],
+      name2: this.props.data.studentName.split(",")[1],
+      name3: this.props.data.studentName.split(",")[2],
+      name4: this.props.data.studentName.split(",")[3],
+      roll1: this.props.data.studentRoll.split(",")[0],
+      roll2: this.props.data.studentRoll.split(",")[1],
+      roll3: this.props.data.studentRoll.split(",")[2],
+      roll4: this.props.data.studentRoll.split(",")[3],
+      project: this.props.data.projectName,
+      supervisor: this.props.data.supervisorName,
+      batch: this.props.data.year
+    });
+    event.preventDefault();
+  };
   handleChange = event => {
     this.setState({
       [event.target.name]: event.target.value
@@ -74,7 +112,7 @@ class EditProject extends Component {
           allData: json[0],
           supData: json[1],
           proData: json[2],
-            batData: json[3],
+          batData: json[3]
         })
       )
       .catch(err => console.log(err));

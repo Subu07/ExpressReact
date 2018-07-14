@@ -203,6 +203,7 @@ class Search extends Component {
           >
             <Clear />
           </RButton>
+          <br/>
           <AddProject />
         </Grid>
         <Grid item xs={10}>
