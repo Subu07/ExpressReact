@@ -9,16 +9,23 @@ import InputLabel from "@material-ui/core/es/InputLabel/InputLabel";
 import TextField from "@material-ui/core/es/TextField/TextField";
 import green from "@material-ui/core/es/colors/green";
 import Grid from "@material-ui/core/es/Grid/Grid";
-import Select from "@material-ui/core/es/Select/Select";
 
 import cyan from "@material-ui/core/es/colors/cyan";
-import Add from "@material-ui/icons/es/Add";
+import Edit from "@material-ui/icons/es/Edit";
+import Select from "@material-ui/core/es/Select/Select";
 import MenuItem from "@material-ui/core/es/MenuItem/MenuItem";
+import sortBy from "lodash/sortBy";
+import Add from "@material-ui/icons/es/Add";
 
-class AddProject extends Component {
+class EditProject extends Component {
   state = {
     isOpen: false,
     number: "",
+    stuData: "",
+    supData: "",
+    proData: "",
+    batData: "",
+
     name1: "",
     name2: "",
     name3: "",
@@ -34,6 +41,23 @@ class AddProject extends Component {
   handleOpen = () => {
     this.setState({
       isOpen: true
+    });
+  };
+  handleClose = () => {
+    this.setState({
+      isOpen: false,
+      number: "",
+      name1: "",
+      name2: "",
+      name3: "",
+      name4: "",
+      roll1: "",
+      roll2: "",
+      roll3: "",
+      roll4: "",
+      project: "",
+      supervisor: "",
+      batch: ""
     });
   };
 
@@ -76,28 +100,25 @@ class AddProject extends Component {
     });
     event.preventDefault();
   };
-
-  handleClose = () => {
+  handleChange = event => {
     this.setState({
-        isOpen: false,
-        number: "",
-        name1: "",
-        name2: "",
-        name3: "",
-        name4: "",
-        roll1: "",
-        roll2: "",
-        roll3: "",
-        roll4: "",
-        project: "",
-        supervisor: "",
-        batch: ""
+      [event.target.name]: event.target.value
     });
   };
 
-  handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
+  componentDidMount() {
+    fetch("/studentDisplay")
+      .then(res => res.json())
+      .then(json =>
+        this.setState({
+          stuData: json[0],
+          supData: json[1],
+          proData: json[2],
+          batData: json[3]
+        })
+      )
+      .catch(err => console.log(err));
+  }
 
   render() {
     let stu_num = () => {
@@ -110,25 +131,34 @@ class AddProject extends Component {
             <br />
             <Fragment>
               <InputLabel>Name :</InputLabel>
-              <TextField
+              <Select
                 value={this.state.name1}
                 name={"name1"}
-                id={"batch"}
                 onChange={this.handleChange}
-                margin={"normal"}
-                autoFocus={true}
                 required={true}
-              />
+                style={{ marginLeft: 10, width:200 }}
+              >
+                {sortBy(this.state.stuData, ["name"]).map(item => (
+                  <MenuItem value={item.name} key={item.roll_no}>
+                    {item.name}
+                  </MenuItem>
+                ))}
+              </Select>
+
               <InputLabel>Roll No. :</InputLabel>
-              <TextField
+              <Select
                 value={this.state.roll1}
                 name={"roll1"}
-                id={"roll"}
                 onChange={this.handleChange}
-                margin={"normal"}
-                autoFocus={true}
                 required={true}
-              />
+                style={{ marginLeft: 10, width:100 }}
+              >
+                {sortBy(this.state.stuData, ["name"]).map(item => (
+                  <MenuItem value={item.roll_no} key={item.roll_no}>
+                    {item.roll_no}
+                  </MenuItem>
+                ))}
+              </Select>
               <br />
               <br />
             </Fragment>
@@ -136,25 +166,33 @@ class AddProject extends Component {
             <br />
             <Fragment>
               <InputLabel>Name :</InputLabel>
-              <TextField
+              <Select
                 value={this.state.name2}
                 name={"name2"}
-                id={"batch"}
                 onChange={this.handleChange}
-                margin={"normal"}
-                autoFocus={true}
                 required={true}
-              />
+                style={{ marginLeft: 10, width:200 }}
+              >
+                {sortBy(this.state.stuData, ["name"]).map(item => (
+                  <MenuItem value={item.name} key={item.roll_no}>
+                    {item.name}
+                  </MenuItem>
+                ))}
+              </Select>
               <InputLabel>Roll No. :</InputLabel>
-              <TextField
+              <Select
                 value={this.state.roll2}
                 name={"roll2"}
-                id={"roll"}
                 onChange={this.handleChange}
-                margin={"normal"}
-                autoFocus={true}
                 required={true}
-              />
+                style={{ marginLeft: 10,width:100}}
+              >
+                {sortBy(this.state.stuData, ["name"]).map(item => (
+                  <MenuItem value={item.roll_no} key={item.roll_no}>
+                    {item.roll_no}
+                  </MenuItem>
+                ))}
+              </Select>
               <br />
               <br />
             </Fragment>
@@ -162,26 +200,33 @@ class AddProject extends Component {
             <br />
             <Fragment>
               <InputLabel>Name :</InputLabel>
-              <TextField
+              <Select
                 value={this.state.name3}
                 name={"name3"}
-                id={"batch"}
                 onChange={this.handleChange}
-                margin={"normal"}
-                autoFocus={true}
                 required={true}
-              />
+                style={{ marginLeft: 10,width:200 }}
+              >
+                {sortBy(this.state.stuData, ["name"]).map(item => (
+                  <MenuItem value={item.name} key={item.roll_no}>
+                    {item.name}
+                  </MenuItem>
+                ))}
+              </Select>
               <InputLabel>Roll No. :</InputLabel>
-              <TextField
+              <Select
                 value={this.state.roll3}
                 name={"roll3"}
-                id={"roll"}
                 onChange={this.handleChange}
-                margin={"normal"}
-                autoFocus={true}
                 required={true}
-              />
-              <br />
+                style={{ marginLeft: 10,width:100 }}
+              >
+                {sortBy(this.state.stuData, ["name"]).map(item => (
+                  <MenuItem value={item.roll_no} key={item.roll_no}>
+                    {item.roll_no}
+                  </MenuItem>
+                ))}
+              </Select>
               <br />
             </Fragment>
           </Fragment>
@@ -194,25 +239,33 @@ class AddProject extends Component {
             <br />
             <Fragment>
               <InputLabel>Name :</InputLabel>
-              <TextField
+              <Select
                 value={this.state.name1}
                 name={"name1"}
-                id={"batch"}
                 onChange={this.handleChange}
-                margin={"normal"}
-                autoFocus={true}
                 required={true}
-              />
+                style={{ marginLeft: 10,width:200 }}
+              >
+                {sortBy(this.state.stuData, ["name"]).map(item => (
+                  <MenuItem value={item.name} key={item.roll_no}>
+                    {item.name}
+                  </MenuItem>
+                ))}
+              </Select>
               <InputLabel>Roll No. :</InputLabel>
-              <TextField
+              <Select
                 value={this.state.roll1}
                 name={"roll1"}
-                id={"roll"}
                 onChange={this.handleChange}
-                margin={"normal"}
-                autoFocus={true}
                 required={true}
-              />
+                style={{ marginLeft: 10,width:100 }}
+              >
+                {sortBy(this.state.stuData, ["name"]).map(item => (
+                  <MenuItem value={item.roll_no} key={item.roll_no}>
+                    {item.roll_no}
+                  </MenuItem>
+                ))}
+              </Select>
               <br />
               <br />
             </Fragment>
@@ -220,25 +273,33 @@ class AddProject extends Component {
             <br />
             <Fragment>
               <InputLabel>Name :</InputLabel>
-              <TextField
+              <Select
                 value={this.state.name2}
                 name={"name2"}
-                id={"batch"}
                 onChange={this.handleChange}
-                margin={"normal"}
-                autoFocus={true}
                 required={true}
-              />
+                style={{ marginLeft: 10,width:200 }}
+              >
+                {sortBy(this.state.stuData, ["name"]).map(item => (
+                  <MenuItem value={item.name} key={item.roll_no}>
+                    {item.name}
+                  </MenuItem>
+                ))}
+              </Select>
               <InputLabel>Roll No. :</InputLabel>
-              <TextField
+              <Select
                 value={this.state.roll2}
                 name={"roll2"}
-                id={"roll"}
                 onChange={this.handleChange}
-                margin={"normal"}
-                autoFocus={true}
                 required={true}
-              />
+                style={{ marginLeft: 10,width:100 }}
+              >
+                {sortBy(this.state.stuData, ["name"]).map(item => (
+                  <MenuItem value={item.roll_no} key={item.roll_no}>
+                    {item.roll_no}
+                  </MenuItem>
+                ))}
+              </Select>
               <br />
               <br />
             </Fragment>
@@ -246,25 +307,33 @@ class AddProject extends Component {
             <br />
             <Fragment>
               <InputLabel>Name :</InputLabel>
-              <TextField
+              <Select
                 value={this.state.name3}
                 name={"name3"}
-                id={"batch"}
                 onChange={this.handleChange}
-                margin={"normal"}
-                autoFocus={true}
                 required={true}
-              />
+                style={{ marginLeft: 10,width:200 }}
+              >
+                {sortBy(this.state.stuData, ["name"]).map(item => (
+                  <MenuItem value={item.name} key={item.roll_no}>
+                    {item.name}
+                  </MenuItem>
+                ))}
+              </Select>
               <InputLabel>Roll No. :</InputLabel>
-              <TextField
+              <Select
                 value={this.state.roll3}
                 name={"roll3"}
-                id={"roll"}
                 onChange={this.handleChange}
-                margin={"normal"}
-                autoFocus={true}
                 required={true}
-              />
+                style={{ marginLeft: 10,width:100 }}
+              >
+                {sortBy(this.state.stuData, ["name"]).map(item => (
+                  <MenuItem value={item.roll_no} key={item.roll_no}>
+                    {item.roll_no}
+                  </MenuItem>
+                ))}
+              </Select>
               <br />
               <br />
             </Fragment>
@@ -272,25 +341,33 @@ class AddProject extends Component {
             <br />
             <Fragment>
               <InputLabel>Name :</InputLabel>
-              <TextField
+              <Select
                 value={this.state.name4}
                 name={"name4"}
-                id={"batch"}
                 onChange={this.handleChange}
-                margin={"normal"}
-                autoFocus={true}
                 required={true}
-              />
+                style={{ marginLeft: 10,width:200 }}
+              >
+                {sortBy(this.state.stuData, ["name"]).map(item => (
+                  <MenuItem value={item.name} key={item.roll_no}>
+                    {item.name}
+                  </MenuItem>
+                ))}
+              </Select>
               <InputLabel>Roll No. :</InputLabel>
-              <TextField
+              <Select
                 value={this.state.roll4}
                 name={"roll4"}
-                id={"roll"}
                 onChange={this.handleChange}
-                margin={"normal"}
-                autoFocus={true}
                 required={true}
-              />
+                style={{ marginLeft: 10,width:100 }}
+              >
+                {sortBy(this.state.stuData, ["name"]).map(item => (
+                  <MenuItem value={item.roll_no} key={item.roll_no}>
+                    {item.roll_no}
+                  </MenuItem>
+                ))}
+              </Select>
               <br />
               <br />
             </Fragment>
@@ -303,9 +380,9 @@ class AddProject extends Component {
         <br />
         <RButton
           color={cyan}
-          buttonText={"Add Project"}
+          buttonText={"AddProject"}
           onClick={this.handleOpen}
-          style={{ marginLeft: 10, marginTop: 20 }}
+          style={{ marginLeft: 10 }}
         >
           <Add />
         </RButton>
@@ -314,8 +391,8 @@ class AddProject extends Component {
           onClose={this.handleClose}
           style={{
             paddingTop: 50,
-            paddingLeft: 200,
-            paddingRight: 200,
+            paddingLeft: 50,
+            paddingRight: 50,
             paddingBottom: 50
           }}
         >
@@ -325,7 +402,7 @@ class AddProject extends Component {
                 variant={"headline"}
                 style={{ textAlign: "center", paddingTop: 30 }}
               >
-                Enter the details of the project:
+                Add the details of the project:
               </Typography>
               <br />
               <Grid container spacing={24}>
@@ -345,44 +422,53 @@ class AddProject extends Component {
                 <Grid item xs={5}>
                   <InputLabel>Project Name:</InputLabel>
                   <br />
-                  <TextField
+                  <Select
                     value={this.state.project}
                     name={"project"}
-                    style={{ width: 300 }}
-                    id={"project_name"}
                     onChange={this.handleChange}
-                    margin={"normal"}
-                    autoFocus={true}
                     required={true}
-                  />
+                    style={{ marginLeft: 5 }}
+                  >
+                    {sortBy(this.state.proData, ["name"]).map(item => (
+                      <MenuItem value={item.name} key={item.idProject}>
+                        {item.name}
+                      </MenuItem>
+                    ))}
+                  </Select>
                   <br />
                   <br />
                   <InputLabel>SuperVisor:</InputLabel>
                   <br />
-                  <TextField
+                  <Select
                     value={this.state.supervisor}
                     name={"supervisor"}
-                    style={{ width: 300 }}
-                    id={"supervisor"}
                     onChange={this.handleChange}
-                    margin={"normal"}
-                    autoFocus={true}
                     required={true}
-                  />
+                    style={{ marginLeft: 5 }}
+                  >
+                    {sortBy(this.state.supData, ["name"]).map(item => (
+                      <MenuItem value={item.name} key={item.idInstructor}>
+                        {item.name}
+                      </MenuItem>
+                    ))}
+                  </Select>
                   <br />
                   <br />
                   <InputLabel>Batch:</InputLabel>
                   <br />
-                  <TextField
+                  <Select
                     value={this.state.batch}
                     name={"batch"}
-                    style={{ width: 300 }}
-                    id={"batch"}
                     onChange={this.handleChange}
-                    margin={"normal"}
-                    autoFocus={true}
                     required={true}
-                  />
+                    style={{ marginLeft: 5 }}
+                  >
+                    {sortBy(this.state.batData, ["year"]).map(item => (
+                      <MenuItem value={item.year} key={item.year}>
+                        {item.year}
+                      </MenuItem>
+                    ))}
+                  </Select>
                   <br />
                   <br />
                   <br />
@@ -391,8 +477,6 @@ class AddProject extends Component {
                       color={green}
                       buttonText={"Submit"}
                       style={{ marginRight: "auto" }}
-                      type={"submit"}
-                      onClick = {this.handleSubmit}
                     />
                   </span>
                   <span>
@@ -413,4 +497,4 @@ class AddProject extends Component {
   }
 }
 
-export default AddProject;
+export default EditProject;
