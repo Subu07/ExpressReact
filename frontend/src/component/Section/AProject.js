@@ -14,13 +14,11 @@ import lime from "@material-ui/core/es/colors/lime";
 import Select from "@material-ui/core/es/Select/Select";
 import MenuItem from "@material-ui/core/es/MenuItem/MenuItem";
 
-class AddStudent extends Component {
+class AProject extends Component {
   state = {
-    student: [],
+    project: [],
     name: "",
-    roll: "",
-    batch: "",
-    programme: "",
+      year:"",
     isOpen: false
   };
   handleOpen = () => {
@@ -40,11 +38,10 @@ class AddStudent extends Component {
   handleSubmit = event => {
     let data = {
       name: this.state.name,
-      batch: this.state.batch,
-      roll: this.state.roll
+        year: this.state.year
     };
     console.log(data);
-    fetch("/newStudent", {
+    fetch("/newSupervisor", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -55,9 +52,7 @@ class AddStudent extends Component {
       .catch(err => console.log(err));
     this.setState({
       name: "",
-      roll: "",
-      batch: "",
-      programme: "",
+        year:"",
       isOpen: false
     });
     event.preventDefault();
@@ -69,7 +64,7 @@ class AddStudent extends Component {
       <Fragment>
         <RButton
           color={lime}
-          buttonText={"Add Student"}
+          buttonText={"Add Project"}
           onClick={this.handleOpen}
         />
         <Modal
@@ -77,76 +72,50 @@ class AddStudent extends Component {
           onClose={this.handleClose}
           style={{
             paddingTop: 100,
-            paddingLeft: 280,
-            paddingRight: 280,
+            paddingLeft: 400,
+            paddingRight: 400,
             paddingBottom: 100
           }}
         >
           <Paper elevation={2}>
             <form onSubmit={this.handleSubmit}>
               <Typography variant={"headline"} style={{ textAlign: "center" }}>
-                Fill the Student Form:
+                Fill the Project Form:
               </Typography>
-
-              <InputLabel>Batch: </InputLabel>
-              <Select
-                name={"batch"}
-                value={this.state.batch}
-                onChange={this.handleChange}
-                style={{ textAlign: "center", width:200 }}
-              >
-                <MenuItem value={2070}>2070</MenuItem>
-                <MenuItem value={2071}>2071</MenuItem>
-              </Select>
-              <br />
-                <br/>
-              <InputLabel>Programme: </InputLabel>
-              <Select
-                name={"programme"}
-                value={this.state.programme}
-                onChange={this.handleChange}
-                style={{ textAlign: "center", width:200 }}
-              >
-                <MenuItem value={"BCT"}>BCT</MenuItem>
-                <MenuItem value={"BEX"}>BEX</MenuItem>
-              </Select>
-              <br />
-              <br />
               <InputLabel>Name:</InputLabel>
               <RTextfield
-                  style={{width: 400}}
+                  style={{width: 250}}
                 value={this.state.name}
-                name={"Name"}
+                name={"name"}
                 required={true}
                 autoFocus={true}
                 onChange={this.handleChange}
               />
               <br />
               <br />
-
-              <InputLabel>Roll No:</InputLabel>
+              <InputLabel>Completion Year:</InputLabel>
               <RTextfield
-                value={this.state.roll}
+                value={this.state.year}
                 name={"roll"}
                 required={true}
                 focus={true}
                 onChange={this.handleChange}
-                helperText="e.g. 070BCT500"
+                helperText="e.g. 2074"
               />
-              <br />
-              <br />
+              <br/>
+              <br/>
 
               <RButton
                 color={green}
                 buttonText={"Submit"}
                 onClick={this.handleSubmit}
-                style={{marginLeft:20, marginBottom:20}}
+                style={{marginLeft:20}}
               />
               <RButton
                 color={red}
                 buttonText={"Cancel"}
                 onClick={this.handleClose}
-                style={{marginLeft: 500,marginBottom: 20}}
+                style={{marginLeft:300}}
               />
             </form>
           </Paper>
@@ -156,4 +125,4 @@ class AddStudent extends Component {
   }
 }
 
-export default AddStudent;
+export default AProject;

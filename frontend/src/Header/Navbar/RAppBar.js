@@ -44,7 +44,9 @@ class RAppBar extends Component <props> {
                            </span>
                            <Project/>
                            <Student title = {heading}/>
-                           <Supervisor/>
+                           <span style={{marginLeft:20}}>
+                               <Supervisor/>
+                           </span>
                        </Toolbar>
                    </AppBar>
                 </MuiThemeProvider>

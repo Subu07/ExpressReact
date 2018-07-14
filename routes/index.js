@@ -39,7 +39,7 @@ db.query(query, (err, result) => {
 });
 
 /* GET home page. */
- studentQuery = "SELECT name AS studentName, roll_no AS studentRoll FROM student;SELECT * FROM Supervisor;SELECT * FROM Project;SELECT * FROM BATCH";
+ studentQuery = "SELECT * FROM student;SELECT * FROM Supervisor;SELECT * FROM Project;SELECT * FROM BATCH";
 router.get('/studentDisplay',(req,res,next) => {
     db.query(studentQuery,(errors,results) => {
         if (errors) throw errors;

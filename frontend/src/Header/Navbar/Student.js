@@ -32,6 +32,7 @@ class Student extends Component {
         this.setState({
             isOpen: false
         });
+        window.location.reload();
     };
 
     handleOpen = () => {
@@ -42,7 +43,7 @@ class Student extends Component {
     componentDidMount() {
       fetch('/studentDisplay')
           .then(res => res.json())
-          .then(data => this.setState({students:data}));
+          .then(data => this.setState({students:data[0]}));
 };
 
     render() {

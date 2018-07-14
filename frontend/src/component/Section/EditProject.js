@@ -99,9 +99,9 @@ class EditProject extends Component {
                 required={true}
                 style={{ marginLeft: 10 }}
               >
-                {sortBy(this.state.allData, ["studentName"]).map(item => (
-                  <MenuItem value={item.studentName} key={item.studentRoll}>
-                    {item.studentName}
+                {sortBy(this.state.allData, ["name"]).map(item => (
+                  <MenuItem value={item.name} key={item.roll_no}>
+                    {item.name}
                   </MenuItem>
                 ))}
               </Select>
@@ -114,9 +114,9 @@ class EditProject extends Component {
                 required={true}
                 style={{ marginLeft: 10 }}
               >
-                {sortBy(this.state.allData, ["studentRoll"]).map(item => (
-                  <MenuItem value={item.studentRoll} key={item.studentRoll}>
-                    {item.studentRoll}
+                {sortBy(this.state.allData, ["roll_no"]).map(item => (
+                  <MenuItem value={item.roll_no} key={item.roll_no}>
+                    {item.roll_no}
                   </MenuItem>
                 ))}
               </Select>
@@ -134,9 +134,9 @@ class EditProject extends Component {
                 required={true}
                 style={{ marginLeft: 10 }}
               >
-                {sortBy(this.state.allData, ["studentName"]).map(item => (
-                  <MenuItem value={item.studentName} key={item.studentRoll}>
-                    {item.studentName}
+                {sortBy(this.state.allData, ["name"]).map(item => (
+                  <MenuItem value={item.name} key={item.roll_no}>
+                    {item.name}
                   </MenuItem>
                 ))}
               </Select>
@@ -148,9 +148,9 @@ class EditProject extends Component {
                 required={true}
                 style={{ marginLeft: 10 }}
               >
-                {sortBy(this.state.allData, ["studentRoll"]).map(item => (
-                  <MenuItem value={item.studentRoll} key={item.studentRoll}>
-                    {item.studentRoll}
+                {sortBy(this.state.allData, ["roll_no"]).map(item => (
+                  <MenuItem value={item.roll_no} key={item.roll_no}>
+                    {item.roll_no}
                   </MenuItem>
                 ))}
               </Select>
@@ -168,9 +168,9 @@ class EditProject extends Component {
                 required={true}
                 style={{ marginLeft: 10 }}
               >
-                {sortBy(this.state.allData, ["studentName"]).map(item => (
-                  <MenuItem value={item.studentName} key={item.studentRoll}>
-                    {item.studentName}
+                {sortBy(this.state.allData, ["name"]).map(item => (
+                  <MenuItem value={item.name} key={item.roll_no}>
+                    {item.name}
                   </MenuItem>
                 ))}
               </Select>
@@ -182,9 +182,9 @@ class EditProject extends Component {
                 required={true}
                 style={{ marginLeft: 10 }}
               >
-                {sortBy(this.state.allData, ["studentRoll"]).map(item => (
-                  <MenuItem value={item.studentRoll} key={item.studentRoll}>
-                    {item.studentRoll}
+                {sortBy(this.state.allData, ["roll_no"]).map(item => (
+                  <MenuItem value={item.roll_no} key={item.roll_no}>
+                    {item.roll_no}
                   </MenuItem>
                 ))}
               </Select>
@@ -207,9 +207,9 @@ class EditProject extends Component {
                 required={true}
                 style={{ marginLeft: 10 }}
               >
-                {sortBy(this.state.allData, ["studentName"]).map(item => (
-                  <MenuItem value={item.studentName} key={item.studentRoll}>
-                    {item.studentName}
+                {sortBy(this.state.allData, ["name"]).map(item => (
+                  <MenuItem value={item.name} key={item.roll_no}>
+                    {item.name}
                   </MenuItem>
                 ))}
               </Select>
@@ -221,9 +221,9 @@ class EditProject extends Component {
                 required={true}
                 style={{ marginLeft: 10 }}
               >
-                {sortBy(this.state.allData, ["studentRoll"]).map(item => (
-                  <MenuItem value={item.studentRoll} key={item.studentRoll}>
-                    {item.studentRoll}
+                {sortBy(this.state.allData, ["roll_no"]).map(item => (
+                  <MenuItem value={item.roll_no} key={item.roll_no}>
+                    {item.roll_no}
                   </MenuItem>
                 ))}
               </Select>
@@ -241,9 +241,9 @@ class EditProject extends Component {
                 required={true}
                 style={{ marginLeft: 10 }}
               >
-                {sortBy(this.state.allData, ["studentName"]).map(item => (
-                  <MenuItem value={item.studentName} key={item.studentRoll}>
-                    {item.studentName}
+                {sortBy(this.state.allData, ["name"]).map(item => (
+                  <MenuItem value={item.name} key={item.roll_no}>
+                    {item.name}
                   </MenuItem>
                 ))}
               </Select>
@@ -255,9 +255,9 @@ class EditProject extends Component {
                 required={true}
                 style={{ marginLeft: 10 }}
               >
-                {sortBy(this.state.allData, ["studentRoll"]).map(item => (
-                  <MenuItem value={item.studentRoll} key={item.studentRoll}>
-                    {item.studentRoll}
+                {sortBy(this.state.allData, ["roll_no"]).map(item => (
+                  <MenuItem value={item.roll_no} key={item.roll_no}>
+                    {item.roll_no}
                   </MenuItem>
                 ))}
               </Select>
@@ -275,9 +275,9 @@ class EditProject extends Component {
                 required={true}
                 style={{ marginLeft: 10 }}
               >
-                {sortBy(this.state.allData, ["studentName"]).map(item => (
-                  <MenuItem value={item.studentName} key={item.studentRoll}>
-                    {item.studentName}
+                {sortBy(this.state.allData, ["name"]).map(item => (
+                  <MenuItem value={item.name} key={item.roll_no}>
+                    {item.name}
                   </MenuItem>
                 ))}
               </Select>
@@ -289,9 +289,9 @@ class EditProject extends Component {
                 required={true}
                 style={{ marginLeft: 10 }}
               >
-                {sortBy(this.state.allData, ["studentRoll"]).map(item => (
-                  <MenuItem value={item.studentRoll} key={item.studentRoll}>
-                    {item.studentRoll}
+                {sortBy(this.state.allData, ["roll_no"]).map(item => (
+                  <MenuItem value={item.roll_no} key={item.roll_no}>
+                    {item.roll_no}
                   </MenuItem>
                 ))}
               </Select>
@@ -309,9 +309,9 @@ class EditProject extends Component {
                 required={true}
                 style={{ marginLeft: 10 }}
               >
-                {sortBy(this.state.allData, ["studentName"]).map(item => (
-                  <MenuItem value={item.studentName} key={item.studentRoll}>
-                    {item.studentName}
+                {sortBy(this.state.allData, ["name"]).map(item => (
+                  <MenuItem value={item.name} key={item.roll_no}>
+                    {item.name}
                   </MenuItem>
                 ))}
               </Select>
@@ -323,9 +323,9 @@ class EditProject extends Component {
                 required={true}
                 style={{ marginLeft: 10 }}
               >
-                {sortBy(this.state.allData, ["studentRoll"]).map(item => (
-                  <MenuItem value={item.studentRoll} key={item.studentRoll}>
-                    {item.studentRoll}
+                {sortBy(this.state.allData, ["roll_no"]).map(item => (
+                  <MenuItem value={item.roll_no} key={item.roll_no}>
+                    {item.roll_no}
                   </MenuItem>
                 ))}
               </Select>
@@ -352,8 +352,8 @@ class EditProject extends Component {
           onClose={this.handleClose}
           style={{
             paddingTop: 50,
-            paddingLeft: 100,
-            paddingRight: 100,
+            paddingLeft: 50,
+            paddingRight: 50,
             paddingBottom: 50
           }}
         >
