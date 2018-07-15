@@ -16,6 +16,8 @@ import DialogTitle from "@material-ui/core/es/DialogTitle/DialogTitle";
 import AddStudent from "../../component/Section/AddStudent";
 import red from "@material-ui/core/es/colors/red";
 import green from "@material-ui/core/es/colors/green";
+import EditStudent from "../../component/Section/EditStudent";
+import DeleteStudent from "../../component/Section/DeleteStudent";
 
 class Student extends Component {
     state = {
@@ -62,8 +64,8 @@ class Student extends Component {
                     <TableCell>{student.name}</TableCell>
                     <TableCell>{student.roll_no}</TableCell>
                     <TableCell>
-                        <RButton color={green} buttonText={"EDIT"}/>
-                        <RButton color={red} buttonText={"DELETE"}/>
+                        <EditStudent data = {student}/>
+                        <DeleteStudent data = {student.idStudent}/>
                     </TableCell>
                 </TableRow>
             )

@@ -14,11 +14,11 @@ import lime from "@material-ui/core/es/colors/lime";
 import Select from "@material-ui/core/es/Select/Select";
 import MenuItem from "@material-ui/core/es/MenuItem/MenuItem";
 
-class AProject extends Component {
+class AddProject extends Component {
   state = {
     project: [],
     name: "",
-      year:"",
+    year:"",
     isOpen: false
   };
   handleOpen = () => {
@@ -59,6 +59,16 @@ class AProject extends Component {
     window.location.reload();
   };
 
+   componentDidMount(){
+      fetch('/displayProject')
+          .then(res => res.json())
+          .then(data => {
+              this.setState({
+                  project: data
+              });
+          })
+          .catch(err => console.log('caught error',err))
+    };
   render() {
     return (
       <Fragment>
@@ -84,7 +94,7 @@ class AProject extends Component {
               </Typography>
               <InputLabel>Name:</InputLabel>
               <RTextfield
-                  style={{width: 250}}
+                style={{width: 250}}
                 value={this.state.name}
                 name={"name"}
                 required={true}
@@ -95,12 +105,13 @@ class AProject extends Component {
               <br />
               <InputLabel>Completion Year:</InputLabel>
               <RTextfield
+                style={{width: 250}}
                 value={this.state.year}
-                name={"roll"}
+                name={"year"}
                 required={true}
-                focus={true}
+                autoFocus={true}
                 onChange={this.handleChange}
-                helperText="e.g. 2074"
+                helperText = "e.g.2070"
               />
               <br/>
               <br/>
@@ -125,4 +136,4 @@ class AProject extends Component {
   }
 }
 
-export default AProject;
+export default AddProject;

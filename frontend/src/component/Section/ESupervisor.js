@@ -14,18 +14,19 @@ import lime from "@material-ui/core/es/colors/lime";
 import Select from "@material-ui/core/es/Select/Select";
 import MenuItem from "@material-ui/core/es/MenuItem/MenuItem";
 
-class AddStudent extends Component {
+class ESupervisor extends Component {
   state = {
-    student: [],
+    supervisor: [],
     name: "",
-    roll: "",
-    batch: "",
-    programme: "",
-    isOpen: false
+    isOpen: false,
+      id: ''
   };
   handleOpen = () => {
     this.setState({
-      isOpen: true
+      isOpen: true,
+      supervisor: this.props.data,
+      name : this.props.data.name,
+      id: this.props.data.idInstructor
     });
   };
   handleClose = () => {
@@ -37,40 +38,36 @@ class AddStudent extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  handleSubmit = event => {
+  handleEdit = event => {
     let data = {
       name: this.state.name,
-      batch: this.state.batch,
-      roll: this.state.roll,
-      programme: this.state.programme,
+      id: this.state.id
     };
     console.log(data);
-    fetch("/newStudent", {
+    fetch("/editSupervisor", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(data)
-
     })
       .then(response => response.json())
       .catch(err => console.log(err));
     this.setState({
       name: "",
-      roll: "",
-      batch: "",
-      programme: "",
+      id: "",
       isOpen: false
     });
     event.preventDefault();
     window.location.reload();
   };
-    componentDidMount(){
-      fetch('/display')
+
+   componentDidMount(){
+      fetch('/displaySupervisor')
           .then(res => res.json())
           .then(data => {
               this.setState({
-                  student: data
+                  supervisor: data
               });
           })
           .catch(err => console.log('caught error',err))
@@ -79,8 +76,8 @@ class AddStudent extends Component {
     return (
       <Fragment>
         <RButton
-          color={lime}
-          buttonText={"Add Student"}
+          color={green}
+          buttonText={"Edit"}
           onClick={this.handleOpen}
         />
         <Modal
@@ -88,75 +85,38 @@ class AddStudent extends Component {
           onClose={this.handleClose}
           style={{
             paddingTop: 100,
-            paddingLeft: 280,
-            paddingRight: 280,
+            paddingLeft: 400,
+            paddingRight: 400,
             paddingBottom: 100
           }}
         >
           <Paper elevation={2}>
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleEdit}>
               <Typography variant={"headline"} style={{ textAlign: "center" }}>
-                Fill the Student Form:
+                Fill the Supervisor Form:
               </Typography>
-
-              <InputLabel>Batch: </InputLabel>
-              <Select
-                name={"batch"}
-                value={this.state.batch}
-                onChange={this.handleChange}
-                style={{ textAlign: "center", width:200 }}
-              >
-                <MenuItem value={2070}>2070</MenuItem>
-                <MenuItem value={2071}>2071</MenuItem>
-              </Select>
-              <br />
-                <br/>
-              <InputLabel>Programme: </InputLabel>
-              <Select
-                name={"programme"}
-                value={this.state.programme}
-                onChange={this.handleChange}
-                style={{ textAlign: "center", width:200 }}
-              >
-                <MenuItem value={"BCT"}>BCT</MenuItem>
-                <MenuItem value={"BEX"}>BEX</MenuItem>
-              </Select>
-              <br />
-              <br />
               <InputLabel>Name:</InputLabel>
               <RTextfield
+                style={{width: 250}}
                 value={this.state.name}
                 name={"name"}
                 required={true}
-                focus={true}
+                autoFocus={true}
                 onChange={this.handleChange}
               />
               <br />
               <br />
-
-              <InputLabel>Roll No:</InputLabel>
-              <RTextfield
-                value={this.state.roll}
-                name={"roll"}
-                required={true}
-                focus={true}
-                onChange={this.handleChange}
-                helperText="e.g. 070BCT500"
-              />
-              <br />
-              <br />
-
               <RButton
                 color={green}
-                buttonText={"Submit"}
-                onClick={this.handleSubmit}
-                style={{marginLeft:20, marginBottom:20}}
+                buttonText={"Ok"}
+                onClick={this.handleEdit}
+                style={{marginLeft:20}}
               />
               <RButton
                 color={red}
                 buttonText={"Cancel"}
                 onClick={this.handleClose}
-                style={{marginLeft: 500,marginBottom: 20}}
+                style={{marginLeft:300}}
               />
             </form>
           </Paper>
@@ -166,4 +126,4 @@ class AddStudent extends Component {
   }
 }
 
-export default AddStudent;
+export default ESupervisor;

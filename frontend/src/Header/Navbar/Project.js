@@ -16,7 +16,9 @@ import DialogTitle from "@material-ui/core/es/DialogTitle/DialogTitle";
 import AddSupervisor from "../../component/Section/AddSupervisor";
 import red from "@material-ui/core/es/colors/red";
 import green from "@material-ui/core/es/colors/green";
-import AProject from "../../component/Section/AProject";
+import AddProject from "../../component/Section/AProject";
+import EProject from "../../component/Section/EProject";
+import DProject from "../../component/Section/DProject";
 
 class Project extends Component {
     state = {
@@ -65,10 +67,10 @@ class Project extends Component {
             return (
                 <TableRow key={project.idProject}>
                     <TableCell>{project.name}</TableCell>
-                    <TableCell>{project.Completed_year}</TableCell>
+                    <TableCell>{project.YearCompleted_year}</TableCell>
                     <TableCell>
-                        <RButton color={green} buttonText={"EDIT"}/>
-                        <RButton color={red} buttonText={"DELETE"}/>
+                        <EProject data = {project}/>
+                        <DProject data = {project.idProject}/>
                     </TableCell>
                 </TableRow>
             )
@@ -80,7 +82,7 @@ class Project extends Component {
                          open = {this.state.isOpen}
                          onClose={this.handleClose}>
                 <Paper elevation={2}>
-                    <AProject />
+                    <AddProject />
                 <Table>
                     <TableHead>
                         <TableRow>{headings}</TableRow>

@@ -13,13 +13,14 @@ import DialogActions from "@material-ui/core/es/DialogActions/DialogActions";
 import Done from "@material-ui/icons/es/Done";
 import Clear from "@material-ui/icons/es/Clear";
 
-class DeleteStudent extends Component {
+class DProject extends Component {
      state = {
         id: this.props.data,
-        student: [],
+        project: [],
          isOpen: false
     };
-        handleOpen = () => {
+
+    handleOpen = () => {
     this.setState({
       isOpen: true
     });
@@ -33,7 +34,7 @@ class DeleteStudent extends Component {
 
     handleDelete = (event) => {
     event.preventDefault();
-    fetch("/deleteStudent",{
+    fetch("/deleteProject",{
         method: 'POST',
         headers:{
             'Content-Type': 'application/json'
@@ -44,11 +45,11 @@ class DeleteStudent extends Component {
     window.location.reload();
   };
     componentDidMount(){
-      fetch('/display')
+      fetch('/displayProject')
           .then(res => res.json())
           .then(data => {
               this.setState({
-                  student: data
+                  project: data
               });
           })
           .catch(err => console.log('caught error',err));
@@ -58,8 +59,8 @@ class DeleteStudent extends Component {
     render() {
         return (
             <Fragment>
-            <RButton color={red} buttonText={"DELETE"} onClick = {this.handleOpen}/>
-            <Modal open={this.state.isOpen} onClose={this.handleClose}>
+                 <RButton color={red} buttonText={"DELETE"} onClick = {this.handleOpen}/>
+                <Modal open={this.state.isOpen} onClose={this.handleClose}>
             <Dialog open={this.state.isOpen} onClose={this.handleClose}>
               <DialogContent>
                 <DialogContentText id="alert-dialog-body">
@@ -98,4 +99,4 @@ class DeleteStudent extends Component {
     }
 }
 
-export default DeleteStudent;
+export default DProject;

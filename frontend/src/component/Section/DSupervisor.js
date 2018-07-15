@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import red from "@material-ui/core/es/colors/red";
 import RButton from "../../Header/Navbar/RButton";
 import green from "@material-ui/core/es/colors/green";
+import Clear from "@material-ui/icons/es/Clear";
+import Done from "@material-ui/icons/es/Done";
 import Modal from "@material-ui/core/es/Modal/Modal";
 import Dialog from "@material-ui/core/es/Dialog/Dialog";
 import DialogContent from "@material-ui/core/es/DialogContent/DialogContent";
@@ -10,16 +12,15 @@ import DialogContentText from "@material-ui/core/es/DialogContentText/DialogCont
 import Typography from "@material-ui/core/es/Typography/Typography";
 import Divider from "@material-ui/core/es/Divider/Divider";
 import DialogActions from "@material-ui/core/es/DialogActions/DialogActions";
-import Done from "@material-ui/icons/es/Done";
-import Clear from "@material-ui/icons/es/Clear";
 
-class DeleteStudent extends Component {
+class DSupervisor extends Component {
      state = {
         id: this.props.data,
-        student: [],
+        supervisor: [],
          isOpen: false
     };
-        handleOpen = () => {
+
+    handleOpen = () => {
     this.setState({
       isOpen: true
     });
@@ -33,7 +34,7 @@ class DeleteStudent extends Component {
 
     handleDelete = (event) => {
     event.preventDefault();
-    fetch("/deleteStudent",{
+    fetch("/deleteSupervisor",{
         method: 'POST',
         headers:{
             'Content-Type': 'application/json'
@@ -44,11 +45,11 @@ class DeleteStudent extends Component {
     window.location.reload();
   };
     componentDidMount(){
-      fetch('/display')
+      fetch('/displaySupervisor')
           .then(res => res.json())
           .then(data => {
               this.setState({
-                  student: data
+                  supervisor: data
               });
           })
           .catch(err => console.log('caught error',err));
@@ -58,8 +59,8 @@ class DeleteStudent extends Component {
     render() {
         return (
             <Fragment>
-            <RButton color={red} buttonText={"DELETE"} onClick = {this.handleOpen}/>
-            <Modal open={this.state.isOpen} onClose={this.handleClose}>
+                 <RButton color={red} buttonText={"DELETE"} onClick = {this.handleOpen}/>
+                <Modal open={this.state.isOpen} onClose={this.handleClose}>
             <Dialog open={this.state.isOpen} onClose={this.handleClose}>
               <DialogContent>
                 <DialogContentText id="alert-dialog-body">
@@ -98,4 +99,4 @@ class DeleteStudent extends Component {
     }
 }
 
-export default DeleteStudent;
+export default DSupervisor;
