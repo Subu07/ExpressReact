@@ -87,7 +87,7 @@ class AddProject extends Component {
             paddingBottom: 100
           }}
         >
-          <Paper elevation={2}>
+          <Paper elevation={1}>
             <form onSubmit={this.handleSubmit}>
               <Typography variant={"headline"} style={{ textAlign: "center" }}>
                 Fill the Project Form:
