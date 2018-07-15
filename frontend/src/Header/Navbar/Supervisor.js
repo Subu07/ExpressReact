@@ -16,6 +16,8 @@ import DialogTitle from "@material-ui/core/es/DialogTitle/DialogTitle";
 import AddSupervisor from "../../component/Section/AddSupervisor";
 import red from "@material-ui/core/es/colors/red";
 import green from "@material-ui/core/es/colors/green";
+import ESupervisor from "../../component/Section/ESupervisor";
+import DSupervisor from "../../component/Section/DSupervisor";
 
 class Supervisor extends Component {
     state = {
@@ -32,7 +34,6 @@ class Supervisor extends Component {
         this.setState({
             isOpen: false
         });
-        window.location.reload();
     };
 
     handleOpen = () => {
@@ -49,16 +50,21 @@ class Supervisor extends Component {
     render() {
 
         let headings =
+            <Fragment>
                 <TableCell>
                     <Typography variant={"title"}>Name</Typography>
-                </TableCell>;
+                </TableCell>
+                <TableCell>
+                        <Typography variant={"title"}>Action</Typography>
+                 </TableCell>
+            </Fragment>;
         let rows = this.state.supervisor.map(supervisor => {
             return (
                 <TableRow key={supervisor.idInstructor}>
                     <TableCell>{supervisor.name}</TableCell>
                     <TableCell>
-                        <RButton color={green} buttonText={"EDIT"}/>
-                        <RButton color={red} buttonText={"DELETE"} style={{marginRight:10, marginLeft:50}}/>
+                       <ESupervisor data = {supervisor}/>
+                        <DSupervisor data = {supervisor.idInstructor}/>
                     </TableCell>
                 </TableRow>
             )

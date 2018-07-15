@@ -56,6 +56,16 @@ class AddSupervisor extends Component {
     window.location.reload();
   };
 
+  componentDidMount(){
+      fetch('/displayProject')
+          .then(res => res.json())
+          .then(data => {
+              this.setState({
+                  supervisor: data
+              });
+          })
+          .catch(err => console.log('caught error',err))
+    };
   render() {
     return (
       <Fragment>
