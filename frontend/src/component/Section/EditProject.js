@@ -19,6 +19,7 @@ import sortBy from "lodash/sortBy";
 class EditProject extends Component {
   state = {
     isOpen: false,
+    orgData: "",
     number: "",
     allData: "",
     supData: "",
@@ -109,6 +110,7 @@ class EditProject extends Component {
       .then(res => res.json())
       .then(json =>
         this.setState({
+            orgData: json[0],
           allData: json[0],
           supData: json[1],
           proData: json[2],
@@ -117,7 +119,16 @@ class EditProject extends Component {
       )
       .catch(err => console.log(err));
   }
-
+  componentDidUpdate(_, prevState, __) {
+    if (this.state.batch !== prevState.batch) {
+      const newData = this.state.orgData.filter(
+        data => data.Batch_batch_no === this.state.batch
+      );
+      this.setState({
+        allData: newData
+      });
+    }
+  }
   render() {
     let stu_num = () => {
       let stuName = this.state.data.studentName.split(",");

@@ -13,6 +13,7 @@ import RTextfield from "../../container/RTextField";
 import lime from "@material-ui/core/es/colors/lime";
 import Select from "@material-ui/core/es/Select/Select";
 import MenuItem from "@material-ui/core/es/MenuItem/MenuItem";
+import {yellow} from "@material-ui/core/es/colors/index";
 
 class AddProject extends Component {
   state = {
@@ -72,11 +73,13 @@ class AddProject extends Component {
   render() {
     return (
       <Fragment>
+        <span style={{marginLeft: 1000}}>
         <RButton
-          color={lime}
+          color={yellow}
           buttonText={"Add Project"}
           onClick={this.handleOpen}
         />
+        </span>
         <Modal
           open={this.state.isOpen}
           onClose={this.handleClose}
