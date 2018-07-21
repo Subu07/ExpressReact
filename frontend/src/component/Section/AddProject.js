@@ -20,7 +20,8 @@ import Add from "@material-ui/icons/es/Add";
 class EditProject extends Component {
   state = {
     isOpen: false,
-    number: "",
+    number: 3,
+    orgData: "",
     stuData: "",
     supData: "",
     proData: "",
@@ -45,6 +46,7 @@ class EditProject extends Component {
   };
   handleClose = () => {
     this.setState({
+      stuData: this.state.orgData,
       isOpen: false,
       number: "",
       name1: "",
@@ -106,6 +108,18 @@ class EditProject extends Component {
     });
   };
 
+  componentDidUpdate(_, prevState, __) {
+    if (this.state.batch !== prevState.batch) {
+      if (this.state.batch !== "") {
+      const newData = this.state.orgData.filter(
+        data => data.Batch_batch_no === this.state.batch
+      );
+      this.setState({
+        stuData: newData
+      });
+    }}
+  }
+
   componentDidMount() {
     fetch("/studentDisplay")
       .then(res => res.json())
@@ -114,7 +128,8 @@ class EditProject extends Component {
           stuData: json[0],
           supData: json[1],
           proData: json[2],
-          batData: json[3]
+          batData: json[3],
+          orgData: json[0]
         })
       )
       .catch(err => console.log(err));
@@ -136,7 +151,7 @@ class EditProject extends Component {
                 name={"name1"}
                 onChange={this.handleChange}
                 required={true}
-                style={{ marginLeft: 10, width:200 }}
+                style={{ marginLeft: 10, width: 200 }}
               >
                 {sortBy(this.state.stuData, ["name"]).map(item => (
                   <MenuItem value={item.name} key={item.roll_no}>
@@ -151,7 +166,7 @@ class EditProject extends Component {
                 name={"roll1"}
                 onChange={this.handleChange}
                 required={true}
-                style={{ marginLeft: 10, width:100 }}
+                style={{ marginLeft: 10, width: 100 }}
               >
                 {sortBy(this.state.stuData, ["name"]).map(item => (
                   <MenuItem value={item.roll_no} key={item.roll_no}>
@@ -171,7 +186,7 @@ class EditProject extends Component {
                 name={"name2"}
                 onChange={this.handleChange}
                 required={true}
-                style={{ marginLeft: 10, width:200 }}
+                style={{ marginLeft: 10, width: 200 }}
               >
                 {sortBy(this.state.stuData, ["name"]).map(item => (
                   <MenuItem value={item.name} key={item.roll_no}>
@@ -185,7 +200,7 @@ class EditProject extends Component {
                 name={"roll2"}
                 onChange={this.handleChange}
                 required={true}
-                style={{ marginLeft: 10,width:100}}
+                style={{ marginLeft: 10, width: 100 }}
               >
                 {sortBy(this.state.stuData, ["name"]).map(item => (
                   <MenuItem value={item.roll_no} key={item.roll_no}>
@@ -205,7 +220,7 @@ class EditProject extends Component {
                 name={"name3"}
                 onChange={this.handleChange}
                 required={true}
-                style={{ marginLeft: 10,width:200 }}
+                style={{ marginLeft: 10, width: 200 }}
               >
                 {sortBy(this.state.stuData, ["name"]).map(item => (
                   <MenuItem value={item.name} key={item.roll_no}>
@@ -219,7 +234,7 @@ class EditProject extends Component {
                 name={"roll3"}
                 onChange={this.handleChange}
                 required={true}
-                style={{ marginLeft: 10,width:100 }}
+                style={{ marginLeft: 10, width: 100 }}
               >
                 {sortBy(this.state.stuData, ["name"]).map(item => (
                   <MenuItem value={item.roll_no} key={item.roll_no}>
@@ -244,7 +259,7 @@ class EditProject extends Component {
                 name={"name1"}
                 onChange={this.handleChange}
                 required={true}
-                style={{ marginLeft: 10,width:200 }}
+                style={{ marginLeft: 10, width: 200 }}
               >
                 {sortBy(this.state.stuData, ["name"]).map(item => (
                   <MenuItem value={item.name} key={item.roll_no}>
@@ -258,7 +273,7 @@ class EditProject extends Component {
                 name={"roll1"}
                 onChange={this.handleChange}
                 required={true}
-                style={{ marginLeft: 10,width:100 }}
+                style={{ marginLeft: 10, width: 100 }}
               >
                 {sortBy(this.state.stuData, ["name"]).map(item => (
                   <MenuItem value={item.roll_no} key={item.roll_no}>
@@ -278,7 +293,7 @@ class EditProject extends Component {
                 name={"name2"}
                 onChange={this.handleChange}
                 required={true}
-                style={{ marginLeft: 10,width:200 }}
+                style={{ marginLeft: 10, width: 200 }}
               >
                 {sortBy(this.state.stuData, ["name"]).map(item => (
                   <MenuItem value={item.name} key={item.roll_no}>
@@ -292,7 +307,7 @@ class EditProject extends Component {
                 name={"roll2"}
                 onChange={this.handleChange}
                 required={true}
-                style={{ marginLeft: 10,width:100 }}
+                style={{ marginLeft: 10, width: 100 }}
               >
                 {sortBy(this.state.stuData, ["name"]).map(item => (
                   <MenuItem value={item.roll_no} key={item.roll_no}>
@@ -312,7 +327,7 @@ class EditProject extends Component {
                 name={"name3"}
                 onChange={this.handleChange}
                 required={true}
-                style={{ marginLeft: 10,width:200 }}
+                style={{ marginLeft: 10, width: 200 }}
               >
                 {sortBy(this.state.stuData, ["name"]).map(item => (
                   <MenuItem value={item.name} key={item.roll_no}>
@@ -326,7 +341,7 @@ class EditProject extends Component {
                 name={"roll3"}
                 onChange={this.handleChange}
                 required={true}
-                style={{ marginLeft: 10,width:100 }}
+                style={{ marginLeft: 10, width: 100 }}
               >
                 {sortBy(this.state.stuData, ["name"]).map(item => (
                   <MenuItem value={item.roll_no} key={item.roll_no}>
@@ -346,7 +361,7 @@ class EditProject extends Component {
                 name={"name4"}
                 onChange={this.handleChange}
                 required={true}
-                style={{ marginLeft: 10,width:200 }}
+                style={{ marginLeft: 10, width: 200 }}
               >
                 {sortBy(this.state.stuData, ["name"]).map(item => (
                   <MenuItem value={item.name} key={item.roll_no}>
@@ -360,7 +375,7 @@ class EditProject extends Component {
                 name={"roll4"}
                 onChange={this.handleChange}
                 required={true}
-                style={{ marginLeft: 10,width:100 }}
+                style={{ marginLeft: 10, width: 100 }}
               >
                 {sortBy(this.state.stuData, ["name"]).map(item => (
                   <MenuItem value={item.roll_no} key={item.roll_no}>

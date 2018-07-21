@@ -1,5 +1,5 @@
-import React, {Component, Fragment} from 'react';
-import PropTypes from 'prop-types';
+import React, { Component, Fragment } from "react";
+import PropTypes from "prop-types";
 import lime from "@material-ui/core/es/colors/lime";
 import RButton from "./RButton";
 import Modal from "@material-ui/core/es/Modal/Modal";
@@ -11,89 +11,85 @@ import Table from "@material-ui/core/es/Table/Table";
 import TableHead from "@material-ui/core/es/TableHead/TableHead";
 import TableBody from "@material-ui/core/es/TableBody/TableBody";
 import Dialog from "@material-ui/core/es/Dialog/Dialog";
-import DialogContent from "@material-ui/core/es/DialogContent/DialogContent";
-import DialogTitle from "@material-ui/core/es/DialogTitle/DialogTitle";
-import AddSupervisor from "../../component/Section/AddSupervisor";
-import red from "@material-ui/core/es/colors/red";
-import green from "@material-ui/core/es/colors/green";
+import { BrowserRouter, Link } from "react-router-dom";
 import AddProject from "../../component/Section/AProject";
 import EProject from "../../component/Section/EProject";
 import DProject from "../../component/Section/DProject";
+import yellow from "@material-ui/core/es/colors/yellow";
 
 class Project extends Component {
-    state = {
-        isOpen: false,
-        project : [],
-    };
-    handleChange = event => {
-      this.setState({
-          [event.target.name]: event.target.value
-      });
-    };
+  state = {
+    isOpen: false,
+    project: []
+  };
+  handleChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  };
 
-    handleClose = () => {
-        this.setState({
-            isOpen: false
-        });
-        window.location.reload();
-    };
+  handleClose = () => {
+    this.setState({
+      isOpen: false
+    });
+  };
 
-    handleOpen = () => {
-        this.setState({
-            isOpen: true
-        });
-    };
-    componentDidMount() {
-      fetch('/studentDisplay')
-          .then(res => res.json())
-          .then(data => this.setState({project:data[2]}));
-};
+  handleOpen = () => {
+    this.setState({
+      isOpen: true
+    });
+  };
+  componentDidMount() {
+    fetch("/studentDisplay")
+      .then(res => res.json())
+      .then(data => this.setState({ project: data[2] }));
+  }
 
-    render() {
-
-        let headings =
-            <Fragment>
-                <TableCell>
-                    <Typography variant={"title"}>Name</Typography>
-                </TableCell>
-                    <TableCell>
-                        <Typography variant={"title"}>Completion Year</Typography>
-                    </TableCell>
-                <TableCell>
-                        <Typography variant={"title"}>Action</Typography>
-                    </TableCell>
-            </Fragment>;
-        let rows = this.state.project.map(project => {
-            return (
-                <TableRow key={project.idProject}>
-                    <TableCell>{project.name}</TableCell>
-                    <TableCell>{project.YearCompleted_year}</TableCell>
-                    <TableCell>
-                        <EProject data = {project}/>
-                        <DProject data = {project.idProject}/>
-                    </TableCell>
-                </TableRow>
-            )
-        });
-        return (
-            <Fragment>
-                <RButton color={lime} buttonText={"Project"} onClick = {this.handleOpen} style={{marginRight:20}}/>
-                 <Dialog fullWidth={false}
-                         open = {this.state.isOpen}
-                         onClose={this.handleClose}>
-                <Paper elevation={2}>
-                    <AddProject />
-                <Table>
-                    <TableHead>
-                        <TableRow>{headings}</TableRow>
-                    </TableHead>
-                    <TableBody>{rows}</TableBody>
-                </Table>
-                </Paper>
-                 </Dialog>
-                </Fragment>
-        );
-    }
+  render() {
+    let headings = (
+      <Fragment>
+        <TableCell>
+          <Typography variant={"title"}>Name</Typography>
+        </TableCell>
+        <TableCell>
+          <Typography variant={"title"}>Completion Year</Typography>
+        </TableCell>
+        <TableCell>
+          <Typography variant={"title"}>Action</Typography>
+        </TableCell>
+      </Fragment>
+    );
+    let rows = this.state.project.map(project => {
+      return (
+        <TableRow key={project.idProject}>
+          <TableCell>{project.name}</TableCell>
+          <TableCell>{project.YearCompleted_year}</TableCell>
+          <TableCell>
+            <EProject data={project} />
+            <DProject data={project.idProject} />
+          </TableCell>
+        </TableRow>
+      );
+    });
+    return (
+      <Fragment>
+        <Link to={"/"} style={{ textDecoration: "none" }}>
+          <RButton
+            color={yellow}
+            buttonText={"Back"}
+            style={{ marginRight: 20 }}
+          />
+        </Link>
+        <AddProject />
+        <Table>
+          <TableHead>
+            <TableRow>{headings}</TableRow>
+          </TableHead>
+          <TableBody>{rows}</TableBody>
+        </Table>
+      </Fragment>
+    );
+  }
 }
 
 export default Project;
