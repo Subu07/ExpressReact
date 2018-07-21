@@ -25,6 +25,7 @@ class EditProject extends Component {
     supData: "",
     proData: "",
     batData: "",
+    id: this.props.id,
     data: this.props.data,
     name1: this.props.data.studentName.split(",")[0],
     name2: this.props.data.studentName.split(",")[1],
@@ -62,12 +63,14 @@ class EditProject extends Component {
   };
 
   handleSubmit = event => {
-    fetch("/addProject", {
+    fetch("/studentProjectEdit", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
+        id: this.state.id,
+        n: this.state.number,
         name1: this.state.name1,
         name2: this.state.name2,
         name3: this.state.name3,
@@ -81,22 +84,17 @@ class EditProject extends Component {
         batch: this.state.batch
       })
     })
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
-    this.setState({
-      number: "",
-      name1: this.props.data.studentName.split(",")[0],
-      name2: this.props.data.studentName.split(",")[1],
-      name3: this.props.data.studentName.split(",")[2],
-      name4: this.props.data.studentName.split(",")[3],
-      roll1: this.props.data.studentRoll.split(",")[0],
-      roll2: this.props.data.studentRoll.split(",")[1],
-      roll3: this.props.data.studentRoll.split(",")[2],
-      roll4: this.props.data.studentRoll.split(",")[3],
-      project: this.props.data.projectName,
-      supervisor: this.props.data.supervisorName,
-      batch: this.props.data.year
-    });
+      .then(res => res.json())
+        .then(json => {
+          if (json.result === "Success"){
+            alert("Success");
+            setInterval(window.location.reload(),100);
+          }
+          else {
+            alert("Duplicate")
+          }
+        })
+        .catch(err => console.log(err));
     event.preventDefault();
   };
   handleChange = event => {
@@ -110,7 +108,7 @@ class EditProject extends Component {
       .then(res => res.json())
       .then(json =>
         this.setState({
-            orgData: json[0],
+          orgData: json[0],
           allData: json[0],
           supData: json[1],
           proData: json[2],
@@ -406,7 +404,7 @@ class EditProject extends Component {
             paddingBottom: 50
           }}
         >
-          <form>
+          <form onSubmit={this.handleSubmit}>
             <Paper elevation={3}>
               <Typography
                 variant={"headline"}
@@ -477,6 +475,7 @@ class EditProject extends Component {
                       color={green}
                       buttonText={"Submit"}
                       style={{ marginRight: "auto" }}
+                      type={"submit"}
                     />
                   </span>
                   <span>
