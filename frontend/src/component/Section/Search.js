@@ -8,7 +8,7 @@ import Divider from "@material-ui/core/Divider";
 import AddProject from "./AddProject";
 import Clear from "@material-ui/icons/Clear";
 import Eye from "@material-ui/icons/Visibility";
-
+import sortBy from 'lodash/sortBy';
 import Grid from "@material-ui/core/es/Grid/Grid";
 import DisplayProject from "./DisplayProject";
 import green from "@material-ui/core/es/colors/green";
@@ -169,7 +169,7 @@ class Search extends Component {
           <Divider />
           <br />
           <br />
-          <InputLabel>Year:</InputLabel>
+          <InputLabel>Year Completed:</InputLabel>
           <br />
           <br />
           <Select
@@ -207,7 +207,7 @@ class Search extends Component {
           <AddProject />
         </Grid>
         <Grid item xs={10}>
-          <DisplayProject data={this.state.data} />
+          <DisplayProject data={sortBy(this.state.data,"projectName")} />
         </Grid>
       </Grid>
     );

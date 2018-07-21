@@ -59,49 +59,58 @@ class EditProject extends Component {
       roll4: "",
       project: "",
       supervisor: "",
-      batch: ""
+      batch: "",
+      res: ""
     });
   };
 
   handleSubmit = event => {
-    fetch("/addProject", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        name1: this.state.name1,
-        name2: this.state.name2,
-        name3: this.state.name3,
-        name4: this.state.name4,
-        roll1: this.state.roll1,
-        roll2: this.state.roll2,
-        roll3: this.state.roll3,
-        roll4: this.state.roll4,
-        project: this.state.project,
-        supervisor: this.state.supervisor,
-        batch: this.state.batch
+    if (
+      this.state.name1 !== "" &&
+      this.state.name2 !== "" &&
+      this.state.name3 !== "" &&
+      this.state.roll1 !== "" &&
+      this.state.roll2 !== "" &&
+      this.state.roll3 !== "" &&
+      this.state.project !== "" &&
+      this.state.supervisor !== "" &&
+      this.state.batch !== ""
+    ) {
+      fetch("/studentProjectAdd", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          n: this.state.number,
+          name1: this.state.name1,
+          name2: this.state.name2,
+          name3: this.state.name3,
+          name4: this.state.name4,
+          roll1: this.state.roll1,
+          roll2: this.state.roll2,
+          roll3: this.state.roll3,
+          roll4: this.state.roll4,
+          project: this.state.project,
+          supervisor: this.state.supervisor,
+          batch: this.state.batch
+        })
       })
-    })
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
-    this.setState({
-      isOpen: false,
-      number: "",
-      name1: "",
-      name2: "",
-      name3: "",
-      name4: "",
-      roll1: "",
-      roll2: "",
-      roll3: "",
-      roll4: "",
-      project: "",
-      supervisor: "",
-      batch: ""
-    });
+        .then(res => res.json())
+        .then(json => {
+          if (json.result === "Success"){
+            alert("Success");
+            setInterval(window.location.reload(),100);
+          }
+          else {
+            alert("Duplicate")
+          }
+        })
+        .catch(err => console.log(err));
+    }
     event.preventDefault();
   };
+
   handleChange = event => {
     this.setState({
       [event.target.name]: event.target.value
@@ -111,13 +120,14 @@ class EditProject extends Component {
   componentDidUpdate(_, prevState, __) {
     if (this.state.batch !== prevState.batch) {
       if (this.state.batch !== "") {
-      const newData = this.state.orgData.filter(
-        data => data.Batch_batch_no === this.state.batch
-      );
-      this.setState({
-        stuData: newData
-      });
-    }}
+        const newData = this.state.orgData.filter(
+          data => data.Batch_batch_no === this.state.batch
+        );
+        this.setState({
+          stuData: newData
+        });
+      }
+    }
   }
 
   componentDidMount() {
@@ -128,7 +138,7 @@ class EditProject extends Component {
           stuData: json[0],
           supData: json[1],
           proData: json[2],
-          batData: json[3],
+          batData: json[4],
           orgData: json[0]
         })
       )
@@ -492,6 +502,7 @@ class EditProject extends Component {
                       color={green}
                       buttonText={"Submit"}
                       style={{ marginRight: "auto" }}
+                      type={"submit"}
                     />
                   </span>
                   <span>

@@ -39,7 +39,8 @@ class DeleteProject extends Component {
         },
         body:JSON.stringify({id:this.state.id})
     }).then(res=>console.log(res))
-        .catch(err=>console.log(err))
+        .catch(err=>console.log(err));
+    window.location.reload();
   };
 
   handleClick = () => {
