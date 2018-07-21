@@ -169,7 +169,7 @@ class Search extends Component {
           <Divider />
           <br />
           <br />
-          <InputLabel>Year:</InputLabel>
+          <InputLabel>Year Completed:</InputLabel>
           <br />
           <br />
           <Select

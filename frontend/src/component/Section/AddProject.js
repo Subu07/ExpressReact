@@ -138,7 +138,7 @@ class EditProject extends Component {
           stuData: json[0],
           supData: json[1],
           proData: json[2],
-          batData: json[3],
+          batData: json[4],
           orgData: json[0]
         })
       )

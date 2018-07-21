@@ -81,7 +81,7 @@ class EditProject extends Component {
         roll4: this.state.roll4,
         project: this.state.project,
         supervisor: this.state.supervisor,
-        batch: this.state.batch
+        yearCompleted: this.state.batch
       })
     })
       .then(res => res.json())
@@ -117,16 +117,7 @@ class EditProject extends Component {
       )
       .catch(err => console.log(err));
   }
-  componentDidUpdate(_, prevState, __) {
-    if (this.state.batch !== prevState.batch) {
-      const newData = this.state.orgData.filter(
-        data => data.Batch_batch_no === this.state.batch
-      );
-      this.setState({
-        allData: newData
-      });
-    }
-  }
+
   render() {
     let stu_num = () => {
       let stuName = this.state.data.studentName.split(",");
@@ -452,7 +443,7 @@ class EditProject extends Component {
                   </Select>
                   <br />
                   <br />
-                  <InputLabel>Batch:</InputLabel>
+                  <InputLabel>Year Completed:</InputLabel>
                   <br />
                   <Select
                     value={this.state.batch}

@@ -24,8 +24,8 @@ db.connect(err => {
 //Queries
 query =
   "SELECT * FROM supervisor;SELECT * FROM Category; " +
-  "SELECT * FROM Batch; SELECT * FROM Student;" +
-  "SELECT P.Project_idProject, GROUP_CONCAT(DISTINCT(S.name)SEPARATOR ',') AS studentName,P2.name AS projectName, GROUP_CONCAT(DISTINCT(S.roll_no)) AS studentRoll, S2.name AS supervisorName, GROUP_CONCAT(DISTINCT(S.Batch_batch_no)) AS year, GROUP_CONCAT(DISTINCT(Category.Category_name)) AS category FROM Project_has_Student P INNER JOIN Student S on P.Student_idStudent = S.idStudent " +
+  "SELECT * FROM year_completed; SELECT * FROM Student;" +
+  "SELECT P.Project_idProject, GROUP_CONCAT(DISTINCT(S.name)SEPARATOR ',') AS studentName,P2.name AS projectName, GROUP_CONCAT(DISTINCT(S.roll_no)) AS studentRoll, S2.name AS supervisorName, P2.YearCompleted_year AS year, GROUP_CONCAT(DISTINCT(Category.Category_name)) AS category FROM Project_has_Student P INNER JOIN Student S on P.Student_idStudent = S.idStudent " +
   "INNER JOIN Project P2 on P.Project_idProject = P2.idProject " +
   "INNER JOIN Project_has_Category Category on P2.idProject = Category.Project_idProject " +
   "INNER JOIN Supervisor S2 on P2.Supervisor_idInstructor = S2.idInstructor " +
@@ -40,7 +40,7 @@ db.query(query, (err, result) => {
 
 /* GET home page. */
 studentQuery =
-  "SELECT * FROM student;SELECT * FROM Supervisor;SELECT * FROM Project;SELECT * FROM BATCH";
+  "SELECT * FROM student;SELECT * FROM Supervisor;SELECT * FROM Project;SELECT * FROM year_completed;SELECT * FROM batch";
 router.get("/studentDisplay", (req, res, next) => {
   db.query(studentQuery, (err, results) => {
     if (err) console.log(err);
@@ -335,7 +335,7 @@ WHERE name='${req.body.supervisor}'`;
       }','${stuId[1].idStudent}'),('${proId[0].idProject}','${
         stuId[2].idStudent
       }');UPDATE project
-SET Supervisor_idInstructor=${supId[0].idInstructor}
+SET Supervisor_idInstructor=${supId[0].idInstructor},YearCompleted_year='${req.body.yearCompleted}'
 WHERE idProject=${proId[0].idProject}`;
     } else {
       nSql = `INSERT INTO project_has_student(Project_idProject, Student_idStudent)
@@ -344,7 +344,7 @@ WHERE idProject=${proId[0].idProject}`;
       }','${stuId[1].idStudent}'),('${proId[0].idProject}','${
         stuId[2].idStudent
       }'),('${proId[0].idProject}','${stuId[3].idStudent}');UPDATE project
-SET Supervisor_idInstructor=${supId[0].idInstructor}
+SET Supervisor_idInstructor=${supId[0].idInstructor},YearCompleted_year='${req.body.yearCompleted}'
 WHERE idProject=${proId[0].idProject}`;
     }
     db.query(nSql, (err, result) => {
