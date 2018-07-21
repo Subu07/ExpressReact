@@ -48,7 +48,7 @@ class EditProject extends Component {
     this.setState({
       stuData: this.state.orgData,
       isOpen: false,
-      number: "",
+      number: 3,
       name1: "",
       name2: "",
       name3: "",
@@ -98,12 +98,11 @@ class EditProject extends Component {
       })
         .then(res => res.json())
         .then(json => {
-          if (json.result === "Success"){
+          if (json.result === "Success") {
             alert("Success");
-            setInterval(window.location.reload(),100);
-          }
-          else {
-            alert("Duplicate")
+            setInterval(window.location.reload(), 100);
+          } else {
+            alert("Duplicate");
           }
         })
         .catch(err => console.log(err));
@@ -432,6 +431,22 @@ class EditProject extends Component {
               <br />
               <Grid container spacing={24}>
                 <Grid item xs={7}>
+                  <InputLabel>Batch:</InputLabel>
+                  <Select
+                    value={this.state.batch}
+                    name={"batch"}
+                    onChange={this.handleChange}
+                    required={true}
+                    style={{ marginLeft: 5 }}
+                  >
+                    {sortBy(this.state.batData, ["year"]).map(item => (
+                      <MenuItem value={item.year} key={item.year}>
+                        {item.year}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                  <br/>
+                  <br/>
                   <InputLabel>Number of Student: </InputLabel>
                   <Select
                     name={"number"}
@@ -479,21 +494,7 @@ class EditProject extends Component {
                   </Select>
                   <br />
                   <br />
-                  <InputLabel>Batch:</InputLabel>
                   <br />
-                  <Select
-                    value={this.state.batch}
-                    name={"batch"}
-                    onChange={this.handleChange}
-                    required={true}
-                    style={{ marginLeft: 5 }}
-                  >
-                    {sortBy(this.state.batData, ["year"]).map(item => (
-                      <MenuItem value={item.year} key={item.year}>
-                        {item.year}
-                      </MenuItem>
-                    ))}
-                  </Select>
                   <br />
                   <br />
                   <br />
