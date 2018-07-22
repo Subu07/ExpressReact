@@ -4,13 +4,6 @@
     <option name="dataSources">
       <list>
         <State>
-          <option name="id" value="d668bfe2-a12c-46d1-83b4-7667eb1d5b7a" />
-          <option name="name" value="DDL data source" />
-          <option name="urls">
-            <array />
-          </option>
-        </State>
-        <State>
           <option name="id" value="77fef2a7-7004-4574-ae5e-f1ede3d4e5d1" />
           <option name="name" value="DDL data source" />
           <option name="urls">
@@ -18,35 +11,7 @@
           </option>
         </State>
         <State>
-          <option name="id" value="4f33d1e2-2099-4d84-916b-00a2cd0329e3" />
-          <option name="name" value="DDL data source" />
-          <option name="urls">
-            <array />
-          </option>
-        </State>
-        <State>
-          <option name="id" value="3ef4d7cb-d6bf-4df4-960f-92edf1846198" />
-          <option name="name" value="DDL data source" />
-          <option name="urls">
-            <array />
-          </option>
-        </State>
-        <State>
-          <option name="id" value="d5c45335-4df1-4125-8733-25ab611a41ab" />
-          <option name="name" value="DDL data source" />
-          <option name="urls">
-            <array />
-          </option>
-        </State>
-        <State>
-          <option name="id" value="472897dc-1636-49e7-993a-2a3bb5ca8665" />
-          <option name="name" value="DDL data source" />
-          <option name="urls">
-            <array />
-          </option>
-        </State>
-        <State>
-          <option name="id" value="209c693f-be35-44c1-b4ce-bd076c3212e7" />
+          <option name="id" value="eb19f3ba-7e69-4342-999a-6b785958ad00" />
           <option name="name" value="DDL data source" />
           <option name="urls">
             <array />
