@@ -57,6 +57,13 @@ class RAppBar extends Component<props> {
                       style={{ marginRight: 20 }}
                     />
                   </Link>
+                  <Link to={"/category"} style={{ textDecoration: "none" }}>
+                    <RButton
+                      color={yellow}
+                      buttonText={"Category"}
+                      style={{ marginRight: 20 }}
+                    />
+                  </Link>
                 </span>
             </Toolbar>
           </AppBar>

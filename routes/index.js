@@ -7,8 +7,8 @@ let stuId, proId, supId, nSql, msg;
 // Create Connection
 const db = mysql.createConnection({
   host: "localhost",
-  user: "root",
-  password: "",
+  user: "sujan",
+  password: "salina@@@",
   database: "beproject",
   multipleStatements: true
 });
@@ -220,6 +220,8 @@ router.post("/newSupervisor", (req, res, next) => {
   console.log(req.body);
 });
 
+
+//EDIT SUPERVISOR
 router.post("/editSupervisor", (req, res) => {
   console.log(req.body);
   let edit =
@@ -360,5 +362,54 @@ WHERE idProject=${proId[0].idProject}`;
     });
   });
 });
+
+//GET CATEGORY
+router.get("/displayCategory", (req, res, next) => {
+  db.query("SELECT * FROM category", (err, results) => {
+    if (err) console.log(err);
+    console.log("data received from Category Table: ");
+    res.send(results);
+  });
+});
+
+
+//ADD CATEGORY
+router.post("/newCategory", (req, res, next) => {
+  console.log("1 NEW Category has been added");
+  let q2 = "INSERT INTO category (name) VALUES(" + "'" + req.body.name + "')";
+  db.query(q2, function(err, result) {
+    if (err) console.log(err);
+    res.send(JSON.stringify(result));
+    console.log(result);
+  });
+  console.log(req.body);
+});
+
+//EDIT CATEGORY
+router.post("/editCategory", (req, res) => {
+  console.log(req.body);
+  let edit =
+    "UPDATE category SET name = '" +
+    req.body.name +
+    "' WHERE name = '" +
+    req.body.name +
+    "'";
+  db.query(edit, (err, result, fields) => {
+    if (err) console.log(err);
+    res.send(JSON.stringify(result));
+  });
+});
+
+//DELETE CATEGORY
+router.post("/deleteCategory", (req, res) => {
+  console.log(req.body.name);
+  let sql =
+    "DELETE FROM category WHERE name =" + "'" + req.body.name + "'";
+  db.query(sql, (err, result, fields) => {
+    if (err) console.log(err);
+    res.send(JSON.stringify(result));
+  });
+});
+
 
 module.exports = router;
