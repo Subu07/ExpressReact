@@ -6,7 +6,7 @@ class DisplayProject extends Component {
 
   render() {
     let heading = [
-      "Year Completed",
+      "Student Batch",
       "Project Title",
       "Category",
       "Student Name",

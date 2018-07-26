@@ -51,13 +51,6 @@ class AddProject extends Component {
     })
       .then(response => response.json())
       .catch(err => console.log(err));
-    this.setState({
-      name: "",
-        year:"",
-      isOpen: false
-    });
-    event.preventDefault();
-    window.location.reload();
   };
 
    componentDidMount(){
@@ -111,7 +104,6 @@ class AddProject extends Component {
                 style={{width: 250}}
                 value={this.state.year}
                 name={"year"}
-                required={true}
                 autoFocus={true}
                 onChange={this.handleChange}
                 helperText = "e.g.2070"
@@ -122,8 +114,8 @@ class AddProject extends Component {
               <RButton
                 color={green}
                 buttonText={"Submit"}
-                onClick={this.handleSubmit}
                 style={{marginLeft:20}}
+                type={"submit"}
               />
               <RButton
                 color={red}

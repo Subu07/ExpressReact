@@ -9,9 +9,9 @@ import TableHead from "@material-ui/core/es/TableHead/TableHead";
 import TableBody from "@material-ui/core/es/TableBody/TableBody";
 import yellow from "@material-ui/core/es/colors/yellow";
 import { BrowserRouter, Link } from "react-router-dom";
-import EditCategory from "./EditCategory";
-import DeleteCategory from "./DeleteCategory";
-import AddCategory from "./AddCategory";
+import EditCategory from "../../component/Section/EditCategory";
+import DeleteCategory from "../../component/Section/DeleteCategory";
+import AddCategory from "../../component/Section/AddCategory";
 
 class Category extends Component {
   state = {

@@ -112,7 +112,7 @@ class EditProject extends Component {
           allData: json[0],
           supData: json[1],
           proData: json[2],
-          batData: json[3]
+          batData: json[3],
         })
       )
       .catch(err => console.log(err));
@@ -437,7 +437,7 @@ class EditProject extends Component {
                   >
                     {sortBy(this.state.supData, ["name"]).map(item => (
                       <MenuItem value={item.name} key={item.idInstructor}>
-                        {item.name}
+                          {item.Title}{item.name}
                       </MenuItem>
                     ))}
                   </Select>
@@ -449,7 +449,6 @@ class EditProject extends Component {
                     value={this.state.batch}
                     name={"batch"}
                     onChange={this.handleChange}
-                    required={true}
                     style={{ marginLeft: 5 }}
                   >
                     {sortBy(this.state.batData, ["year"]).map(item => (

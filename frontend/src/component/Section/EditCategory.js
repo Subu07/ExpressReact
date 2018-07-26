@@ -18,13 +18,15 @@ class EditCategory extends Component {
   state = {
     category: [],
     name: "",
-    isOpen: false,
+    prev: "",
+    isOpen: false
   };
   handleOpen = () => {
     this.setState({
       isOpen: true,
       category: this.props.data,
-      name : this.props.data.name,
+      name: this.props.data.name,
+      prev: this.props.data.name
     });
   };
   handleClose = () => {
@@ -37,16 +39,14 @@ class EditCategory extends Component {
   };
 
   handleEdit = event => {
-    let data = {
-      name: this.state.name,
-    };
+    let data = this.state.name;
     console.log(data);
     fetch("/editCategory", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify({ name: data, prev: this.state.prev })
     })
       .then(response => response.json())
       .catch(err => console.log(err));
@@ -58,24 +58,20 @@ class EditCategory extends Component {
     window.location.reload();
   };
 
-   componentDidMount(){
-      fetch('/displayCategory')
-          .then(res => res.json())
-          .then(data => {
-              this.setState({
-                  category: data
-              });
-          })
-          .catch(err => console.log('caught error',err))
-    };
+  componentDidMount() {
+    fetch("/displayCategory")
+      .then(res => res.json())
+      .then(data => {
+        this.setState({
+          category: data
+        });
+      })
+      .catch(err => console.log("caught error", err));
+  }
   render() {
     return (
       <Fragment>
-        <RButton
-          color={green}
-          buttonText={"Edit"}
-          onClick={this.handleOpen}
-        />
+        <RButton color={green} buttonText={"Edit"} onClick={this.handleOpen} />
         <Modal
           open={this.state.isOpen}
           onClose={this.handleClose}
@@ -93,7 +89,7 @@ class EditCategory extends Component {
               </Typography>
               <InputLabel>Name:</InputLabel>
               <RTextfield
-                style={{width: 250}}
+                style={{ width: 250 }}
                 value={this.state.name}
                 name={"name"}
                 required={true}
@@ -106,13 +102,13 @@ class EditCategory extends Component {
                 color={green}
                 buttonText={"Ok"}
                 onClick={this.handleEdit}
-                style={{marginLeft:20}}
+                style={{ marginLeft: 20 }}
               />
               <RButton
                 color={red}
                 buttonText={"Cancel"}
                 onClick={this.handleClose}
-                style={{marginLeft:300}}
+                style={{ marginLeft: 300 }}
               />
             </form>
           </Paper>

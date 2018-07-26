@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Project from "./Header/Navbar/Project";
 import Supervisor from "./Header/Navbar/Supervisor";
 import Student from "./Header/Navbar/Student";
+import Category from "./Header/Navbar/Category";
 
 class App extends Component {
   render() {
@@ -23,6 +24,11 @@ class App extends Component {
             path={"/student"}
             exact={true}
             render={() => <Student title={heading} />}
+          />
+          <Route
+            path={"/category"}
+            exact={true}
+            render={() => <Category/>}
           />
         </Switch>
       </BrowserRouter>

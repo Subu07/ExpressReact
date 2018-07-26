@@ -39,28 +39,28 @@ class RAppBar extends Component<props> {
                   <Link to={"/project"} style={{ textDecoration: "none" }}>
                     <RButton
                       color={yellow}
-                      buttonText={"Project"}
+                      buttonText={"Project Info"}
                       style={{ marginRight: 20 }}
                     />
                   </Link>
                   <Link to={"/student"} style={{ textDecoration: "none" }}>
                     <RButton
                       color={yellow}
-                      buttonText={"Student"}
+                      buttonText={"Student Info"}
                       style={{ marginRight: 20 }}
                     />
                   </Link>
                   <Link to={"/supervisor"} style={{ textDecoration: "none" }}>
                     <RButton
                       color={yellow}
-                      buttonText={"Supervisor"}
+                      buttonText={"Supervisor Info"}
                       style={{ marginRight: 20 }}
                     />
                   </Link>
                   <Link to={"/category"} style={{ textDecoration: "none" }}>
                     <RButton
                       color={yellow}
-                      buttonText={"Category"}
+                      buttonText={"Category Info"}
                       style={{ marginRight: 20 }}
                     />
                   </Link>

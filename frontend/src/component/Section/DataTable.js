@@ -48,7 +48,7 @@ class DataTable extends Component {
               </div>
             ))}
           </TableCell>
-          <TableCell>{row.supervisorName}</TableCell>
+          <TableCell>{row.title}{row.supervisorName}</TableCell>
           <TableCell>
             <EditProject data={row} allData={this.props.data} id={row.Project_idProject}/>
             <br />
