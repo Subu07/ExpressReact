@@ -24,6 +24,7 @@ class DataTable extends Component {
       return (
         <TableRow key={row.Project_idProject}>
           <TableCell>{row.year}</TableCell>
+            <TableCell>{row.program}</TableCell>
           <TableCell>{row.projectName}</TableCell>
           <TableCell>{row.category.split(",").map(name => (
               <div key={name}>
@@ -60,11 +61,11 @@ class DataTable extends Component {
     });
     return (
       <Fragment>
-        <Table>
+        <Table style={{minWidth: 20}}>
           <TableHead>
             <TableRow>{headings}</TableRow>
           </TableHead>
-          <TableBody>{rows}</TableBody>
+          <TableBody >{rows}</TableBody>
         </Table>
       </Fragment>
     );
