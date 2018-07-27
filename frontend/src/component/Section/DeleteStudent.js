@@ -14,85 +14,86 @@ import Done from "@material-ui/icons/es/Done";
 import Clear from "@material-ui/icons/es/Clear";
 
 class DeleteStudent extends Component {
-     state = {
+    state = {
         id: this.props.data,
         student: [],
-         isOpen: false
+        isOpen: false
     };
-        handleOpen = () => {
-    this.setState({
-      isOpen: true
-    });
-  };
+    handleOpen = () => {
+        this.setState({
+            isOpen: true
+        });
+    };
 
-  handleClose = () => {
-    this.setState({
-      isOpen: false
-    });
-  };
+    handleClose = () => {
+        this.setState({
+            isOpen: false
+        });
+    };
 
-    handleDelete = (event) => {
-    event.preventDefault();
-    fetch("/deleteStudent",{
-        method: 'POST',
-        headers:{
-            'Content-Type': 'application/json'
-        },
-        body:JSON.stringify({id:this.state.id})
-    }).then(res=>console.log(res))
-        .catch(err=>console.log(err));
-    window.location.reload();
-  };
-    componentDidMount(){
-      fetch('/display')
-          .then(res => res.json())
-          .then(data => {
-              this.setState({
-                  student: data
-              });
-          })
-          .catch(err => console.log('caught error',err));
+    handleDelete = () => {
+        fetch("/deleteStudent", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({id: this.state.id})
+        }).then(res => console.log(res))
+            .catch(err => console.log(err));
+    };
+
+    componentDidMount() {
+        fetch('/display')
+            .then(res => res.json())
+            .then(data => {
+                this.setState({
+                    student: data
+                });
+            })
+            .catch(err => console.log('caught error', err));
 
     };
 
     render() {
         return (
             <Fragment>
-            <RButton color={red} buttonText={"DELETE"} onClick = {this.handleOpen}/>
-            <Modal open={this.state.isOpen} onClose={this.handleClose}>
-            <Dialog open={this.state.isOpen} onClose={this.handleClose}>
-              <DialogContent>
-                <DialogContentText id="alert-dialog-body">
-                  <Typography
-                    color={"textSecondary"}
-                    variant={"caption"}
-                    style={{ fontSize: 20 }}
-                  >
-                    Are you sure you want to delete this Record?
-                  </Typography>
-                </DialogContentText>
-              </DialogContent>
-              <Divider />
-              <DialogActions style={{ paddingTop: 100 }}>
-                <RButton
-                  onClick={this.handleDelete}
-                  color={red}
-                  buttonText={"Yes"}
-                  style={{ marginRight: "auto" }}
-                >
-                  <Done />
-                </RButton>
-                <RButton
-                  color={green}
-                  buttonText={"No"}
-                  style={{ marginLeft: 175 }}
-                  onClick={this.handleClose}
-                >
-                  <Clear />
-                </RButton>
-              </DialogActions>
-            </Dialog>
-          </Modal>
+                <RButton color={red} buttonText={"DELETE"} onClick={this.handleOpen}/>
+                <Modal open={this.state.isOpen} onClose={this.handleClose}>
+                    <Dialog open={this.state.isOpen} onClose={this.handleClose}>
+                        <DialogContent>
+                            <DialogContentText id="alert-dialog-body">
+                                <Typography
+                                    color={"textSecondary"}
+                                    variant={"caption"}
+                                    style={{fontSize: 20}}
+                                >
+                                    Are you sure you want to delete this Record?
+                                </Typography>
+                            </DialogContentText>
+                        </DialogContent>
+                        <Divider/>
+                        <DialogActions style={{paddingTop: 100}}>
+                            <form onSubmit={this.handleDelete}>
+                                <RButton
+                                    type={"submit"}
+                                    color={red}
+                                    buttonText={"Yes"}
+                                    style={{marginRight: "auto"}}
+                                >
+                                    <Done/>
+                                </RButton>
+                                <RButton
+                                    color={green}
+                                    buttonText={"No"}
+                                    style={{marginLeft: 175}}
+                                    onClick={this.handleClose}
+                                >
+                                    <Clear/>
+                                </RButton>
+                            </form>
+                        </DialogActions>
+                    </Dialog>
+                </Modal>
             </Fragment>
         );
     }

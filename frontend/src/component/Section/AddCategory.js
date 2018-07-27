@@ -35,16 +35,14 @@ class AddCategory extends Component {
   };
 
   handleSubmit = event => {
-    let data = {
-      name: this.state.name
-    };
+    let data = this.state.name;
     console.log(data);
     fetch("/newCategory", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify({name: data})
     })
       .then(response => response.json())
       .catch(err => console.log(err));

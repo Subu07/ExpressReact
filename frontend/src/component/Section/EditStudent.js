@@ -66,11 +66,11 @@ class EditStudent extends Component {
         };
 
       componentDidMount(){
-      fetch('/display')
+      fetch('/studentDisplay')
           .then(res => res.json())
           .then(data => {
               this.setState({
-                  student: data
+                  student: data[0]
               });
           })
           .catch(err => console.log('caught error',err))

@@ -20,6 +20,7 @@ class RTextfield extends Component<props> {
                            autoFocus={this.props.focus}
                            onChange={this.props.onChange}
                            name={this.props.name}
+                           placeholder={this.props.placeholder}
                            helperText={this.props.helperText}
                 style={this.props.style}/>
             </Fragment>
