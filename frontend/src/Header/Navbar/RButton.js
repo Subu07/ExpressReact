@@ -5,8 +5,8 @@ import MuiThemeProvider from "@material-ui/core/es/styles/MuiThemeProvider";
 import {Link} from "react-router-dom";
 
 type props = {
-    color : any,
-    buttonText : string
+    color: any,
+    buttonText: string
 }
 
 class RButton extends Component <props> {
@@ -14,15 +14,16 @@ class RButton extends Component <props> {
     render() {
         return (
             <Fragment>
-                 <MuiThemeProvider theme={theme(this.props.color)}>
+                <MuiThemeProvider theme={theme(this.props.color)}>
                     <Button color={"primary"} variant={"contained"} size={"small"}
                             onClick={this.props.onClick}
                             style={this.props.style}
-                    type={this.props.type}>
+                            type={this.props.type}
+                            component={this.props.component}>
                         {this.props.children}
                         {this.props.buttonText}
                     </Button>
-                 </MuiThemeProvider>
+                </MuiThemeProvider>
             </Fragment>
         );
     }

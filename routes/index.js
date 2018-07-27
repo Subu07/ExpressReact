@@ -50,8 +50,12 @@ router.get("/studentDisplay", (req, res, next) => {
 });
 
 //ADD NEW STUDENT
-router.post("/newStudent", (req, res, next) => {
+router.post("/newStudent", (req, res) => {
     console.log(req.body);
+    let q = `INSERT INTO batch(year) VALUES ('${req.body.batch}')`;
+    db.query(q, (err, result) => {
+
+    });
     let q1 =
         `INSERT INTO student (name, Batch_batch_no, roll_no, Programme_name) VALUES('${req.body.name}','${req.body.batch}','${req.body.roll}','${req.body.programme}')`;
     db.query(q1, function (err, result) {
@@ -77,7 +81,7 @@ router.post("/editStudent", (req, res) => {
         "' WHERE idStudent = '" +
         req.body.id +
         "'";
-    db.query(edit, (err, result, fields) => {
+    db.query(edit, (err, result) => {
         if (err) console.log(err);
         res.send(JSON.stringify(result));
     });
@@ -86,11 +90,10 @@ router.post("/editStudent", (req, res) => {
 //DELETE STUDENT
 router.post("/deleteStudent", (req, res) => {
     console.log(req.body.id);
-    let sql = "DELETE FROM student WHERE idStudent =" + "'" + req.body.id + "'";
+    let sql = `DELETE FROM student WHERE idStudent ='${req.body.id}'`;
     db.query(sql, (err, result, fields) => {
         if (err) console.log(err);
         res.send(JSON.stringify(result));
-
     });
 });
 
@@ -102,7 +105,7 @@ disp = "SELECT * FROM student;";
 router.get("/display", (req, res, next) => {
     db.query(disp, (err, results) => {
         if (err) console.log(err);
-        console.log("data received from database nodeTutorial:\n");
+        console.log("data extracted from database:\n");
         res.send(JSON.stringify(results));
     });
 });
@@ -173,6 +176,7 @@ router.post("/delete", (req, res) => {
     let sql = `UPDATE project
 SET Supervisor_idInstructor = NULL 
 WHERE idProject=${req.body.id};DELETE FROM project_has_student
+WHERE Project_idProject=${req.body.id};DELETE FROM project_has_category
 WHERE Project_idProject=${req.body.id}`;
     db.query(sql, (err, result) => {
         if (err) console.log(err);
@@ -274,7 +278,7 @@ WHERE name='${req.body.supervisor}'`;
                 stuId[2].idStudent
                 }');UPDATE project
 SET Supervisor_idInstructor=${supId[0].idInstructor}
-WHERE idProject=${proId[0].idProject};INSERT INTO project_has_category(Project_idProject, Category_name) VALUES ('${proId[0].idProject}','${req.body.category}')`;
+WHERE idProject=${proId[0].idProject};`;
         } else {
             nSql = `INSERT INTO project_has_student(Project_idProject, Student_idStudent)
     VALUES ('${proId[0].idProject}','${stuId[0].idStudent}'),('${
@@ -283,13 +287,20 @@ WHERE idProject=${proId[0].idProject};INSERT INTO project_has_category(Project_i
                 stuId[2].idStudent
                 }'),('${proId[0].idProject}','${stuId[3].idStudent}');UPDATE project
 SET Supervisor_idInstructor=${supId[0].idInstructor}
-WHERE idProject=${proId[0].idProject};INSERT INTO project_has_category(Project_idProject, Category_name) VALUES ('${proId[0].idProject}','${req.body.category}')`;
+WHERE idProject=${proId[0].idProject};`;
         }
         db.query(nSql, (err, result) => {
             if (err) msg = "Duplicate";
             else msg = "Success";
             res.send(JSON.stringify({result: msg}));
         });
+        for (let i=0;i<req.body.category.length;i++){
+        db.query(`INSERT INTO project_has_category(Project_idProject, Category_name) VALUES ('${proId[0].idProject}','${req.body.category[i]}')`,
+            (err, result) => {
+            if (err) console.log(err);
+            else console.log(result);
+            })
+        }
         db.query(query, (err, result) => {
             if (err) console.log(err);
             else {
@@ -340,7 +351,7 @@ SET Supervisor_idInstructor=${supId[0].idInstructor},YearCompleted_year='${
                 }'
 WHERE idProject=${proId[0].idProject}`;
         }
-        db.query(nSql, (err, result) => {
+        db.query(nSql, (err) => {
             if (err) msg = "Duplicate";
             else msg = "Success";
             res.send(JSON.stringify({result: msg}));
@@ -356,7 +367,7 @@ WHERE idProject=${proId[0].idProject}`;
 
 //GET CATEGORY
 router.get("/displayCategory", (req, res, next) => {
-    db.query("SELECT * FROM category", (err, results) => {
+    db.query(`SELECT * FROM category`, (err, results) => {
         if (err) console.log(err);
         console.log("data received from Category Table: ");
         res.send(results);

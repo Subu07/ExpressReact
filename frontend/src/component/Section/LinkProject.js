@@ -398,10 +398,11 @@ class LinkProject extends Component {
                                         value={this.state.category}
                                         name={"category"}
                                         onChange={this.handleChange}
+                                        multiple={true}
                                         style={{marginLeft: 5, width: 250}}
                                     >
                                         {sortBy(this.state.catData, ["name"]).map(item => (
-                                            <MenuItem value={item.name} key={item.id}>
+                                            <MenuItem value={item.name} key={item.name}>
                                                 {item.name}
                                             </MenuItem>
                                         ))}

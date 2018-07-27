@@ -1,11 +1,8 @@
 import React, { Component, Fragment } from "react";
-import PropTypes from "prop-types";
 import InputLabel from "@material-ui/core/es/InputLabel/InputLabel";
-import TextField from "@material-ui/core/es/TextField/TextField";
 import RButton from "../../Header/Navbar/RButton";
 import Modal from "@material-ui/core/es/Modal/Modal";
 import Paper from "@material-ui/core/es/Paper/Paper";
-import cyan from "@material-ui/core/es/colors/cyan";
 import Typography from "@material-ui/core/es/Typography/Typography";
 import green from "@material-ui/core/es/colors/green";
 import red from "@material-ui/core/es/colors/red";
@@ -13,6 +10,7 @@ import RTextfield from "../../container/RTextField";
 import lime from "@material-ui/core/es/colors/lime";
 import Select from "@material-ui/core/es/Select/Select";
 import MenuItem from "@material-ui/core/es/MenuItem/MenuItem";
+import ReadFromExcel from "./ReadFromExcel";
 
 class AddStudent extends Component {
   state = {
@@ -33,7 +31,7 @@ class AddStudent extends Component {
       isOpen: false
     });
   };
-  handleChange = event => {
+  handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
@@ -61,11 +59,11 @@ class AddStudent extends Component {
     event.preventDefault();
   };
   componentDidMount() {
-    fetch("/display")
+    fetch("/studentDisplay")
       .then(res => res.json())
       .then(data => {
         this.setState({
-          student: data
+          student: data[0]
         });
       })
       .catch(err => console.log("caught error", err));
@@ -78,6 +76,9 @@ class AddStudent extends Component {
           buttonText={"Add Student"}
           onClick={this.handleOpen}
         />
+        <br/>
+        <br/>
+        <ReadFromExcel/>
         <Modal
           open={this.state.isOpen}
           onClose={this.handleClose}

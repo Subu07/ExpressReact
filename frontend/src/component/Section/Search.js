@@ -7,7 +7,8 @@ import RButton from "../../Header/Navbar/RButton";
 import Divider from "@material-ui/core/Divider";
 import LinkProject from "./LinkProject";
 import Clear from "@material-ui/icons/Clear";
-import Eye from "@material-ui/icons/Visibility";
+import Print from '@material-ui/icons/Print';
+import XLSX from 'xlsx/xlsx'
 import sortBy from 'lodash/sortBy';
 import Grid from "@material-ui/core/es/Grid/Grid";
 import DisplayProject from "./DisplayProject";
@@ -29,7 +30,6 @@ class Search extends Component {
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleClear = this.handleClear.bind(this);
-        this.handleView = this.handleView.bind(this);
     }
 
     componentDidMount() {
@@ -47,7 +47,28 @@ class Search extends Component {
             .catch(err => console.log(err));
     }
 
-    handleView = () => {
+    componentDidUpdate(_, prevState, __) {
+        if (this.state.category !== prevState.category || this.state.supervisor !== prevState.supervisor || this.state.batch !== prevState.batch || this.state.program !== prevState.program) {
+            if (
+                this.state.category !== "" ||
+                (this.state.supervisor !== "" || this.state.batch !== "" || this.state.program !== "")
+            ) {
+                let newData = this.state.orgData.filter(item => {
+                    return (
+                        item.category.includes(this.state.category) &&
+                        item.supervisorName.includes(this.state.supervisor) &&
+                        item.year.includes(this.state.batch) &&
+                        item.program.includes(this.state.program)
+                    );
+                });
+                this.setState({
+                    data: newData
+                });
+            }
+        }
+    }
+
+    /*handleView = () => {
         if (
             this.state.category !== "" ||
             (this.state.supervisor !== "" || this.state.batch !== "" || this.state.program !== "")
@@ -55,8 +76,8 @@ class Search extends Component {
             let newData = this.state.orgData.filter(item => {
                 return (
                     item.category.includes(this.state.category) &&
-                    item.supervisorName.includes(this.state.supervisor)&&
-                    item.year.includes(this.state.batch)&&
+                    item.supervisorName.includes(this.state.supervisor) &&
+                    item.year.includes(this.state.batch) &&
                     item.program.includes(this.state.program)
                 );
             });
@@ -64,7 +85,7 @@ class Search extends Component {
                 data: newData
             });
         }
-    };
+    };*/
 
     handleChange = e => {
         this.setState({
@@ -80,6 +101,37 @@ class Search extends Component {
             data: this.state.orgData,
             program: "",
         });
+    };
+
+    handlePrint = () => {
+        let workbook = XLSX.utils.book_new();
+        /*let mappedData = this.state.data.map(item => (
+             [item.category, item.studentName, item.studentRoll, item.title + item.supervisorName]
+        ));*/
+        let printValue = this.state.data;
+        printValue.map(item => {
+                item["Student\nBatch"] = item.year;
+                item["Programme"] = item.program;
+                item["Project\nTitle"] = item.projectName.split(" ").join("\n");
+                item["Category"] = item.category.split(" " || ",").join("\n");
+                item["Student\nName"] = item.studentName.split(",").join("\n");
+                item["Student\nRoll"] = item.studentRoll.split(",").join("\n").toUpperCase();
+                item["Supervisor\nName"] = item.title + item.supervisorName;
+                delete item.Project_idProject;
+                delete item.title;
+                delete item.year;
+                delete item.program;
+                delete item.projectName;
+                delete item.category;
+                delete item.studentRoll;
+                delete item.studentName;
+                delete item.supervisorName;
+            }
+        );
+        let sheet = XLSX.utils.json_to_sheet(printValue);
+        sheet['!cols']=[{},{},{wch:15},{wch:15},{wch:25},{wch:20},{wch:25}];
+        XLSX.utils.book_append_sheet(workbook, sheet, 'Sheet 1');
+        XLSX.writeFile(workbook, "Project.xlsx")
     };
 
     render() {
@@ -113,7 +165,7 @@ class Search extends Component {
                         fullWidth={true}
                         name={"supervisor"}
                     >
-                        {sortBy(this.state.supervisorData,"name").map(item => (
+                        {sortBy(this.state.supervisorData, "name").map(item => (
                             <MenuItem value={item.name} key={item.idInstructor}>
                                 {item.Title}{item.name}
                             </MenuItem>
@@ -154,18 +206,18 @@ class Search extends Component {
                     </Select>
                     <Divider/>
                     <br/>
-                    <RButton
+                    {/*<RButton
                         color={green}
                         buttonText={"View"}
                         style={{marginTop: 20, marginLeft: 10}}
                         onClick={this.handleView}
                     >
                         <Eye/>
-                    </RButton>
+                    </RButton>*/}
                     <br/>
                     <RButton
                         color={red}
-                        buttonText={"Reset"}
+                        buttonText={"Reset Filter"}
                         style={{marginTop: 20, marginLeft: 10}}
                         onClick={this.handleClear}
                     >
@@ -173,6 +225,11 @@ class Search extends Component {
                     </RButton>
                     <br/>
                     <LinkProject/>
+                    <br/>
+                    <br/>
+                    <RButton color={green} buttonText={"Print List"} onClick={this.handlePrint} style={{marginLeft: 10}}>
+                        <Print/>
+                    </RButton>
                 </Grid>
                 <Grid item xs={10}>
                     <DisplayProject data={sortBy(this.state.data, "projectName")}/>
