@@ -11,6 +11,9 @@ import RTextfield from "../../container/RTextField";
 import InputLabel from "@material-ui/core/InputLabel/InputLabel";
 import Select from "@material-ui/core/Select/Select";
 import MenuItem from "@material-ui/core/MenuItem/MenuItem";
+import Grid from "@material-ui/core/es/Grid/Grid";
+
+import excel from '../../assets/img/Excel.png';
 
 class ReadFromExcel extends React.Component {
     state = {
@@ -99,37 +102,52 @@ class ReadFromExcel extends React.Component {
                     paddingBottom: 100
                 }}>
                     <Paper elevation={2}>
-                        <form onSubmit={this.handleSubmit}>
-                            <InputLabel>Enter Batch:</InputLabel>
-                            <br/>
-                            <br/>
-                            <RTextfield value={this.state.batch} required={true} onChange={this.handleSelect} style={{width: 200}}
-                                        name={"batch"}/>
-                            <br/>
-                            <br/>
-                            <InputLabel>Select Programme:</InputLabel>
-                            <br/>
-                            <br/>
-                            <Select value={this.state.programme} onChange={this.handleSelect} style={{width: 200}}
-                                    name={"programme"}>
-                                <MenuItem value={"BCT"}>BCT</MenuItem>
-                                <MenuItem value={"BEX"}>BEX</MenuItem>
-                            </Select>
-                            <br/>
-                            <br/>
-                            <InputLabel>{this.state.location}</InputLabel>
-                            <br/>
-                            <RButton variant="raised" component="label" color={orange}
-                                     buttonText={"Upload Excel File"}
-                                     style={{marginTop: 20}}>
-                                <Input
-                                    onChange={this.handleChange} type="file" style={{display: 'none'}}/>
-                            </RButton>
-                            <br/>
-                            <br/>
-                            <RButton color={green} buttonText={"Submit"} type={"submit"}/>
-                            <RButton  style={{marginLeft: 400}} variant={"raised"} onClick={this.handleClose} color={red} buttonText={"Cancel"}/>
-                        </form>
+                        <Grid container>
+                            <Grid item xs={6}>
+                                <form onSubmit={this.handleSubmit}>
+                                    <InputLabel>Enter Batch:</InputLabel>
+                                    <br/>
+                                    <br/>
+                                    <RTextfield value={this.state.batch} required={true} onChange={this.handleSelect}
+                                                style={{width: 200}}
+                                                name={"batch"}/>
+                                    <br/>
+                                    <br/>
+                                    <InputLabel>Select Programme:</InputLabel>
+                                    <br/>
+                                    <br/>
+                                    <Select value={this.state.programme} onChange={this.handleSelect}
+                                            style={{width: 200}}
+                                            name={"programme"}>
+                                        <MenuItem value={"BCT"}>BCT</MenuItem>
+                                        <MenuItem value={"BEX"}>BEX</MenuItem>
+                                    </Select>
+                                    <br/>
+                                    <br/>
+                                    <InputLabel>{this.state.location}</InputLabel>
+                                    <br/>
+                                    <RButton variant="raised" component="label" color={orange}
+                                             buttonText={"Upload Excel File"}
+                                             style={{marginTop: 20}}>
+                                        <Input
+                                            onChange={this.handleChange} type="file" style={{display: 'none'}}/>
+                                    </RButton>
+                                    <br/>
+                                    <br/>
+                                    <RButton color={green} buttonText={"Submit"} type={"submit"}/>
+                                    <RButton style={{marginLeft: 400}} variant={"raised"} onClick={this.handleClose}
+                                             color={red} buttonText={"Cancel"}/>
+                                </form>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <img src={excel} style={{width:300, height:200}}/>
+                                <br/>
+                                <InputLabel>"A" Column Should Have Name Header.<br/>
+                                    "B" Column Should Have Roll No.<br/>
+                                    No Other Column Required
+                                </InputLabel>
+                            </Grid>
+                        </Grid>
                     </Paper>
                 </Modal>
             </div>
