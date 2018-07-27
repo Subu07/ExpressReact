@@ -227,7 +227,7 @@ class Search extends Component {
                     <LinkProject/>
                     <br/>
                     <br/>
-                    <RButton color={green} buttonText={"Print List"} onClick={this.handlePrint} style={{marginLeft: 10}}>
+                    <RButton color={green} buttonText={"Download"} onClick={this.handlePrint} style={{marginLeft: 10}}>
                         <Print/>
                     </RButton>
                 </Grid>
