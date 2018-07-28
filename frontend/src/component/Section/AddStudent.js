@@ -1,11 +1,8 @@
 import React, { Component, Fragment } from "react";
-import PropTypes from "prop-types";
 import InputLabel from "@material-ui/core/es/InputLabel/InputLabel";
-import TextField from "@material-ui/core/es/TextField/TextField";
 import RButton from "../../Header/Navbar/RButton";
 import Modal from "@material-ui/core/es/Modal/Modal";
 import Paper from "@material-ui/core/es/Paper/Paper";
-import cyan from "@material-ui/core/es/colors/cyan";
 import Typography from "@material-ui/core/es/Typography/Typography";
 import green from "@material-ui/core/es/colors/green";
 import red from "@material-ui/core/es/colors/red";
@@ -13,6 +10,7 @@ import RTextfield from "../../container/RTextField";
 import lime from "@material-ui/core/es/colors/lime";
 import Select from "@material-ui/core/es/Select/Select";
 import MenuItem from "@material-ui/core/es/MenuItem/MenuItem";
+import ReadFromExcel from "./ReadFromExcel";
 
 class AddStudent extends Component {
   state = {
@@ -33,25 +31,20 @@ class AddStudent extends Component {
       isOpen: false
     });
   };
-  handleChange = event => {
+  handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
   handleSubmit = event => {
-    let data = {
-      name: this.state.name,
-      batch: this.state.batch,
-      roll: this.state.roll,
-      programme: this.state.programme,
-    };
-    console.log(data);
     fetch("/newStudent", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(data)
-
+      body: JSON.stringify({name: this.state.name,
+      batch: this.state.batch,
+      roll: this.state.roll,
+      programme: this.state.programme})
     })
       .then(response => response.json())
       .catch(err => console.log(err));
@@ -62,19 +55,19 @@ class AddStudent extends Component {
       programme: "",
       isOpen: false
     });
-    event.preventDefault();
     window.location.reload();
+    event.preventDefault();
   };
-    componentDidMount(){
-      fetch('/display')
-          .then(res => res.json())
-          .then(data => {
-              this.setState({
-                  student: data
-              });
-          })
-          .catch(err => console.log('caught error',err))
-    };
+  componentDidMount() {
+    fetch("/studentDisplay")
+      .then(res => res.json())
+      .then(data => {
+        this.setState({
+          student: data[0]
+        });
+      })
+      .catch(err => console.log("caught error", err));
+  }
   render() {
     return (
       <Fragment>
@@ -83,6 +76,9 @@ class AddStudent extends Component {
           buttonText={"Add Student"}
           onClick={this.handleOpen}
         />
+        <br/>
+        <br/>
+        <ReadFromExcel/>
         <Modal
           open={this.state.isOpen}
           onClose={this.handleClose}
@@ -104,19 +100,19 @@ class AddStudent extends Component {
                 name={"batch"}
                 value={this.state.batch}
                 onChange={this.handleChange}
-                style={{ textAlign: "center", width:200 }}
+                style={{ textAlign: "center", width: 200 }}
               >
                 <MenuItem value={2070}>2070</MenuItem>
                 <MenuItem value={2071}>2071</MenuItem>
               </Select>
               <br />
-                <br/>
+              <br />
               <InputLabel>Programme: </InputLabel>
               <Select
                 name={"programme"}
                 value={this.state.programme}
                 onChange={this.handleChange}
-                style={{ textAlign: "center", width:200 }}
+                style={{ textAlign: "center", width: 200 }}
               >
                 <MenuItem value={"BCT"}>BCT</MenuItem>
                 <MenuItem value={"BEX"}>BEX</MenuItem>
@@ -149,14 +145,14 @@ class AddStudent extends Component {
               <RButton
                 color={green}
                 buttonText={"Submit"}
-                onClick={this.handleSubmit}
-                style={{marginLeft:20, marginBottom:20}}
+                type={"submit"}
+                style={{ marginLeft: 20, marginBottom: 20 }}
               />
               <RButton
                 color={red}
                 buttonText={"Cancel"}
                 onClick={this.handleClose}
-                style={{marginLeft: 500,marginBottom: 20}}
+                style={{ marginLeft: 500, marginBottom: 20 }}
               />
             </form>
           </Paper>

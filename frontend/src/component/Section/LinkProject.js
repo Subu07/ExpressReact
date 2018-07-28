@@ -15,30 +15,31 @@ import Edit from "@material-ui/icons/es/Edit";
 import Select from "@material-ui/core/es/Select/Select";
 import MenuItem from "@material-ui/core/es/MenuItem/MenuItem";
 import sortBy from "lodash/sortBy";
+import Add from "@material-ui/icons/es/Add";
 
-class EditProject extends Component {
+class LinkProject extends Component {
     state = {
         isOpen: false,
-        orgData: [],
-        number: [],
-        allData: [],
-        supData: [],
-        proData: [],
-        batData: [],
-        id: this.props.id,
-        data: this.props.data,
-        name1: this.props.data.studentName.split(",")[0],
-        name2: this.props.data.studentName.split(",")[1],
-        name3: this.props.data.studentName.split(",")[2],
-        name4: this.props.data.studentName.split(",")[3],
-        roll1: this.props.data.studentRoll.split(",")[0],
-        roll2: this.props.data.studentRoll.split(",")[1],
-        roll3: this.props.data.studentRoll.split(",")[2],
-        roll4: this.props.data.studentRoll.split(",")[3],
-        project: this.props.data.projectName,
-        supervisor: this.props.data.supervisorName,
-        batch: this.props.data.year,
-        category: this.props.data.category.split(",")
+        number: 3,
+        orgData: "",
+        stuData: "",
+        supData: "",
+        proData: "",
+        batData: "",
+        catData: "",
+
+        name1: "",
+        name2: "",
+        name3: "",
+        name4: "",
+        roll1: "",
+        roll2: "",
+        roll3: "",
+        roll4: "",
+        project: "",
+        supervisor: "",
+        batch: "",
+        category: [],
     };
     handleOpen = () => {
         this.setState({
@@ -47,80 +48,69 @@ class EditProject extends Component {
     };
     handleClose = () => {
         this.setState({
+            stuData: this.state.orgData,
             isOpen: false,
-            number: "",
-            name1: this.props.data.studentName.split(",")[0],
-            name2: this.props.data.studentName.split(",")[1],
-            name3: this.props.data.studentName.split(",")[2],
-            name4: this.props.data.studentName.split(",")[3],
-            roll1: this.props.data.studentRoll.split(",")[0],
-            roll2: this.props.data.studentRoll.split(",")[1],
-            roll3: this.props.data.studentRoll.split(",")[2],
-            roll4: this.props.data.studentRoll.split(",")[3],
-            project: this.props.data.projectName,
-            supervisor: this.props.data.supervisorName,
-            batch: this.props.data.year,
-            allData: this.state.orgData,
-            category: this.props.data.category.split(",")
+            number: 3,
+            name1: "",
+            name2: "",
+            name3: "",
+            name4: "",
+            roll1: "",
+            roll2: "",
+            roll3: "",
+            roll4: "",
+            project: "",
+            supervisor: "",
+            batch: "",
+            res: ""
         });
     };
 
     handleSubmit = event => {
-        fetch("/studentProjectEdit", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                id: this.state.id,
-                n: this.state.number,
-                name1: this.state.name1,
-                name2: this.state.name2,
-                name3: this.state.name3,
-                name4: this.state.name4,
-                roll1: this.state.roll1,
-                roll2: this.state.roll2,
-                roll3: this.state.roll3,
-                roll4: this.state.roll4,
-                project: this.state.project,
-                supervisor: this.state.supervisor,
-                category: this.state.category,
+        if (
+            this.state.name1 !== "" &&
+            this.state.name2 !== "" &&
+            this.state.name3 !== "" &&
+            this.state.project !== "" &&
+            this.state.supervisor !== "" &&
+            this.state.category !== ""
+        ) {
+            fetch("/studentProjectAdd", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    n: this.state.number,
+                    name1: this.state.name1,
+                    name2: this.state.name2,
+                    name3: this.state.name3,
+                    name4: this.state.name4,
+                    category: this.state.category,
+                    project: this.state.project,
+                    supervisor: this.state.supervisor,
+                    batch: this.state.batch
+                })
             })
-        })
-            .then(res => res.json())
-            .then(json => {
-                if (json.result === "Success") {
-                    alert("Success");
-                    setInterval(window.location.reload(), 100);
-                }
-                else {
-                    alert("Duplicate")
-                }
-            })
-            .catch(err => console.log(err));
+                .then(res => res.json())
+                .then(json => {
+                    if (json.result === "Success") {
+                        alert("Success");
+                        setInterval(window.location.reload(), 100);
+                    } else {
+                        alert("Duplicate");
+                    }
+                })
+                .catch(err => console.log(err));
+        }
         event.preventDefault();
     };
+
     handleChange = event => {
         this.setState({
             [event.target.name]: event.target.value
         });
     };
-
-    componentDidMount() {
-        fetch("/studentDisplay")
-            .then(res => res.json())
-            .then(json =>
-                this.setState({
-                    orgData: json[0],
-                    allData: json[0],
-                    supData: json[1],
-                    proData: json[2],
-                    batData: json[4],
-                    catData: json[5],
-                })
-            )
-            .catch(err => console.log(err));
-    }
 
     componentDidUpdate(_, prevState, __) {
         if (this.state.batch !== prevState.batch) {
@@ -129,16 +119,31 @@ class EditProject extends Component {
                     data => data.Batch_batch_no === this.state.batch
                 );
                 this.setState({
-                    allData: newData
+                    stuData: newData
                 });
             }
         }
     }
 
+    componentDidMount() {
+        fetch("/studentDisplay")
+            .then(res => res.json())
+            .then(json =>
+                this.setState({
+                    stuData: json[0],
+                    supData: json[1],
+                    proData: json[2],
+                    batData: json[4],
+                    orgData: json[0],
+                    catData: json[5],
+                })
+            )
+            .catch(err => console.log(err));
+    }
+
     render() {
         let stu_num = () => {
-            let stuName = this.state.data.studentName.split(",");
-            let check = stuName.length;
+            let check = this.state.number;
             if (check === 3) {
                 return (
                     <Fragment>
@@ -152,9 +157,9 @@ class EditProject extends Component {
                                 name={"name1"}
                                 onChange={this.handleChange}
                                 required={true}
-                                style={{marginLeft: 10}}
+                                style={{marginLeft: 10, width: 200}}
                             >
-                                {sortBy(this.state.allData, ["name"]).map(item => (
+                                {sortBy(this.state.stuData, ["name"]).map(item => (
                                     <MenuItem value={item.name} key={item.roll_no}>
                                         {item.name} ({item.roll_no})
                                     </MenuItem>
@@ -172,9 +177,9 @@ class EditProject extends Component {
                                 name={"name2"}
                                 onChange={this.handleChange}
                                 required={true}
-                                style={{marginLeft: 10}}
+                                style={{marginLeft: 10, width: 200}}
                             >
-                                {sortBy(this.state.allData, ["name"]).map(item => (
+                                {sortBy(this.state.stuData, ["name"]).map(item => (
                                     <MenuItem value={item.name} key={item.roll_no}>
                                         {item.name} ({item.roll_no})
                                     </MenuItem>
@@ -192,9 +197,9 @@ class EditProject extends Component {
                                 name={"name3"}
                                 onChange={this.handleChange}
                                 required={true}
-                                style={{marginLeft: 10}}
+                                style={{marginLeft: 10, width: 200}}
                             >
-                                {sortBy(this.state.allData, ["name"]).map(item => (
+                                {sortBy(this.state.stuData, ["name"]).map(item => (
                                     <MenuItem value={item.name} key={item.roll_no}>
                                         {item.name} ({item.roll_no})
                                     </MenuItem>
@@ -217,9 +222,9 @@ class EditProject extends Component {
                                 name={"name1"}
                                 onChange={this.handleChange}
                                 required={true}
-                                style={{marginLeft: 10}}
+                                style={{marginLeft: 10, width: 200}}
                             >
-                                {sortBy(this.state.allData, ["name"]).map(item => (
+                                {sortBy(this.state.stuData, ["name"]).map(item => (
                                     <MenuItem value={item.name} key={item.roll_no}>
                                         {item.name} ({item.roll_no})
                                     </MenuItem>
@@ -237,9 +242,9 @@ class EditProject extends Component {
                                 name={"name2"}
                                 onChange={this.handleChange}
                                 required={true}
-                                style={{marginLeft: 10}}
+                                style={{marginLeft: 10, width: 200}}
                             >
-                                {sortBy(this.state.allData, ["name"]).map(item => (
+                                {sortBy(this.state.stuData, ["name"]).map(item => (
                                     <MenuItem value={item.name} key={item.roll_no}>
                                         {item.name} ({item.roll_no})
                                     </MenuItem>
@@ -257,9 +262,9 @@ class EditProject extends Component {
                                 name={"name3"}
                                 onChange={this.handleChange}
                                 required={true}
-                                style={{marginLeft: 10}}
+                                style={{marginLeft: 10, width: 200}}
                             >
-                                {sortBy(this.state.allData, ["name"]).map(item => (
+                                {sortBy(this.state.stuData, ["name"]).map(item => (
                                     <MenuItem value={item.name} key={item.roll_no}>
                                         {item.name} ({item.roll_no})
                                     </MenuItem>
@@ -277,9 +282,9 @@ class EditProject extends Component {
                                 name={"name4"}
                                 onChange={this.handleChange}
                                 required={true}
-                                style={{marginLeft: 10}}
+                                style={{marginLeft: 10, width: 200}}
                             >
-                                {sortBy(this.state.allData, ["name"]).map(item => (
+                                {sortBy(this.state.stuData, ["name"]).map(item => (
                                     <MenuItem value={item.name} key={item.roll_no}>
                                         {item.name} ({item.roll_no})
                                     </MenuItem>
@@ -297,11 +302,11 @@ class EditProject extends Component {
                 <br/>
                 <RButton
                     color={cyan}
-                    buttonText={"Edit"}
+                    buttonText={"Link Project"}
                     onClick={this.handleOpen}
                     style={{marginLeft: 10}}
                 >
-                    <Edit/>
+                    <Add/>
                 </RButton>
                 <Modal
                     open={this.state.isOpen}
@@ -319,20 +324,37 @@ class EditProject extends Component {
                                 variant={"headline"}
                                 style={{textAlign: "center", paddingTop: 30}}
                             >
-                                Edit the details of the project:
+                                Add the details of the project:
                             </Typography>
                             <br/>
                             <Grid container spacing={24}>
                                 <Grid item xs={7}>
-                                    <InputLabel>Batch: </InputLabel>
-                                    <Select value={this.state.batch} name={"batch"} onChange={this.handleChange}>
-                                        {this.state.batData.map(item => (
+                                    <InputLabel>Batch:</InputLabel>
+                                    <Select
+                                        value={this.state.batch}
+                                        name={"batch"}
+                                        onChange={this.handleChange}
+                                        required={true}
+                                        style={{marginLeft: 5}}
+                                    >
+                                        {sortBy(this.state.batData, ["year"]).map(item => (
                                             <MenuItem value={item.year} key={item.year}>
                                                 {item.year}
                                             </MenuItem>
                                         ))}
                                     </Select>
                                     <br/>
+                                    <br/>
+                                    <InputLabel>Number of Student: </InputLabel>
+                                    <Select
+                                        name={"number"}
+                                        value={this.state.number}
+                                        onChange={this.handleChange}
+                                        style={{textAlign: "center"}}
+                                    >
+                                        <MenuItem value={3}>3</MenuItem>
+                                        <MenuItem value={4}>4</MenuItem>
+                                    </Select>
                                     {stu_num()}
                                 </Grid>
                                 <Grid item xs={5}>
@@ -343,7 +365,7 @@ class EditProject extends Component {
                                         name={"project"}
                                         onChange={this.handleChange}
                                         required={true}
-                                        style={{marginLeft: 5}}
+                                        style={{marginLeft: 5, width: 250}}
                                     >
                                         {sortBy(this.state.proData, ["name"]).map(item => (
                                             <MenuItem value={item.name} key={item.idProject}>
@@ -360,7 +382,7 @@ class EditProject extends Component {
                                         name={"supervisor"}
                                         onChange={this.handleChange}
                                         required={true}
-                                        style={{marginLeft: 5}}
+                                        style={{marginLeft: 5, width: 250}}
                                     >
                                         {sortBy(this.state.supData, ["name"]).map(item => (
                                             <MenuItem value={item.name} key={item.idInstructor}>
@@ -376,8 +398,8 @@ class EditProject extends Component {
                                         value={this.state.category}
                                         name={"category"}
                                         onChange={this.handleChange}
-                                        style={{marginLeft: 5}}
                                         multiple={true}
+                                        style={{marginLeft: 5, width: 250}}
                                     >
                                         {sortBy(this.state.catData, ["name"]).map(item => (
                                             <MenuItem value={item.name} key={item.name}>
@@ -385,6 +407,9 @@ class EditProject extends Component {
                                             </MenuItem>
                                         ))}
                                     </Select>
+                                    <br/>
+                                    <br/>
+                                    <br/>
                                     <br/>
                                     <br/>
                                     <br/>
@@ -414,4 +439,4 @@ class EditProject extends Component {
     }
 }
 
-export default EditProject;
+export default LinkProject;

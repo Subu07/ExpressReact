@@ -14,8 +14,7 @@ import Dialog from "@material-ui/core/es/Dialog/Dialog";
 import DialogContent from "@material-ui/core/es/DialogContent/DialogContent";
 import DialogTitle from "@material-ui/core/es/DialogTitle/DialogTitle";
 import AddSupervisor from "../../component/Section/AddSupervisor";
-import red from "@material-ui/core/es/colors/red";
-import green from "@material-ui/core/es/colors/green";
+import sortBy from "lodash/sortBy";
 import ESupervisor from "../../component/Section/ESupervisor";
 import DSupervisor from "../../component/Section/DSupervisor";
 import yellow from "@material-ui/core/es/colors/yellow";
@@ -60,10 +59,10 @@ class Supervisor extends Component {
         </TableCell>
       </Fragment>
     );
-    let rows = this.state.supervisor.map(supervisor => {
+    let rows = sortBy(this.state.supervisor,"name").map(supervisor => {
       return (
         <TableRow key={supervisor.idInstructor}>
-          <TableCell>{supervisor.name}</TableCell>
+          <TableCell>{supervisor.Title}{supervisor.name}</TableCell>
           <TableCell>
             <ESupervisor data={supervisor} />
             <DSupervisor data={supervisor.idInstructor} />
