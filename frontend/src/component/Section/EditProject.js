@@ -6,7 +6,6 @@ import Modal from "@material-ui/core/es/Modal/Modal";
 import Typography from "@material-ui/core/es/Typography/Typography";
 import Paper from "@material-ui/core/es/Paper/Paper";
 import InputLabel from "@material-ui/core/es/InputLabel/InputLabel";
-import TextField from "@material-ui/core/es/TextField/TextField";
 import green from "@material-ui/core/es/colors/green";
 import Grid from "@material-ui/core/es/Grid/Grid";
 
@@ -20,7 +19,7 @@ class EditProject extends Component {
     state = {
         isOpen: false,
         orgData: [],
-        number: [],
+        number: this.props.data.studentName.split(",").length,
         allData: [],
         supData: [],
         proData: [],
@@ -48,7 +47,7 @@ class EditProject extends Component {
     handleClose = () => {
         this.setState({
             isOpen: false,
-            number: "",
+            number: this.props.data.studentName.split(",").length,
             name1: this.props.data.studentName.split(",")[0],
             name2: this.props.data.studentName.split(",")[1],
             name3: this.props.data.studentName.split(",")[2],
@@ -94,7 +93,7 @@ class EditProject extends Component {
                     setInterval(window.location.reload(), 100);
                 }
                 else {
-                    alert("Duplicate")
+                    alert(json.result)
                 }
             })
             .catch(err => console.log(err));
@@ -154,7 +153,7 @@ class EditProject extends Component {
                                 required={true}
                                 style={{marginLeft: 10}}
                             >
-                                {sortBy(this.state.allData, ["name"]).map(item => (
+                                {sortBy(this.state.allData, ["name"]).filter(data => data.Batch_batch_no === this.state.batch).map(item => (
                                     <MenuItem value={item.name} key={item.roll_no}>
                                         {item.name} ({item.roll_no})
                                     </MenuItem>
@@ -174,7 +173,7 @@ class EditProject extends Component {
                                 required={true}
                                 style={{marginLeft: 10}}
                             >
-                                {sortBy(this.state.allData, ["name"]).map(item => (
+                                {sortBy(this.state.allData, ["name"]).filter(data => data.Batch_batch_no === this.state.batch).map(item => (
                                     <MenuItem value={item.name} key={item.roll_no}>
                                         {item.name} ({item.roll_no})
                                     </MenuItem>
@@ -194,7 +193,7 @@ class EditProject extends Component {
                                 required={true}
                                 style={{marginLeft: 10}}
                             >
-                                {sortBy(this.state.allData, ["name"]).map(item => (
+                                {sortBy(this.state.allData, ["name"]).filter(data => data.Batch_batch_no === this.state.batch).map(item => (
                                     <MenuItem value={item.name} key={item.roll_no}>
                                         {item.name} ({item.roll_no})
                                     </MenuItem>
@@ -219,7 +218,7 @@ class EditProject extends Component {
                                 required={true}
                                 style={{marginLeft: 10}}
                             >
-                                {sortBy(this.state.allData, ["name"]).map(item => (
+                                {sortBy(this.state.allData, ["name"]).filter(data => data.Batch_batch_no === this.state.batch).map(item => (
                                     <MenuItem value={item.name} key={item.roll_no}>
                                         {item.name} ({item.roll_no})
                                     </MenuItem>
@@ -239,7 +238,7 @@ class EditProject extends Component {
                                 required={true}
                                 style={{marginLeft: 10}}
                             >
-                                {sortBy(this.state.allData, ["name"]).map(item => (
+                                {sortBy(this.state.allData, ["name"]).filter(data => data.Batch_batch_no === this.state.batch).map(item => (
                                     <MenuItem value={item.name} key={item.roll_no}>
                                         {item.name} ({item.roll_no})
                                     </MenuItem>
@@ -259,7 +258,7 @@ class EditProject extends Component {
                                 required={true}
                                 style={{marginLeft: 10}}
                             >
-                                {sortBy(this.state.allData, ["name"]).map(item => (
+                                {sortBy(this.state.allData, ["name"]).filter(data => data.Batch_batch_no === this.state.batch).map(item => (
                                     <MenuItem value={item.name} key={item.roll_no}>
                                         {item.name} ({item.roll_no})
                                     </MenuItem>
@@ -279,7 +278,7 @@ class EditProject extends Component {
                                 required={true}
                                 style={{marginLeft: 10}}
                             >
-                                {sortBy(this.state.allData, ["name"]).map(item => (
+                                {sortBy(this.state.allData, ["name"]).filter(data => data.Batch_batch_no === this.state.batch).map(item => (
                                     <MenuItem value={item.name} key={item.roll_no}>
                                         {item.name} ({item.roll_no})
                                     </MenuItem>
