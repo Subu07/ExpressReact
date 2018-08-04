@@ -254,107 +254,116 @@ router.get("/simple", function (req, res, next) {
 
 //studentProject
 router.post("/studentProjectAdd", (req, res) => {
-    let sql = `SELECT idStudent FROM student WHERE name IN ('${
-        req.body.name1
-        }','${req.body.name2}','${req.body.name3}','${
-        req.body.name4
-        }');SELECT idProject FROM project
+    if (req.body.name1 === req.body.name2 || req.body.name1 === req.body.name3 || req.body.name1 === req.body.name4 || req.body.name2 === req.body.name3 || req.body.name2 === req.body.name4 || req.body.name3 === req.body.name4) {
+        res.send(JSON.stringify({result: "Duplicate Name"}))
+    }
+    else {
+        let sql = `SELECT idStudent FROM student WHERE name IN ('${
+            req.body.name1
+            }','${req.body.name2}','${req.body.name3}','${
+            req.body.name4
+            }');SELECT idProject FROM project
 WHERE name='${req.body.project}';SELECT idInstructor FROM supervisor
 WHERE name='${req.body.supervisor}'`;
-    db.query(sql, (err, result) => {
-        if (err) console.log(err);
-        stuId = result[0];
-        proId = result[1];
-        supId = result[2];
-        console.log(result);
-        if (req.body.n === 3) {
-            nSql = `INSERT INTO project_has_student(Project_idProject, Student_idStudent)
-    VALUES ('${proId[0].idProject}','${stuId[0].idStudent}'),('${
-                proId[0].idProject
-                }','${stuId[1].idStudent}'),('${proId[0].idProject}','${
-                stuId[2].idStudent
-                }');UPDATE project
-SET Supervisor_idInstructor=${supId[0].idInstructor}
-WHERE idProject=${proId[0].idProject};`;
-        } else {
-            nSql = `INSERT INTO project_has_student(Project_idProject, Student_idStudent)
-    VALUES ('${proId[0].idProject}','${stuId[0].idStudent}'),('${
-                proId[0].idProject
-                }','${stuId[1].idStudent}'),('${proId[0].idProject}','${
-                stuId[2].idStudent
-                }'),('${proId[0].idProject}','${stuId[3].idStudent}');UPDATE project
-SET Supervisor_idInstructor=${supId[0].idInstructor}
-WHERE idProject=${proId[0].idProject};`;
-        }
-        db.query(nSql, (err, result) => {
-            if (err) msg = "Duplicate";
-            else msg = "Success";
-            res.send(JSON.stringify({result: msg}));
-        });
-        for (let i = 0; i < req.body.category.length; i++) {
-            db.query(`INSERT INTO project_has_category(Project_idProject, Category_name) VALUES ('${proId[0].idProject}','${req.body.category[i]}')`,
-                (err, result) => {
-                    if (err) console.log(err);
-                    else console.log(result);
-                })
-        }
-        db.query(query, (err, result) => {
+        db.query(sql, (err, result) => {
             if (err) console.log(err);
-            else {
-                data = result;
+            stuId = result[0];
+            proId = result[1];
+            supId = result[2];
+            if (req.body.n === 3) {
+                nSql = `INSERT INTO project_has_student(Project_idProject, Student_idStudent)
+    VALUES ('${proId[0].idProject}','${stuId[0].idStudent}'),('${
+                    proId[0].idProject
+                    }','${stuId[1].idStudent}'),('${proId[0].idProject}','${
+                    stuId[2].idStudent
+                    }');UPDATE project
+SET Supervisor_idInstructor=${supId[0].idInstructor}
+WHERE idProject=${proId[0].idProject};`;
+            } else {
+                nSql = `INSERT INTO project_has_student(Project_idProject, Student_idStudent)
+    VALUES ('${proId[0].idProject}','${stuId[0].idStudent}'),('${
+                    proId[0].idProject
+                    }','${stuId[1].idStudent}'),('${proId[0].idProject}','${
+                    stuId[2].idStudent
+                    }'),('${proId[0].idProject}','${stuId[3].idStudent}');UPDATE project
+SET Supervisor_idInstructor=${supId[0].idInstructor}
+WHERE idProject=${proId[0].idProject};`;
             }
+            db.query(nSql, (err, result) => {
+                if (err) msg = "Some Data Already Linked";
+                else msg = "Success";
+                res.send(JSON.stringify({result: msg}));
+            });
+            for (let i = 0; i < req.body.category.length; i++) {
+                db.query(`INSERT INTO project_has_category(Project_idProject, Category_name) VALUES ('${proId[0].idProject}','${req.body.category[i]}')`,
+                    (err, result) => {
+                        if (err) console.log(err);
+                        else console.log(result);
+                    })
+            }
+            db.query(query, (err, result) => {
+                if (err) console.log(err);
+                else {
+                    data = result;
+                }
+            });
         });
-    });
+    }
 });
 
+
 router.post("/studentProjectEdit", (req, res) => {
-    let sql =
-        `UPDATE project SET Supervisor_idInstructor = NULL WHERE idProject=${req.body.id};
-DELETE FROM project_has_student WHERE Project_idProject=${req.body.id};
+    if (req.body.name1 === req.body.name2 || req.body.name1 === req.body.name3 || req.body.name1 === req.body.name4 || req.body.name2 === req.body.name3 || req.body.name2 === req.body.name4 || req.body.name3 === req.body.name4) {
+        res.send(JSON.stringify({result: "Duplicate Name"}))
+    }
+    else {
+        let sql =
+            `UPDATE project SET Supervisor_idInstructor = NULL WHERE idProject=${req.body.id};
 SELECT idStudent FROM student WHERE name IN ('${req.body.name1}','${req.body.name2}','${req.body.name3}','${req.body.name4}');
 SELECT idProject FROM project WHERE name='${req.body.project}';
 SELECT idInstructor FROM supervisor WHERE name='${req.body.supervisor}';
-DELETE FROM project_has_category WHERE Project_idProject=${req.body.id};`;
-
-    db.query(sql, (err, result) => {
-        if (err) console.log(err);
-        stuId = result[2];
-        proId = result[3];
-        supId = result[4];
-        console.log(stuId[2].idStudent);
-        if (req.body.n === 3) {
-            nSql = `INSERT INTO project_has_student(Project_idProject, Student_idStudent) VALUES ('${proId[0].idProject}','${stuId[0].idStudent}'),('${proId[0].idProject}','${stuId[1].idStudent}'),('${proId[0].idProject}','${stuId[2].idStudent}');
+DELETE FROM project_has_category WHERE Project_idProject=${req.body.id};
+DELETE FROM project_has_student WHERE Project_idProject=${req.body.id}`;
+        db.query(sql, (err, result) => {
+                stuId = result[1];
+                proId = result[2];
+                supId = result[3];
+                console.log(stuId);
+                if (req.body.n === 3) {
+                    nSql = `INSERT INTO project_has_student(Project_idProject, Student_idStudent) VALUES ('${proId[0].idProject}','${stuId[0].idStudent}'),('${proId[0].idProject}','${stuId[1].idStudent}'),('${proId[0].idProject}','${stuId[2].idStudent}');
 UPDATE project SET Supervisor_idInstructor=${supId[0].idInstructor} WHERE idProject=${proId[0].idProject}`;
-        } else {
-            nSql = `INSERT INTO project_has_student(Project_idProject, Student_idStudent)
+                } else {
+                    nSql = `INSERT INTO project_has_student(Project_idProject, Student_idStudent)
     VALUES ('${proId[0].idProject}','${stuId[0].idStudent}'),('${
-                proId[0].idProject
-                }','${stuId[1].idStudent}'),('${proId[0].idProject}','${
-                stuId[2].idStudent
-                }'),('${proId[0].idProject}','${stuId[3].idStudent}');UPDATE project
+                        proId[0].idProject
+                        }','${stuId[1].idStudent}'),('${proId[0].idProject}','${
+                        stuId[2].idStudent
+                        }'),('${proId[0].idProject}','${stuId[3].idStudent}');UPDATE project
 SET Supervisor_idInstructor=${supId[0].idInstructor}
 WHERE idProject=${proId[0].idProject}`;
-        }
-        for (let i = 0; i < req.body.category.length; i++) {
-            db.query(`INSERT INTO project_has_category(Project_idProject, Category_name) VALUES ('${proId[0].idProject}','${req.body.category[i]}')`,
-                (err, result) => {
+                }
+                for (let i = 0; i < req.body.category.length; i++) {
+                    db.query(`INSERT INTO project_has_category(Project_idProject, Category_name) VALUES ('${proId[0].idProject}','${req.body.category[i]}')`,
+                        (err, result) => {
+                            if (err) console.log(err);
+                            else console.log(result);
+                        })
+                }
+                db.query(nSql, (err) => {
+                    if (err) msg = "Some Data Already Linked";
+                    else msg = "Success";
+                    res.send(JSON.stringify({result: msg}));
+                });
+                db.query(query, (err, result) => {
                     if (err) console.log(err);
-                    else console.log(result);
-                })
-        }
-        db.query(nSql, (err) => {
-            if (err) msg = "Duplicate";
-            else msg = "Success";
-            res.send(JSON.stringify({result: msg}));
+                    else {
+                        data = result;
+                    }
+                });
         });
-        db.query(query, (err, result) => {
-            if (err) console.log(err);
-            else {
-                data = result;
-            }
-        });
-    });
+    }
 });
+
 
 //GET CATEGORY
 router.get("/displayCategory", (req, res, next) => {

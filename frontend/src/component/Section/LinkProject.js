@@ -98,7 +98,7 @@ class LinkProject extends Component {
                         alert("Success");
                         setInterval(window.location.reload(), 100);
                     } else {
-                        alert("Duplicate");
+                        alert(json.result);
                     }
                 })
                 .catch(err => console.log(err));
