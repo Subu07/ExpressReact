@@ -50,18 +50,15 @@ class DataTable extends Component {
             ))}
           </TableCell>
           <TableCell>{row.title}{row.supervisorName}</TableCell>
-          <TableCell>
             <EditProject data={row} allData={this.props.data} id={row.Project_idProject}/>
-            <br />
-            <br />
+            <br/><br/>
             <DeleteProject data={row.Project_idProject} />
-          </TableCell>
         </TableRow>
       );
     });
     return (
       <Fragment>
-        <Table style={{minWidth: 20}}>
+        <Table>
           <TableHead>
             <TableRow>{headings}</TableRow>
           </TableHead>
